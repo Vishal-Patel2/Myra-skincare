@@ -11,11 +11,8 @@
         </video>
     </div>
     
-
     @include('components.shop-by-category', ['top_category' => 'SKIN CONCERN'])
-    @include('components.shop-by-category', ['top_category' => 'TREATMENTS'])
-
-        
+    @include('components.shop-by-category', ['top_category' => 'TREATMENTS']) 
 
     <!--end  SHOP BY TREATMENTS -->
     <!-- Best Selling Deals -->

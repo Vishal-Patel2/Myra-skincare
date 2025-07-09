@@ -10,7 +10,7 @@
         <div class="container">
             <h2 class="breadcrumb-title">Doctor Details</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="{{route('index')}}">Home</a></li>
                 <li class="active">Doctor Details</li>
             </ul>
         </div>

@@ -87,7 +87,7 @@
         <div class="container">
             <h2 class="breadcrumb-title">Booking</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="{{route('index')}}">Home</a></li>
                 <li class="active">Booking</li>
             </ul>
         </div>

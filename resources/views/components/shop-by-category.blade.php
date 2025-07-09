@@ -55,6 +55,7 @@ $maleMid = \App\Models\MidCategory::whereHas('topCategory', function($query) use
             <div class="tab-pane fade show active" id="{{ $categorySlug }}-female" role="tabpanel" aria-labelledby="{{ $categorySlug }}-female-tab">
                 <div class="row">
                     @foreach($femaleMid as $mid)
+                    <a href="{{route('services')}}">
                         <div class="col-6 col-md-6 col-lg-2 mb-4">
                             <div class="card h-100 text-center">
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}" class="card-img-top" alt="">
@@ -63,6 +64,7 @@ $maleMid = \App\Models\MidCategory::whereHas('topCategory', function($query) use
                                 </div>
                             </div>
                         </div>
+                    </a>
                     @endforeach
                 </div>
             </div>

@@ -194,7 +194,7 @@ h2.pro {
         <div class="container">
             <h2 class="breadcrumb-title">Cart</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="{{route('index')}}">Home</a></li>
                 <li class="active">Cart</li>
             </ul>
         </div>

@@ -23,14 +23,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
- Route::get('/', [IndexController::class, 'index'])->name('frontend.index');
+ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::view('/about-us' , 'about')->name('about');
 
 
 Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
 Route::get('/women', [WomenController::class, 'showWomenCategories'])->name('women');
-  
+Route::get('{gender}/services', [ServiceController::class, 'services'])->name('services');
+
+
 Route::view('/packages' , 'packages')->name('packages');
 Route::view('/blog' , 'blog')->name('blog');
 Route::view('/career' , 'career')->name('career');
@@ -56,15 +58,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-        Route::view('/index' , 'admin/index')->name('index');
- 
+    Route::view('/index' , 'admin/index')->name('admin.index');
 
-        Route::resource('genders', GenderController::class);
-        Route::resource('top-categories', TopCategoryController::class);
-        Route::resource('mid-categories', MidCategoryController::class);
-        Route::resource('services', ServiceController::class);
 
-        Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
+    Route::resource('genders', GenderController::class);
+    Route::resource('top-categories', TopCategoryController::class);
+    Route::resource('mid-categories', MidCategoryController::class);
+    Route::resource('services', ServiceController::class);
+
+    Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
 
 });
 

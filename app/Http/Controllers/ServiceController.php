@@ -193,4 +193,17 @@ public function update(Request $request, Service $service)
             'action' => $service->action
         ]);
     }
+
+
+
+    //frontend
+        
+    public function service(Service $gender)
+    {
+        // Load relationships
+        $service = Service::findOrFail($gender);
+         
+        return view('services', compact('service'));
+    }
+    
 }

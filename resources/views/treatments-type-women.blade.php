@@ -253,7 +253,7 @@
         <div class="container">
             <h2 class="breadcrumb-title">Full Body Laser Hair Reduction</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="{{route('index')}}">Home</a></li>
                 <li class="active">Full Body Laser Hair Reduction</li>
             </ul>
         </div>
