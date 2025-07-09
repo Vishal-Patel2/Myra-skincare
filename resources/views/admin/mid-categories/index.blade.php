@@ -40,6 +40,7 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>#</th>
+                                            <th>Image</th>
                                             <th>Gender</th>
                                             <th>Top Category Name</th>
                                             <th>Mid Category Name</th>
@@ -50,6 +51,19 @@
                                         @foreach ($midCategories as $category)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
+                                               <td>
+                                                    <label style="cursor:pointer">
+                                                        <img src="{{ asset('storage/uploads/mid_categories/' . $category->image) }}"
+                                                            height="50" 
+                                                            id="img-preview-{{ $category->id }}">
+                                                        <input type="file"
+                                                            name="image"
+                                                            accept="image/*"
+                                                            style="display: none"
+                                                            onchange="uploadMidCategoryImage(this, {{ $category->id }})">
+                                                    </label>
+                                                </td>
+
                                                 <td>
                                                     @php
                                                         $genderId = $category->topCategory->gender_id ?? null;
@@ -90,3 +104,31 @@
     </div>
 </div>
 @endsection
+<script>
+    function uploadMidCategoryImage(input, id) {
+        const file = input.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('_method', 'POST');
+        formData.append('_token', '{{ csrf_token() }}');
+
+        fetch(`/admin/mid-categories/${id}/upload-image`, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const imgTag = document.getElementById('img-preview-' + id);
+                imgTag.src = data.image_url + '?' + new Date().getTime(); // Cache bust
+            } else {
+                alert('Image upload failed');
+            }
+        })
+        .catch(() => {
+            alert('Upload failed. Please try again.');
+        });
+    }
+</script>

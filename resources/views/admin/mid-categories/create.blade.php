@@ -15,7 +15,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="{{ route('mid-categories.store') }}" method="POST">
+                <form action="{{ route('mid-categories.store') }}" method="POST"  enctype="multipart/form-data">
                     @csrf
 
                     <!-- Gender Selection -->
@@ -48,6 +48,14 @@
                                 placeholder="Enter mid-level category name" required>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+
 
                     <!-- Submit & View Buttons -->
                     <div class="text-start mt-4 mb-4">

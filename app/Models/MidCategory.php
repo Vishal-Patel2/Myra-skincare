@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MidCategory extends Model
 {
-    protected $fillable = ['top_category_id', 'name'];
+    protected $fillable = ['top_category_id', 'name', 'image'];
 
     public function topCategory()
     {

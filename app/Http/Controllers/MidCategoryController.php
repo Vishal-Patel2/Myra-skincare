@@ -30,20 +30,29 @@ class MidCategoryController extends Controller
     /**
      * Store a newly created mid category in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'top_category_id' => 'required|exists:top_categories,id',
-            'name' => 'required|string|max:100|unique:mid_categories,name,NULL,id,top_category_id,' . $request->top_category_id,
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'top_category_id' => 'required|exists:top_categories,id',
+        'name' => 'required|string|max:100|unique:mid_categories,name,NULL,id,top_category_id,' . $request->top_category_id,
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ]);
 
-        MidCategory::create([
-            'top_category_id' => $request->top_category_id,
-            'name' => $request->name,
-        ]);
+    $data = $request->only(['top_category_id', 'name']);
 
-        return redirect()->route('mid-categories.index')->with('success', 'Mid Category created successfully.');
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('uploads/mid_categories', $filename, 'public');
+
+        $data['image'] = $filename; // ✅ only filename saved
     }
+
+    MidCategory::create($data);
+
+    return redirect()->route('mid-categories.index')->with('success', 'Mid Category created successfully.');
+}
+
 
     /**
      * Show the form for editing the specified mid category.
@@ -57,20 +66,34 @@ class MidCategoryController extends Controller
     /**
      * Update the specified mid category in storage.
      */
-    public function update(Request $request, MidCategory $midCategory)
-    {
-        $request->validate([
-            'top_category_id' => 'required|exists:top_categories,id',
-            'name' => 'required|string|max:100|unique:mid_categories,name,' . $midCategory->id . ',id,top_category_id,' . $request->top_category_id,
-        ]);
+public function update(Request $request, MidCategory $midCategory)
+{
+    $request->validate([
+        'top_category_id' => 'required|exists:top_categories,id',
+        'name' => 'required|string|max:100|unique:mid_categories,name,' . $midCategory->id . ',id,top_category_id,' . $request->top_category_id,
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ]);
 
-        $midCategory->update([
-            'top_category_id' => $request->top_category_id,
-            'name' => $request->name,
-        ]);
+    $data = $request->only(['top_category_id', 'name']);
 
-        return redirect()->route('mid-categories.index')->with('success', 'Mid Category updated successfully.');
+    if ($request->hasFile('image')) {
+        // Delete old image if exists
+        if ($midCategory->image && \Storage::disk('public')->exists('uploads/mid_categories/' . $midCategory->image)) {
+            \Storage::disk('public')->delete('uploads/mid_categories/' . $midCategory->image);
+        }
+
+        $file = $request->file('image');
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('uploads/mid_categories', $filename, 'public');
+
+        $data['image'] = $filename; // ✅ only filename saved
     }
+
+    $midCategory->update($data);
+
+    return redirect()->route('mid-categories.index')->with('success', 'Mid Category updated successfully.');
+}
+
 
     /**
      * Remove the specified mid category from storage.
@@ -87,5 +110,30 @@ class MidCategoryController extends Controller
 
         return response()->json($topCategories);
     }
+
+
+    public function uploadImage(Request $request, MidCategory $midCategory)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        // Delete old image
+        if ($midCategory->image && \Storage::disk('public')->exists('uploads/mid_categories/' . $midCategory->image)) {
+            \Storage::disk('public')->delete('uploads/mid_categories/' . $midCategory->image);
+        }
+
+        $file = $request->file('image');
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('uploads/mid_categories', $filename, 'public');
+
+        $midCategory->update(['image' => $filename]);
+
+        return response()->json([
+            'success' => true,
+            'image_url' => asset('storage/uploads/mid_categories/' . $filename),
+        ]);
+    }
+
 
 }

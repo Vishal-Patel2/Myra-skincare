@@ -15,7 +15,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="{{ route('mid-categories.update', $midCategory->id) }}" method="POST">
+                <form action="{{ route('mid-categories.update', $midCategory->id) }}" method="POST"  enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -58,6 +58,19 @@
                                 placeholder="Enter mid-level category name" required>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Upload New Image</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                            @if($midCategory->image)
+                                <img src="{{ asset('storage/uploads/mid_categories/' . $midCategory->image) }}" height="80">
+                            @endif
+                        </div>
+                    </div>
+
+                    
+
 
                     <!-- Submit & View Buttons -->
                     <div class="text-start mt-4 mb-4">

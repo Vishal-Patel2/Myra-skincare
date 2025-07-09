@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Myraluxa Aesthetic Pvt Ltd')
+@section('title', 'Men Categories')
 
 @section('content')
 
@@ -10,126 +10,58 @@
         <div class="container">
             <h2 class="breadcrumb-title">Men Category</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li class="active">Men Category</li>
             </ul>
         </div>
     </div>
 
-
-    <div class="team-area">
+    <div class="team-area pt-4">
         <div class="container">
-            
-            <div class="row justify-content-center">
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m1.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Hair Reduction</a></h5>
-                                
-                            </div>
+
+            {{-- Tabs --}}
+            <ul class="nav nav-tabs justify-content-center mb-4" role="tablist">
+                @foreach($topCategories as $index => $topCat)
+                    <li class="nav-item">
+                        <button class="nav-link @if($index === 0) active @endif"
+                                data-bs-toggle="tab"
+                                data-bs-target="#tab-{{ $topCat->id }}"
+                                type="button"
+                                role="tab">
+                            {{ $topCat->name }}
+                        </button>
+                    </li>
+                @endforeach
+            </ul>
+
+            {{-- Tab Content --}}
+            <div class="tab-content">
+                @foreach($topCategories as $index => $topCat)
+                    <div class="tab-pane fade @if($index === 0) show active @endif"
+                         id="tab-{{ $topCat->id }}"
+                         role="tabpanel">
+
+                        <div class="row justify-content-center">
+                            @foreach($topCat->midCategories as $midCat)
+                                <div class="col-6 col-md-6 col-lg-3 mb-4">
+                                    <div class="team-item text-center">
+                                        <img src="{{ asset('storage/uploads/mid_categories/' . $midCat->image) }}"
+                                             alt="{{ $midCat->name }}"
+                                             class="img-fluid mb-2">
+                                        <div class="team-content">
+                                            <div class="team-bio">
+                                                <h5><a href="#">{{ $midCat->name }}</a></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
+
                     </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m2.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Body Slimming</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item active">
-                        <img src="assets/img/men/m3.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Glutathione IV</a></h5>
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m4.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Laser Facials</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m5.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Invasive Treatments</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m6.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Permanent Makeup</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m7.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Skin Rejuvenation</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m8.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Hair Treatment</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3">
-                    <div class="team-item">
-                        <img src="assets/img/men/m9.jpg" alt="thumb">
-                        
-                        <div class="team-content">
-                            <div class="team-bio">
-                                <h5><a href="conditions-details-men.php">Chemical Peels</a></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+
         </div>
     </div>
 

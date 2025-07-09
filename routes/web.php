@@ -8,7 +8,8 @@ use App\Http\Controllers\TopCategoryController;
 use App\Http\Controllers\MidCategoryController;
 use App\Http\Controllers\LowCategoryController;
 use App\Http\Controllers\IndexController;
-
+use App\Http\Controllers\MenController;
+use App\Http\Controllers\WomenController;
 
 
 
@@ -25,8 +26,11 @@ Route::middleware('auth')->group(function () {
  Route::get('/', [IndexController::class, 'index'])->name('frontend.index');
 
 Route::view('/about-us' , 'about')->name('about');
-Route::view('/men' , 'men')->name('men');
-Route::view('/women' , 'women')->name('women');
+
+
+Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
+Route::get('/women', [WomenController::class, 'showWomenCategories'])->name('women');
+  
 Route::view('/packages' , 'packages')->name('packages');
 Route::view('/blog' , 'blog')->name('blog');
 Route::view('/career' , 'career')->name('career');
@@ -60,7 +64,11 @@ Route::prefix('admin')->group(function () {
         Route::resource('mid-categories', MidCategoryController::class);
         Route::resource('services', ServiceController::class);
 
+        Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
+
 });
+
+
 use App\Http\Controllers\AjaxCategoryController;
 
 Route::prefix('admin')->group(function () {
