@@ -49,21 +49,58 @@
 
                                  <a href="wallet.php" class=""><i class="fas fa-wallet"></i></a>
                                  <div class="user-dropdown">
-                                     <a href="#" class="user-icon" id="userIcon"><i class="fa fa-user"></i></a>
+                                <a href="#" class="user-icon" id="userIcon"><i class="fa fa-user"></i></a>
 
-                                     <div class="profile-menu" id="profileMenu">
-                                         <div class="menu-item"><a href="edit-profile.php"
-                                                 style="color: black;font-size:15px;"> Edit Profile </a><span
-                                                 class="arrow">›</span></div>
-                                         <div class="menu-item"><a href="booking.php"
-                                                 style="color: black;font-size:15px;">My Bookings </a><span
-                                                 class="arrow">›</span></div>
-                                         <div class="menu-item"><a href="manage-address.php"
-                                                 style="color: black;font-size:15px;">Manage Address </a><span
-                                                 class="arrow">›</span></div>
-                                         <div class="menu-item">Logout <span class="arrow">›</span></div>
-                                     </div>
-                                 </div>
+                                @auth
+                                <div class="profile-menu" id="profileMenu" style="d-none">
+                                    <div class="menu-item">
+                                        <a href="#" class="protected-link" data-href="{{ route('profile.edit') }}"
+                                            style="color: black;font-size:15px;">Edit Profile</a>
+                                        <span class="arrow">›</span>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="protected-link" data-href="{{ url('/booking') }}"
+                                            style="color: black;font-size:15px;">My Bookings</a>
+                                        <span class="arrow">›</span>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="protected-link" data-href="{{ url('/manage-address') }}"
+                                            style="color: black;font-size:15px;">Manage Address</a>
+                                        <span class="arrow">›</span>
+                                    </div>
+                                    <div class="menu-item">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit"
+                                                style="background:none;border:none;color: black;font-size:15px;cursor:pointer;">Logout</button>
+                                            <span class="arrow">›</span>
+                                        </form>
+                                    </div>
+                                </div>
+                                @endauth
+                            </div>
+
+                            <script>
+                            document.getElementById('userIcon').addEventListener('click', function(e) {
+                                e.preventDefault();
+
+                                @auth
+                                const menu = document.getElementById('profileMenu');
+
+                                menu.style.display = (menu.style.display === 'none') ? 'block' : 'none';
+                                @else
+                                window.location.href = "{{ route('login') }}";
+                                @endauth
+                            });
+
+                            document.querySelectorAll('.protected-link').forEach(link => {
+                                link.addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    window.location.href = this.dataset.href;
+                                });
+                            });
+                            </script>
+
                              </div>
 
                          </div>

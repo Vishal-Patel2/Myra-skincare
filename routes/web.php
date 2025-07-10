@@ -30,7 +30,6 @@ Route::view('/about-us' , 'about')->name('about');
 
 Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
 Route::get('/women', [WomenController::class, 'showWomenCategories'])->name('women');
-Route::get('{gender}/services', [ServiceController::class, 'services'])->name('services');
 
 
 Route::view('/packages' , 'packages')->name('packages');
@@ -83,6 +82,11 @@ Route::post('/admin/services/toggle-status/{id}', [ServiceController::class, 'to
 
 
 
+// Services list by mid category
+Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->name('services');
+
+// Single service detail
+Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
 
 
 

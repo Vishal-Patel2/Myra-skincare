@@ -28,11 +28,11 @@ class Service extends Model
         'faqs' => 'array',
     ];
 
-    // ✅ MidCategory Relationship
-    public function midCategory()
-    {
-        return $this->belongsTo(MidCategory::class);
-    }
+public function midCategory()
+{
+    return $this->belongsTo(MidCategory::class);
+}
+
 
     // ✅ TopCategory via MidCategory
     public function topCategory()
