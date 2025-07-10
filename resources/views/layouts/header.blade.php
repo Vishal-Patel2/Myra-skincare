@@ -32,7 +32,7 @@
                              <li class="nav-item"><a class="nav-link" href="{{route('men')}}">Men</a></li>
                              <li class="nav-item"><a class="nav-link" href="{{route('women')}}">Women</a></li>
                              <li class="nav-item"><a class="nav-link" href="{{route('packages')}}">Packages</a></li>
-                             <li class="nav-item"><a class="nav-link" href="{{route('blog')}}">Blog</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('blogs')}}">Blog</a></li>
                              <li class="nav-item"><a class="nav-link" href="{{route('career')}}">Carrer</a></li>
                              <li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact Us</a></li>
 

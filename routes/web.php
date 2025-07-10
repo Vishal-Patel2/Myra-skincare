@@ -10,6 +10,8 @@ use App\Http\Controllers\LowCategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MenController;
 use App\Http\Controllers\WomenController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AjaxCategoryController;
 
 
 
@@ -30,10 +32,17 @@ Route::view('/about-us' , 'about')->name('about');
 
 Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
 Route::get('/women', [WomenController::class, 'showWomenCategories'])->name('women');
+<<<<<<< HEAD
+=======
+// Services list by mid category
+Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->name('services');
+
+// Single service detail
+Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
+>>>>>>> 3db20a7 (blog section dyanmic)
 
 
 Route::view('/packages' , 'packages')->name('packages');
-Route::view('/blog' , 'blog')->name('blog');
 Route::view('/career' , 'career')->name('career');
 Route::view('/contact' , 'contact')->name('contact');
 
@@ -64,13 +73,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('top-categories', TopCategoryController::class);
     Route::resource('mid-categories', MidCategoryController::class);
     Route::resource('services', ServiceController::class);
+   
 
     Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
 
 });
 
 
-use App\Http\Controllers\AjaxCategoryController;
 
 Route::prefix('admin')->group(function () {
     // Use AjaxCategoryController for all dynamic AJAX-based category fetching
@@ -79,6 +88,21 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::post('/admin/services/toggle-status/{id}', [ServiceController::class, 'toggleStatus'])->name('services.toggleStatus');
+
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::resource('blogs', BlogController::class);
+}); 
+Route::post('/admin/blogs/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggleStatus');
+
+
+
+//frontend
+
+
+Route::get('/blogs', [BlogController::class, 'frontendIndex'])->name('blogs');
+
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 
 
 

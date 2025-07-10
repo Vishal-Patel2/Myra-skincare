@@ -7,7 +7,7 @@
                   <div class="navbar-brand-box">   
                       <a href="{{route('index')}}" class="logo logo-dark">
                           <span class="logo-sm">
-                              <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40">
+                              <img src="{{ asset('assets/img/logo/fav.png') }}" alt="" height="40">
                           </span>
                           <span class="logo-lg">
                               <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40">
@@ -16,7 +16,7 @@
 
                       <a href="{{route('index')}}" class="logo logo-light">
                           <span class="logo-sm">
-                              <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40">
+                              <img src="{{ asset('assets/img/logo/fav.png') }}" alt="" height="40">
                           </span>
                           <span class="logo-lg">
                               <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40">
@@ -67,7 +67,7 @@
                   <div class="dropdown d-inline-block">
                       <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">
-                          <img id="header-lang-img" src="{{ asset('assets/dashboard/images/flags/us.jpg') }}" alt="Header Language" height="16">
+                          <img id="header-lang-img" src="{{ asset('assets/dashboard/images/flags/india.png') }}" alt="Header Language" height="35">
                       </button>
                       <div class="dropdown-menu dropdown-menu-end">
 

@@ -21,11 +21,18 @@
                 @forelse($services as $service)
                 <div class="col-6 col-md-6 col-lg-3 mb-4">
                     <div class="team-item text-center">
+<<<<<<< HEAD
                         <img src="{{ asset('storage/services/images/' . $service->image) }}" alt="{{ $service->name }}">
 
                         <div class="team-content">
                             <div class="team-bio">
                                 <h5><a href="{{ route('service.detail', Str::slug($service->name)) }}">{{ $service->name }}</a></h5>
+=======
+                        <img src="{{ asset('storage/uploads/services/' . $service->image) }}" alt="{{ $service->title }}">
+                        <div class="team-content">
+                            <div class="team-bio">
+                                <h5><a href="{{ route('service.detail', $service->slug) }}">{{ $service->title }}</a></h5>
+>>>>>>> 3db20a7 (blog section dyanmic)
                             </div>
                         </div>
                     </div>

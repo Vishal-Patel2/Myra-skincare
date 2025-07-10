@@ -196,6 +196,7 @@ class ServiceController extends Controller
 
     //frontend
         
+<<<<<<< HEAD
 
 public function services($gender, $midSlug)
 {
@@ -236,6 +237,24 @@ public function services($gender, $midSlug)
         }
 
         return view('service-detail', compact('service'));
+=======
+   public function services($gender, $midSlug)
+    {
+        $midCategory = MidCategory::where('slug', $midSlug)->firstOrFail();
+
+        $services = Service::where('mid_category_id', $midCategory->id)
+                        ->whereHas('topCategory.gender', fn($q) => $q->where('name', ucfirst($gender)))
+                        ->get();
+
+        return view('services-list', compact('services', 'midCategory'));
+>>>>>>> 3db20a7 (blog section dyanmic)
     }
+
+    public function serviceDetail($slug)
+    {
+        $service = Service::where('slug', $slug)->firstOrFail();
+        return view('service-detail', compact('service'));
+    }
+
     
 }

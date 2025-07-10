@@ -10,67 +10,45 @@
                 <li class="menu-title" key="t-menu">Menu</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="{{ route('admin.index') }}">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">Dashboards</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="index.html" key="t-default">Default</a></li>
-                        <li><a href="dashboard-saas.html" key="t-saas">Saas</a></li>
-
-                        <li><a href="dashboard-blog.html" key="t-blog">Blog</a></li>
-                        <li><a href="dashboard-job.html" key="t-jobs">Jobs</a></li>
-                    </ul>
                 </li>
-
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-store"></i>
-                        <span key="t-ecommerce">services</span>
+                        <i class="bx bx-grid-alt"></i>
+                        <span key="t-categories">Categories</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('top-categories.index') }}" key="t-top-category">Top Category</a></li>
                         <li><a href="{{ route('mid-categories.index') }}" key="t-mid-category">Mid Category</a></li>
-                        <li><a href="{{ route('services.index') }}" key="t-add-product">Services</a></li>
-
-
-                        <li><a href="ecommerce-products.html" key="t-products">Products</a></li>
-                        <li><a href="ecommerce-product-detail.html" key="t-product-detail">Product Detail</a>
-                        </li>
-                        <li><a href="ecommerce-orders.html" key="t-orders">Orders</a></li>
-                        <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
-                        <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
-                        <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
-                        <li><a href="ecommerce-shops.html" key="t-shops">Shops</a></li>
-
                     </ul>
                 </li>
-
 
 
                 <li>
+                    <a href="{{ route('services.index') }}" class="waves-effect">
+                        <i class="bx bx-store"></i>
+                        <span key="t-services">Services</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-envelope"></i>
-                        <span key="t-email">Email</span>
+                        <i class="bx bx-cart"></i>
+                        <span key="t-orders-section">Orders</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html" key="t-inbox">Inbox</a></li>
-                        <li><a href="email-read.html" key="t-read-email">Read Email</a></li>
-                        <li>
-                            <a href="javascript: void(0);">
-                                <span key="t-email-templates">Templates</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="email-template-basic.html" key="t-basic-action">Basic Action</a>
-                                </li>
-                                <li><a href="email-template-alert.html" key="t-alert-email">Alert Email</a></li>
-                                <li><a href="email-template-billing.html" key="t-bill-email">Billing Email</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <li><a href="ecommerce-orders.html" key="t-orders">Orders</a></li>
+                        <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
+                        <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
+                        <li><a href="ecommerce-shops.html" key="t-shops">Shops</a></li>
                     </ul>
                 </li>
+
+
+
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -83,22 +61,17 @@
                     </ul>
                 </li>
 
-
-
-
-
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-detail"></i>
-                        <span key="t-blog">Blog</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="blog-list.html" key="t-blog-list">Blog List</a></li>
-                        <li><a href="blog-grid.html" key="t-blog-grid">Blog Grid</a></li>
-                        <li><a href="blog-details.html" key="t-blog-details">Blog Details</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-detail"></i>
+                    <span key="t-blog">Blog</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('blogs.index') }}">All Blogs</a></li>
+                    <li><a href="{{ route('blogs.create') }}">Add Blog</a></li>
+                </ul>
+                    </li>
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect has-arrow">
@@ -149,131 +122,6 @@
                 </li>
 
 
-                <li class="menu-title" key="t-components">Components</li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-tone"></i>
-                        <span key="t-ui-elements">UI Elements</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html" key="t-alerts">Alerts</a></li>
-                        <li><a href="ui-buttons.html" key="t-buttons">Buttons</a></li>
-                        <li><a href="ui-cards.html" key="t-cards">Cards</a></li>
-                        <li><a href="ui-carousel.html" key="t-carousel">Carousel</a></li>
-                        <li><a href="ui-dropdowns.html" key="t-dropdowns">Dropdowns</a></li>
-                        <li><a href="ui-grid.html" key="t-grid">Grid</a></li>
-                        <li><a href="ui-images.html" key="t-images">Images</a></li>
-                        <li><a href="ui-lightbox.html" key="t-lightbox">Lightbox</a></li>
-                        <li><a href="ui-modals.html" key="t-modals">Modals</a></li>
-                        <li><a href="ui-offcanvas.html" key="t-offcanvas">Offcanvas</a></li>
-                        <li><a href="ui-rangeslider.html" key="t-range-slider">Range Slider</a></li>
-                        <li><a href="ui-session-timeout.html" key="t-session-timeout">Session Timeout</a></li>
-                        <li><a href="ui-progressbars.html" key="t-progress-bars">Progress Bars</a></li>
-                        <li><a href="ui-placeholders.html" key="t-placeholders">Placeholders</a></li>
-                        <li><a href="ui-sweet-alert.html" key="t-sweet-alert">Sweet-Alert</a></li>
-                        <li><a href="ui-tabs-accordions.html" key="t-tabs-accordions">Tabs & Accordions</a></li>
-                        <li><a href="ui-typography.html" key="t-typography">Typography</a></li>
-                        <li><a href="ui-toasts.html" key="t-toasts">Toasts</a></li>
-                        <li><a href="ui-video.html" key="t-video">Video</a></li>
-                        <li><a href="ui-general.html" key="t-general">General</a></li>
-                        <li><a href="ui-colors.html" key="t-colors">Colors</a></li>
-                        <li><a href="ui-rating.html" key="t-rating">Rating</a></li>
-                        <li><a href="ui-notifications.html" key="t-notifications">Notifications</a></li>
-                        <li><a href="ui-utilities.html" key="t-utilities">Utilities</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <i class="bx bxs-eraser"></i>
-                        <span class="badge rounded-pill bg-danger float-end">10</span>
-                        <span key="t-forms">Forms</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="form-elements.html" key="t-form-elements">Form Elements</a></li>
-                        <li><a href="form-layouts.html" key="t-form-layouts">Form Layouts</a></li>
-                        <li><a href="form-validation.html" key="t-form-validation">Form Validation</a></li>
-                        <li><a href="form-advanced.html" key="t-form-advanced">Form Advanced</a></li>
-                        <li><a href="form-editors.html" key="t-form-editors">Form Editors</a></li>
-                        <li><a href="form-uploads.html" key="t-form-upload">Form File Upload</a></li>
-                        <li><a href="form-xeditable.html" key="t-form-xeditable">Form Xeditable</a></li>
-                        <li><a href="form-repeater.html" key="t-form-repeater">Form Repeater</a></li>
-                        <li><a href="form-wizard.html" key="t-form-wizard">Form Wizard</a></li>
-                        <li><a href="form-mask.html" key="t-form-mask">Form Mask</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-list-ul"></i>
-                        <span key="t-tables">Tables</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.html" key="t-basic-tables">Basic Tables</a></li>
-                        <li><a href="tables-datatable.html" key="t-data-tables">Data Tables</a></li>
-                        <li><a href="tables-responsive.html" key="t-responsive-table">Responsive Table</a></li>
-                        <li><a href="tables-editable.html" key="t-editable-table">Editable Table</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxs-bar-chart-alt-2"></i>
-                        <span key="t-charts">Charts</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="charts-apex.html" key="t-apex-charts">Apex Charts</a></li>
-                        <li><a href="charts-echart.html" key="t-e-charts">E Charts</a></li>
-                        <li><a href="charts-chartjs.html" key="t-chartjs-charts">Chartjs Charts</a></li>
-                        <li><a href="charts-flot.html" key="t-flot-charts">Flot Charts</a></li>
-                        <li><a href="charts-tui.html" key="t-ui-charts">Toast UI Charts</a></li>
-                        <li><a href="charts-knob.html" key="t-knob-charts">Jquery Knob Charts</a></li>
-                        <li><a href="charts-sparkline.html" key="t-sparkline-charts">Sparkline Charts</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-aperture"></i>
-                        <span key="t-icons">Icons</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="icons-boxicons.html" key="t-boxicons">Boxicons</a></li>
-                        <li><a href="icons-materialdesign.html" key="t-material-design">Material Design</a></li>
-                        <li><a href="icons-dripicons.html" key="t-dripicons">Dripicons</a></li>
-                        <li><a href="icons-fontawesome.html" key="t-font-awesome">Font Awesome</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-map"></i>
-                        <span key="t-maps">Maps</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="maps-google.html" key="t-g-maps">Google Maps</a></li>
-                        <li><a href="maps-vector.html" key="t-v-maps">Vector Maps</a></li>
-                        <li><a href="maps-leaflet.html" key="t-l-maps">Leaflet Maps</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-share-alt"></i>
-                        <span key="t-multi-level">Multi Level</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="javascript: void(0);" key="t-level-1-1">Level 1.1</a></li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow" key="t-level-1-2">Level 1.2</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="javascript: void(0);" key="t-level-2-1">Level 2.1</a></li>
-                                <li><a href="javascript: void(0);" key="t-level-2-2">Level 2.2</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
 
             </ul>
         </div>
