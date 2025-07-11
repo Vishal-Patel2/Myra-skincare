@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2025 at 06:48 AM
+-- Generation Time: Jul 11, 2025 at 07:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `myra_skincare`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `content` text NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `slug`, `image`, `content`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'HOW TO EXFOLIATE SKIN FOR A SMOOTH AND RADIANT GLOW', 'how-to-exfoliate-skin-for-a-smooth-and-radiant-glow', 'TJWaL5PUygYWXxKqtpTUKOFZFtyBSOHtmeRn9qDS.jpg', '<h3>Introduction</h3>\r\n\r\n<p>Don&#39;t you love that feeling when you run fingers along clean skin that feels fresh and smooth. But when it starts to feel bumpy or dull, or it seems as though your favourite products might not be absorbing the same way anymore, it may be time to consider adding some exfoliation.</p>\r\n\r\n<p>Exfoliation is not just something to check off your skin-care checklist; it is a way to give your skin a bit of a reset. When you are removing dead skin and the buildup on your skin, it can breathe, refresh and absorb all the wonderful things you have been putting on it.</p>\r\n\r\n<p>In this guide, we will explain how to exfoliate skin gently and effectively at home, what methods are better for different skin types, and when you might want to think about seeking help from the pros and getting an additional layer of glow with a professional treatment.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>Why Is Exfoliation Important?</h3>\r\n\r\n<p>Our skin is an active surface, tirelessly working away, carrying out its processes of growing, shedding, and protecting us. As we get older, manage everyday stressors and pollution, or even just a change in seasons, our natural cell turnover rate slows down. The result? Dullness, dry patches, rough texture, and skincare that suddenly feels...meh.</p>\r\n\r\n<p>If you&rsquo;ve asked yourself, &ldquo;Why does my skin look tired even though I&rsquo;m doing all the right things?&rdquo;, the answer could be as simple as this: your skin might be craving exfoliation.</p>\r\n\r\n<p>Some common signs include:</p>\r\n\r\n<ul>\r\n	<li>Skin that looks a little flat or greyish</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li>Roughness when you run your hand across your cheeks</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li>Uneven patches or dry flakes</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li>Breakouts that keep coming back, especially around clogged areas</li>\r\n</ul>\r\n\r\n<p>Regular exfoliation (done right) helps get rid of that buildup, revealing the fresher, healthier skin hiding underneath. It also allows moisturisers, serums, and active ingredients to actually do their job, which means better results from the products you&rsquo;re already using.</p>', 'active', '2025-07-09 19:31:36', '2025-07-09 20:41:47'),
+(4, 'HOW TO REDUCE DOUBLE CHIN WITH SIMPLE AND SAFE METHODS', 'how-to-reduce-double-chin-with-simple-and-safe-methods', 'MdD16MOgJrwgiI3uYbAcQefjoK1AmSdzkwkyoG1q.png', '<h3>Introduction</h3>\r\n\r\n<p>Let&rsquo;s just come out and say it: it is not enjoyable to see a double chin in photographs. That little flap of skin beneath your jaw has the power to change the look of your whole face. While weight gain is often cited as the reason behind a double chin, there are lots of other factors to consider. Genetics, posture, skin aging, and even how we hold our phones can all play a role.</p>\r\n\r\n<p>If you have ever typed the words &ldquo;how can I get rid of double chin naturally&rdquo; into your search engine, you are not alone. This blog is going to provide you with some simple, straightforward home solutions and habits that do not involve any fancy gadgets or circumvention. Let&rsquo;s go!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>What Causes a Double Chin?</h3>\r\n\r\n<p>Double chins are surprisingly common, and they can show up even if you&rsquo;re not overweight. Here&#39;s why:</p>\r\n\r\n<ul>\r\n	<li><strong>Extra Fat:&nbsp;</strong>Just like belly fat or love handles, the area under your chin stores fat, too.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Weak Muscles:</strong>&nbsp;If your jaw and neck muscles aren&rsquo;t getting much action, the skin can start to sag.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Aging:&nbsp;</strong>As we age, our skin loses elasticity and collagen, leading to looser skin.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Genetics:&nbsp;</strong>If your parents had it, chances are you might too.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Poor Posture:</strong>&nbsp;Tech neck is real; constantly looking down can weaken the muscles that support your chin.</li>\r\n</ul>\r\n\r\n<p>So when you ask yourself, &ldquo;How to reduce double chin?&rdquo;, know that it&rsquo;s a mix of small changes done consistently over time.</p>\r\n\r\n<h3>Home Remedies to Reduce Double Chin</h3>\r\n\r\n<p>You don&rsquo;t need an expensive serum to start improving your chin area. Here are a few gentle, natural fixes that can help:</p>\r\n\r\n<p>1. Glycerin + Epsom Salt Mask</p>\r\n\r\n<p>Combine a spoonful of glycerin with half a spoon of Epsom salt and a few drops of peppermint oil. Dab this on under your chin, wait 20-30 minutes, and rinse.</p>\r\n\r\n<p>Why it helps:&nbsp;This could help with the bloating and puffiness while making your skin feel firmer.</p>\r\n\r\n<p>2. Green Tea</p>\r\n\r\n<p>Get into the habit of drinking green tea in the morning.</p>\r\n\r\n<p>Why it helps:&nbsp;Green tea boosts metabolism, helps with fat loss, and areas like the chin are included.</p>\r\n\r\n<p>3. Egg White Mask</p>\r\n\r\n<p>Whisk together two egg whites with a spoonful of milk, a bit of honey, and a few drops of lemon juice. Apply it and wait for it to tighten and rinse.</p>\r\n\r\n<p>Why it helps:&nbsp;Egg whites can tighten the skin temporarily, and you will see improvement in texture with continuous use.</p>\r\n\r\n<p>4. Oil Massage</p>\r\n\r\n<p>Daily, massage wheat germ oil or cocoa butter (or both) on your jawline. Use upward strokes for a few minutes each day.</p>\r\n\r\n<p>Why it helps:&nbsp;Massaging will help with circulation, and over time, it will help firm up the skin slowly.</p>\r\n\r\n<p>These home remedies for double chin won&rsquo;t give you overnight results, but with regular use, they can absolutely make a difference.</p>\r\n\r\n<h3>Exercises &amp; Daily Habits to Support Results</h3>\r\n\r\n<p>Want to take it a step further? Add in these simple movements and daily tweaks:</p>\r\n\r\n<p>Facial Exercises</p>\r\n\r\n<ul>\r\n	<li><strong>Chin Lifts:</strong>&nbsp;Look up, pucker your lips like you&#39;re kissing the ceiling. Hold, then release.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Neck Rolls:</strong>&nbsp;Slow, circular neck rolls loosen up tension and engage the muscles.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Tongue Stretch:&nbsp;</strong>Try touching your nose with your tongue (even if you can&#39;t, it&#39;s a fun workout!).</li>\r\n</ul>\r\n\r\n<p>Everyday Habits That Help</p>\r\n\r\n<ul>\r\n	<li><strong>Fix Your Posture:&nbsp;</strong>Sit tall, shoulders back, chin up. It sounds basic, but it works wonders.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Stay Hydrated:</strong>&nbsp;Drinking enough water keeps skin firm and supports fat metabolism.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Mind Your Diet:&nbsp;</strong>Limit sugary and processed foods that can lead to fat buildup.</li>\r\n</ul>\r\n\r\n<p>If you&#39;re serious about how to eliminate double chin naturally, these small steps, repeated daily, can make a big difference.</p>', 'active', '2025-07-09 20:56:16', '2025-07-09 20:56:16');
 
 -- --------------------------------------------------------
 
@@ -52,6 +77,34 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_details`
+--
+
+CREATE TABLE `doctor_details` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `dr_name` varchar(255) DEFAULT NULL,
+  `dr_introduction` text DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `speciality` varchar(255) DEFAULT NULL,
+  `experience` varchar(50) DEFAULT NULL,
+  `degree` varchar(255) DEFAULT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `doctor_details`
+--
+
+INSERT INTO `doctor_details` (`id`, `image`, `dr_name`, `dr_introduction`, `phone`, `email`, `speciality`, `experience`, `degree`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'sHjtBQNlE5ELzOZo0MqsjZ3EigzirCA1VtbIwMtB.jpg', 'Dr. Malissa Fierro', '<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.</p>\r\n\r\n<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', '1122334455', 'Malissa@gmail.com', 'Cardiology Specialist', '15 Years', 'MD. of Cardiology', 'active', '2025-07-10 00:01:39', '2025-07-10 00:36:08');
 
 -- --------------------------------------------------------
 
@@ -312,6 +365,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cache`
 --
 ALTER TABLE `cache`
@@ -322,6 +381,12 @@ ALTER TABLE `cache`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `doctor_details`
+--
+ALTER TABLE `doctor_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -403,6 +468,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `doctor_details`
+--
+ALTER TABLE `doctor_details`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -472,60 +549,6 @@ ALTER TABLE `services`
 ALTER TABLE `top_categories`
   ADD CONSTRAINT `top_categories_ibfk_1` FOREIGN KEY (`gender_id`) REFERENCES `genders` (`id`) ON DELETE CASCADE;
 COMMIT;
-
-
-
---
--- Table structure for table `blogs`
---
-
-CREATE TABLE `blogs` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `content` text NOT NULL,
-  `status` enum('active','inactive') NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `blogs`
---
-
-INSERT INTO `blogs` (`id`, `title`, `slug`, `image`, `content`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'HOW TO EXFOLIATE SKIN FOR A SMOOTH AND RADIANT GLOW', 'how-to-exfoliate-skin-for-a-smooth-and-radiant-glow', 'TJWaL5PUygYWXxKqtpTUKOFZFtyBSOHtmeRn9qDS.jpg', '<h3>Introduction</h3>\r\n\r\n<p>Don&#39;t you love that feeling when you run fingers along clean skin that feels fresh and smooth. But when it starts to feel bumpy or dull, or it seems as though your favourite products might not be absorbing the same way anymore, it may be time to consider adding some exfoliation.</p>\r\n\r\n<p>Exfoliation is not just something to check off your skin-care checklist; it is a way to give your skin a bit of a reset. When you are removing dead skin and the buildup on your skin, it can breathe, refresh and absorb all the wonderful things you have been putting on it.</p>\r\n\r\n<p>In this guide, we will explain how to exfoliate skin gently and effectively at home, what methods are better for different skin types, and when you might want to think about seeking help from the pros and getting an additional layer of glow with a professional treatment.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>Why Is Exfoliation Important?</h3>\r\n\r\n<p>Our skin is an active surface, tirelessly working away, carrying out its processes of growing, shedding, and protecting us. As we get older, manage everyday stressors and pollution, or even just a change in seasons, our natural cell turnover rate slows down. The result? Dullness, dry patches, rough texture, and skincare that suddenly feels...meh.</p>\r\n\r\n<p>If you&rsquo;ve asked yourself, &ldquo;Why does my skin look tired even though I&rsquo;m doing all the right things?&rdquo;, the answer could be as simple as this: your skin might be craving exfoliation.</p>\r\n\r\n<p>Some common signs include:</p>\r\n\r\n<ul>\r\n	<li>Skin that looks a little flat or greyish</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li>Roughness when you run your hand across your cheeks</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li>Uneven patches or dry flakes</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li>Breakouts that keep coming back, especially around clogged areas</li>\r\n</ul>\r\n\r\n<p>Regular exfoliation (done right) helps get rid of that buildup, revealing the fresher, healthier skin hiding underneath. It also allows moisturisers, serums, and active ingredients to actually do their job, which means better results from the products you&rsquo;re already using.</p>', 'active', '2025-07-10 01:01:36', '2025-07-10 02:11:47'),
-(4, 'HOW TO REDUCE DOUBLE CHIN WITH SIMPLE AND SAFE METHODS', 'how-to-reduce-double-chin-with-simple-and-safe-methods', 'MdD16MOgJrwgiI3uYbAcQefjoK1AmSdzkwkyoG1q.png', '<h3>Introduction</h3>\r\n\r\n<p>Let&rsquo;s just come out and say it: it is not enjoyable to see a double chin in photographs. That little flap of skin beneath your jaw has the power to change the look of your whole face. While weight gain is often cited as the reason behind a double chin, there are lots of other factors to consider. Genetics, posture, skin aging, and even how we hold our phones can all play a role.</p>\r\n\r\n<p>If you have ever typed the words &ldquo;how can I get rid of double chin naturally&rdquo; into your search engine, you are not alone. This blog is going to provide you with some simple, straightforward home solutions and habits that do not involve any fancy gadgets or circumvention. Let&rsquo;s go!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3>What Causes a Double Chin?</h3>\r\n\r\n<p>Double chins are surprisingly common, and they can show up even if you&rsquo;re not overweight. Here&#39;s why:</p>\r\n\r\n<ul>\r\n	<li><strong>Extra Fat:&nbsp;</strong>Just like belly fat or love handles, the area under your chin stores fat, too.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Weak Muscles:</strong>&nbsp;If your jaw and neck muscles aren&rsquo;t getting much action, the skin can start to sag.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Aging:&nbsp;</strong>As we age, our skin loses elasticity and collagen, leading to looser skin.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Genetics:&nbsp;</strong>If your parents had it, chances are you might too.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Poor Posture:</strong>&nbsp;Tech neck is real; constantly looking down can weaken the muscles that support your chin.</li>\r\n</ul>\r\n\r\n<p>So when you ask yourself, &ldquo;How to reduce double chin?&rdquo;, know that it&rsquo;s a mix of small changes done consistently over time.</p>\r\n\r\n<h3>Home Remedies to Reduce Double Chin</h3>\r\n\r\n<p>You don&rsquo;t need an expensive serum to start improving your chin area. Here are a few gentle, natural fixes that can help:</p>\r\n\r\n<p>1. Glycerin + Epsom Salt Mask</p>\r\n\r\n<p>Combine a spoonful of glycerin with half a spoon of Epsom salt and a few drops of peppermint oil. Dab this on under your chin, wait 20-30 minutes, and rinse.</p>\r\n\r\n<p>Why it helps:&nbsp;This could help with the bloating and puffiness while making your skin feel firmer.</p>\r\n\r\n<p>2. Green Tea</p>\r\n\r\n<p>Get into the habit of drinking green tea in the morning.</p>\r\n\r\n<p>Why it helps:&nbsp;Green tea boosts metabolism, helps with fat loss, and areas like the chin are included.</p>\r\n\r\n<p>3. Egg White Mask</p>\r\n\r\n<p>Whisk together two egg whites with a spoonful of milk, a bit of honey, and a few drops of lemon juice. Apply it and wait for it to tighten and rinse.</p>\r\n\r\n<p>Why it helps:&nbsp;Egg whites can tighten the skin temporarily, and you will see improvement in texture with continuous use.</p>\r\n\r\n<p>4. Oil Massage</p>\r\n\r\n<p>Daily, massage wheat germ oil or cocoa butter (or both) on your jawline. Use upward strokes for a few minutes each day.</p>\r\n\r\n<p>Why it helps:&nbsp;Massaging will help with circulation, and over time, it will help firm up the skin slowly.</p>\r\n\r\n<p>These home remedies for double chin won&rsquo;t give you overnight results, but with regular use, they can absolutely make a difference.</p>\r\n\r\n<h3>Exercises &amp; Daily Habits to Support Results</h3>\r\n\r\n<p>Want to take it a step further? Add in these simple movements and daily tweaks:</p>\r\n\r\n<p>Facial Exercises</p>\r\n\r\n<ul>\r\n	<li><strong>Chin Lifts:</strong>&nbsp;Look up, pucker your lips like you&#39;re kissing the ceiling. Hold, then release.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Neck Rolls:</strong>&nbsp;Slow, circular neck rolls loosen up tension and engage the muscles.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Tongue Stretch:&nbsp;</strong>Try touching your nose with your tongue (even if you can&#39;t, it&#39;s a fun workout!).</li>\r\n</ul>\r\n\r\n<p>Everyday Habits That Help</p>\r\n\r\n<ul>\r\n	<li><strong>Fix Your Posture:&nbsp;</strong>Sit tall, shoulders back, chin up. It sounds basic, but it works wonders.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Stay Hydrated:</strong>&nbsp;Drinking enough water keeps skin firm and supports fat metabolism.</li>\r\n</ul>\r\n\r\n<ul>\r\n	<li><strong>Mind Your Diet:&nbsp;</strong>Limit sugary and processed foods that can lead to fat buildup.</li>\r\n</ul>\r\n\r\n<p>If you&#39;re serious about how to eliminate double chin naturally, these small steps, repeated daily, can make a big difference.</p>', 'active', '2025-07-10 02:26:16', '2025-07-10 02:26:16');
-
-
-
-
---
--- Table structure for table `doctor_details`
---
-
-CREATE TABLE `doctor_details` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `dr_name` varchar(255) DEFAULT NULL,
-  `dr_introduction` text DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `speciality` varchar(255) DEFAULT NULL,
-  `experience` varchar(50) DEFAULT NULL,
-  `degree` varchar(255) DEFAULT NULL,
-  `status` enum('active','inactive') DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `doctor_details`
---
-
-INSERT INTO `doctor_details` (`id`, `image`, `dr_name`, `dr_introduction`, `phone`, `email`, `speciality`, `experience`, `degree`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'sHjtBQNlE5ELzOZo0MqsjZ3EigzirCA1VtbIwMtB.jpg', 'Dr. Malissa Fierro', '<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.</p>\r\n\r\n<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', '1122334455', 'Malissa@gmail.com', 'Cardiology Specialist', '15 Years', 'MD. of Cardiology', 'active', '2025-07-10 05:31:39', '2025-07-10 06:06:08');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
