@@ -45,19 +45,12 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
                 aria-labelledby="{{ $categorySlug }}-female-tab">
                 <div class="row">
                     @foreach($femaleMid as $mid)
-<<<<<<< HEAD
 
 
                     <div class="col-6 col-md-6 col-lg-2 mb-4">
                         <a
                             href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
 
-=======
- 
-                  <a href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
-
-                        <div class="col-6 col-md-6 col-lg-2 mb-4">
->>>>>>> 3db20a7 (blog section dyanmic)
                             <div class="card h-100 text-center">
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
                                     class="card-img-top" alt="">
@@ -77,17 +70,11 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
                 aria-labelledby="{{ $categorySlug }}-male-tab">
                 <div class="row">
                     @foreach($maleMid as $mid)
-<<<<<<< HEAD
 
                     <div class="col-6 col-md-6 col-lg-2 mb-4">
                         <a
                             href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
 
-=======
-                   <a href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
-
-                        <div class="col-6 col-md-6 col-lg-2 mb-4">
->>>>>>> 3db20a7 (blog section dyanmic)
                             <div class="card h-100 text-center">
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
                                     class="card-img-top" alt="">
@@ -95,14 +82,9 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
                                     <h5 class="card-title">{{ $mid->name }}</h5>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </a>
 
                     </div>
-=======
-                        </div>
-                    </a>    
->>>>>>> 3db20a7 (blog section dyanmic)
                     @endforeach
                 </div>
             </div>
