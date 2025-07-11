@@ -58,10 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+ 
     Route::view('/index' , 'admin/index')->name('admin.index');
-
-
+ 
     Route::resource('genders', GenderController::class);
     Route::resource('top-categories', TopCategoryController::class);
     Route::resource('mid-categories', MidCategoryController::class);
@@ -69,7 +69,7 @@ Route::prefix('admin')->group(function () {
    
 
     Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
-
+ 
 });
 
 
@@ -111,8 +111,7 @@ Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show')
 
 // Services list by mid category
 Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->name('services');
-
-// Single service detail
+ 
 Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
 
 
