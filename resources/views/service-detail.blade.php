@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-<<<<<<< HEAD
 @section('content')
 
 <style>
@@ -250,23 +249,10 @@
             <ul class="breadcrumb-menu">
                 <li><a href="/">Home</a></li>
                 <li class="active">{{ $service->name }}</li>
-=======
-@section('title', $service->title)
-
-@section('content')
-<main class="main">
-    <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01.jpg)">
-        <div class="container">
-            <h2 class="breadcrumb-title">{{ $service->title }}</h2>
-            <ul class="breadcrumb-menu">
-                <li><a href="/">Home</a></li>
-                <li class="active">{{ $service->title }}</li>
->>>>>>> 3db20a7 (blog section dyanmic)
             </ul>
         </div>
     </div>
 
-<<<<<<< HEAD
     <div class="service-single-area py-5">
         <div class="container">
             <div class="service-single-wrapper">
@@ -359,22 +345,10 @@
                     </div>
 
                 </div>
-=======
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="{{ asset('storage/uploads/services/' . $service->image) }}" class="img-fluid">
-            </div>
-            <div class="col-md-6">
-                <h3>{{ $service->title }}</h3>
-                <p>{{ $service->description }}</p>
-                {{-- Add more fields like price, duration etc if needed --}}
->>>>>>> 3db20a7 (blog section dyanmic)
             </div>
         </div>
     </div>
 </main>
-<<<<<<< HEAD
 
 <script>
     // JavaScript to rotate images every 3 seconds
@@ -390,6 +364,3 @@
 <!-- end slider -->
 
 @endsection
-=======
-@endsection
->>>>>>> 3db20a7 (blog section dyanmic)
