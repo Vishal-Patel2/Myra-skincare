@@ -34,11 +34,41 @@
                         <span key="t-services">Services</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('doctor_details.index') }}" class="waves-effect">
                         <i class="bx bx-user-circle"></i> {{-- You can use bx-user, bx-id-card, or bx-stethoscope if available --}}
                         <span key="t-doctors">Doctors</span>
                     </a>
+                </li>
+
+                 <li>
+
+                    <a href="{{ route('blogs.index') }}" class="waves-effect">
+                        <i class="bx bx-detail"></i>
+                        <span key="t-blog">Blogs</span>
+                    </a>
+
+                </li>
+
+
+                <li>
+                    <a href="{{ route('careers.index') }}" class="waves-effect">
+                        <i class="bx bx-briefcase-alt"></i>
+                        <span key="t-jobs">Careers</span>
+                    </a>
+                    
+                </li>
+
+                 <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-receipt"></i>
+                        <span key="t-invoices">Invoices</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="invoices-list.html" key="t-invoice-list">Invoice List</a></li>
+                        <li><a href="invoices-detail.html" key="t-invoice-detail">Invoice Detail</a></li>
+                    </ul>
                 </li>
 
                 <li>
@@ -54,52 +84,7 @@
                     </ul>
                 </li>
 
-
-
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-receipt"></i>
-                        <span key="t-invoices">Invoices</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="invoices-list.html" key="t-invoice-list">Invoice List</a></li>
-                        <li><a href="invoices-detail.html" key="t-invoice-detail">Invoice Detail</a></li>
-                    </ul>
-                </li>
-
-                <li>
-
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-detail"></i>
-                        <span key="t-blog">Blog</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a href="{{ route('blogs.index') }}">All Blogs</a></li>
-                        <li><a href="{{ route('blogs.create') }}">Add Blog</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect has-arrow">
-                        <i class="bx bx-briefcase-alt"></i>
-                        <span key="t-jobs">Jobs</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="job-list.html" key="t-job-list">Job List</a></li>
-                        <li><a href="job-grid.html" key="t-job-grid">Job Grid</a></li>
-                        <li><a href="job-apply.html" key="t-apply-job">Apply Job</a></li>
-                        <li><a href="job-details.html" key="t-job-details">Job Details</a></li>
-                        <li><a href="job-categories.html" key="t-Jobs-categories">Jobs Categories</a></li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow" key="t-candidate">Candidate</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="candidate-list.html" key="t-list">List</a></li>
-                                <li><a href="candidate-overview.html" key="t-overview">Overview</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                
 
                 <li class="menu-title" key="t-pages">Pages</li>
 

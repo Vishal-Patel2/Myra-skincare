@@ -3,91 +3,137 @@
 @section('title', 'Myraluxa Aesthetic Pvt Ltd')
 
 @section('content')
-
-
-
-<main class="main">
-
-    <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01.jpg)">
-        <div class="container">
-            <h2 class="breadcrumb-title">Our Carrer</h2>
-            <ul class="breadcrumb-menu">
-                <li><a href="index-2.html">Home</a></li>
-                <li class="active">Our Carrer</li>
-            </ul>
+    <main class="main">
+        <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01.jpg)">
+            <div class="container">
+                <h2 class="breadcrumb-title">Our Career</h2>
+                <ul class="breadcrumb-menu">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">Our Career</li>
+                </ul>
+            </div>
         </div>
-    </div>
 
-    <div class="contact-area py-5">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="row">
-                    <div class="col-md-12 align-self-center">
-                        <div class="contact-form">
-                            <div class="contact-form-header text-center">
-                                <h2>Explore Career Opportunities</h2>
-
+        <div class="container py-5">
+            <div class="row g-4">
+                @foreach ($careers as $career)
+                    <div class="col-md-6">
+                        <div class="career-card">
+                            <h5 class="career-title">{{ $career->job_profile }}</h5>
+                            <div class="career-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> {{ $career->location ?? 'N/A' }}</span>
+                                <span><i class="fas fa-briefcase"></i> {{ $career->experience ?? 'N/A' }} Experience</span>
                             </div>
-                            <form method="post" action="" id="contact-form">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="name" placeholder="Your Name"
-                                                required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="email"
-                                                placeholder="Your Email" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="tel" class="form-control" name="phone"
-                                                placeholder="Your Number" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="location"
-                                                placeholder="Your location" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input class="form-control" type="file" id="formFile">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="profile"
-                                                placeholder="What job profile are you looking for?" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea name="message" cols="30" rows="4" class="form-control"
-                                                placeholder="Write Your Message"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="theme-btn mt-3"> <i class="far fa-paper-plane"></i> Send
-                                    Message</button>
-                                <div class="col-md-12 mt-3">
-                                    <div class="form-messege text-success"></div>
-                                </div>
-                            </form>
+                            <div class="career-buttons">
+                                <button class="btn-outline read-desc" data-id="{{ $career->id }}">Read
+                                    Description</button>
+                                <button class="btn-outline apply-btn"
+                                    onclick="openApplicationModal('{{ $career->job_profile }}')">Apply Now</button>
+                            </div>
+                            <div class="job-desc mt-2" id="desc-{{ $career->id }}" style="display: none;">
+                                <p>{!! nl2br(e($career->job_description)) !!}</p>
+                            </div>
                         </div>
                     </div>
+                @endforeach
+            </div>
+        </div>
 
+        <!-- Application Modal -->
+        <div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Apply for <span id="jobTitle"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('careers.apply') }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="job_profile" id="hiddenJobProfile">
+
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" name="phone" placeholder="Your Phone" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="file" class="form-control" name="resume" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="message" class="form-control" rows="3" placeholder="Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Submit Application</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
+    <style>
+        .career-card {
+            border: 1px solid #eee;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
 
-</main>
+        .career-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .career-meta span {
+            display: inline-block;
+            margin-right: 15px;
+            color: #666;
+        }
+
+        .career-buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-outline {
+            border: 1px solid #414a53;
+            color: #414a53;
+            padding: 4px 8px;
+            border-radius: 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background-color: #414a53;
+            color: #fff;
+        }
+    </style>
+
+    <script>
+        function openApplicationModal(jobProfile) {
+            document.getElementById('jobTitle').textContent = jobProfile;
+            document.getElementById('hiddenJobProfile').value = jobProfile;
+            new bootstrap.Modal(document.getElementById('applicationModal')).show();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.read-desc').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const desc = document.getElementById('desc-' + id);
+                    desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
 @endsection

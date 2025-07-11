@@ -13,7 +13,8 @@ use App\Http\Controllers\WomenController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AjaxCategoryController;
 use App\Http\Controllers\DoctorController;
-
+use App\Http\Controllers\CareerDoctorController;
+use App\Http\Controllers\CareerApplicationController;
 
 
 
@@ -33,7 +34,6 @@ Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
 Route::get('/women', [WomenController::class, 'showWomenCategories'])->name('women');
 
 Route::view('/packages' , 'packages')->name('packages');
-Route::view('/career' , 'career')->name('career');
 Route::view('/contact' , 'contact')->name('contact');
 
 Route::view('/wallet' , 'wallet')->name('wallet');
@@ -91,6 +91,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('doctor_details', DoctorController::class);
 });
 
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::resource('careers', CareerDoctorController::class);
+});
+
 
 // Must match fetch() URL
 Route::post('/admin/doctor_details/toggle-status/{id}', [DoctorController::class, 'toggleStatus'])->name('doctor_details.toggleStatus');
@@ -98,8 +102,11 @@ Route::post('/admin/doctor_details/toggle-status/{id}', [DoctorController::class
 Route::get('/doctors', [IndexController::class, 'frontendIndex'])->name('frontend.doctors.index');
 Route::get('/doctors/{doctor}', [DoctorController::class, 'frontendShow'])->name('frontend.doctors.show');
 
+Route::get('/careers', [CareerDoctorController::class, 'frontendIndex'])->name('careers');
+Route::post('/admin/careers/toggle-status/{id}', [CareerDoctorController::class, 'toggleStatus']);
+Route::post('/careers/apply', [CareerApplicationController::class, 'apply'])->name('careers.apply');
 
-
+ 
 
 //frontend
 
@@ -116,6 +123,8 @@ Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name(
 Route::get('/change-password', function () {
     return view('profile.partials.change-password');
 })->middleware('auth')->name('password.change');
+
+
 
 
 require __DIR__.'/auth.php';
