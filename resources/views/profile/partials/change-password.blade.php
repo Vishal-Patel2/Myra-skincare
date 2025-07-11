@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Myraluxa Aesthetic Pvt Ltd')
+@section('title', 'Change Password')
 
 @section('content')
 
@@ -199,98 +199,79 @@
 </style>
 
 <main class="main">
-
     <div class="container py-5">
         <div class="row align-items-center">
             <!-- Carousel Section -->
             <div class="col-lg-6">
                 <div class="fade-gallery-wrapper">
                     <div class="fade-gallery-slider">
-                        <img src="./assets/img/slider/edit_slider.png" class="fade-gallery-img active" alt="gallery">
-                        <img src="./assets/img/slider/edit_slider1.webp" class="fade-gallery-img" alt="gallery">
-
+                        <img src="{{ asset('assets/img/slider/edit_slider.png') }}" class="fade-gallery-img active" alt="gallery">
+                        <img src="{{ asset('assets/img/slider/edit_slider1.webp') }}" class="fade-gallery-img" alt="gallery">
                     </div>
                 </div>
             </div>
-
-
 
             <!-- Profile Form Section -->
             <div class="col-lg-6 col-md-12">
                 <div class="profile-form-container">
                     <div class="login-header">
-                        <img src="assets/img/logo/logo.png" alt="Logo">
+                        <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo">
                         <h2>PERSONALIZED AND HIGH PERFORMANCE SKINCARE TREATMENTS AT HOME</h2>
                     </div>
 
+                    @if (session('status') === 'password-updated')
+                        <div class="alert alert-success">Password updated successfully.</div>
+                    @endif
 
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+                        @method('PUT')
 
-
-                    <form action="#">
-                        <!-- <div class="form-group">
-                            <label>Full Name*</label>
-                            <input type="text" placeholder="Enter your full name" value="aakash">
+                        <!-- Current Password -->
+                        <div class="form-group">
+                            <label>Current Password*</label>
+                            <input type="password" id="current_password" name="current_password" placeholder="Current password" required>
+                            <i class="fa fa-eye toggle-password" onclick="togglePassword('current_password', this)"></i>
+                            @error('current_password')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label>Phone Number*</label>
-                            <input type="tel" placeholder="Enter phone number" value="8505920451">
-                        </div> -->
-
-                        <div class="form-group">
-                            <label>Email*</label>
-                            <input type="email" name="email" placeholder="johndoe@gmail.com" value="">
-                        </div>
+                        <!-- New Password -->
                         <div class="form-group">
                             <label>New Password*</label>
-                            <input type="password" id="password" name="password" placeholder="Wthh@12#$$" maxlength="8"
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8}$"
-                                title="Password must contain uppercase, lowercase, number, and special character, and be exactly 8 characters long."
-                                required>
+                            <input type="password" id="password" name="password" placeholder="New password" maxlength="8"
+                                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8}$"
+                                   title="Must contain uppercase, lowercase, number, special character, and be exactly 8 characters long."
+                                   required>
                             <i class="fa fa-eye toggle-password" onclick="togglePassword('password', this)"></i>
+                            @error('password')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
-                        <!-- Confirm Password Field -->
+                        <!-- Confirm Password -->
                         <div class="form-group">
                             <label>Confirm Password*</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Wthh@12#$$"
-                                maxlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8}$"
-                                title="Password must contain uppercase, lowercase, number, and special character, and be exactly 8 characters long."
-                                required>
-                            <i class="fa fa-eye toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+                            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password" maxlength="8"
+                                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8}$"
+                                   title="Must match the new password and follow format." required>
+                            <i class="fa fa-eye toggle-password" onclick="togglePassword('password_confirmation', this)"></i>
                         </div>
-
-
 
                         <div class="login-header">
-
-                            <h2>I accept the <a href="" style="color: black;"> TERMS & CONDITIONS</a> and <a href=""
-                                    style="color: black;">PRIVACY POLICY</a></h2>
+                            <h2>I accept the <a href="#" style="color: black;">TERMS & CONDITIONS</a> and <a href="#" style="color: black;">PRIVACY POLICY</a></h2>
                         </div>
-
 
                         <button type="submit" class="continue-btn">SUBMIT</button>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
-
-
-
 </main>
 
-<script>
-// Toggle gender selection
-document.querySelectorAll('.gender-option').forEach(option => {
-    option.addEventListener('click', () => {
-        document.querySelectorAll('.gender-option').forEach(el => el.classList.remove('active'));
-        option.classList.add('active');
-    });
-});
-</script>
-<!--password eyes -->
+<!-- Scripts -->
 <script>
 function togglePassword(inputId, icon) {
     const input = document.getElementById(inputId);
@@ -304,22 +285,14 @@ function togglePassword(inputId, icon) {
         icon.classList.add("fa-eye");
     }
 }
-</script>
 
-<!-- end password eyes -->
-<!-- slider -->
-<script>
-// JavaScript to rotate images every 3 seconds
 let current = 0;
 const slides = document.querySelectorAll('.fade-gallery-img');
-
 setInterval(() => {
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
     slides[current].classList.add('active');
 }, 3000);
 </script>
-<!-- end slider -->
-
 
 @endsection

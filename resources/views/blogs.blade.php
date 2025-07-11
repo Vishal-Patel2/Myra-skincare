@@ -8,7 +8,7 @@
         <div class="container">
             <h2 class="breadcrumb-title">Our Blog</h2>
             <ul class="breadcrumb-menu">
-                <li><a href="{{ route('admin.index') }}">Home</a></li>
+                <li><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="active">Our Blog</li>
             </ul>
         </div>

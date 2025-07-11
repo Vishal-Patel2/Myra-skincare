@@ -17,9 +17,6 @@ use App\Http\Controllers\DoctorController;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -59,8 +56,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
+    
  
-    Route::view('/index' , 'admin/index')->name('admin.index');
+    Route::view('/index' , 'admin/index')->name('dashboard');
  
     Route::resource('genders', GenderController::class);
     Route::resource('top-categories', TopCategoryController::class);
@@ -114,6 +113,9 @@ Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->n
  
 Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
 
+Route::get('/change-password', function () {
+    return view('profile.partials.change-password');
+})->middleware('auth')->name('password.change');
 
 
 require __DIR__.'/auth.php';

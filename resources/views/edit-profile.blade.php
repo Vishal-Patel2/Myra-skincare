@@ -1,9 +1,8 @@
 @extends('layouts.master')
 
-@section('title', 'Myraluxa Aesthetic Pvt Ltd')
+@section('title', 'Edit Profile')
 
 @section('content')
-
 <style>
 /* ==== General Styles ==== */
 
@@ -187,20 +186,8 @@
 
 </style>
 
+
 <main class="main">
-
-    <!-- <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01.jpg)">
-            <div class="container">
-                <h2 class="breadcrumb-title">edit-profile</h2>
-                <ul class="breadcrumb-menu">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li class="active">edit-profile</li>
-                </ul>
-            </div>
-        </div> -->
-   
-
-
 
     <div class="container py-5">
         <div class="row align-items-center">
@@ -208,81 +195,101 @@
             <div class="col-lg-6">
                 <div class="fade-gallery-wrapper">
                     <div class="fade-gallery-slider">
-                        <img src="./assets/img/slider/edit_slider.png" class="fade-gallery-img active" alt="gallery">
-                        <img src="./assets/img/slider/edit_slider1.webp" class="fade-gallery-img" alt="gallery">
-                        
+                        <img src="{{ asset('assets/img/slider/edit_slider.png') }}" class="fade-gallery-img active" alt="gallery">
+                        <img src="{{ asset('assets/img/slider/edit_slider1.webp') }}" class="fade-gallery-img" alt="gallery">
                     </div>
                 </div>
             </div>
-
-
 
             <!-- Profile Form Section -->
             <div class="col-lg-6 col-md-12">
                 <div class="profile-form-container">
                     <div class="login-header">
-                        <img src="assets/img/logo/logo.png" alt="Logo">
+                        <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo">
                         <h2>Complete Your Profile</h2>
                     </div>
 
                     <!-- Upload Section -->
                     <div class="upload-photo">
                         <label for="uploadInput" class="upload-icon" id="previewContainer">
-                            <i class="fa fa-user" id="defaultIcon"></i>
-                            <img id="profilePreview" src="#" alt="Profile Preview" style="display: none;" />
+                            <i class="fa fa-user" id="defaultIcon" style="{{ auth()->user()->profile_image ? 'display: none;' : '' }}"></i>
+                            <img id="profilePreview" 
+                                 src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : '#' }}" 
+                                 alt="Profile Preview" 
+                                 style="{{ auth()->user()->profile_image ? '' : 'display: none;' }}" />
                         </label>
-                        <input type="file" id="uploadInput" accept="image/*" style="display: none;" />
+                        <input type="file" id="uploadInput" name="profile_image" accept="image/*" form="profileForm" style="display: none;" />
                         <div class="upload-link">UPLOAD PHOTO</div>
                     </div>
 
+                    <form id="profileForm" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PATCH')
 
-                    <form action="#">
+                        <!-- Full Name -->
                         <div class="form-group">
                             <label>Full Name*</label>
-                            <input type="text" name="name" placeholder="John Doe" value="" 
-                            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                            <input type="text" name="name" placeholder="John Doe" value="{{ old('name', auth()->user()->name) }}"
+                                   oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                            @error('name')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
+                        <!-- Phone -->
                         <div class="form-group">
                             <label>Phone Number*</label>
-                            <input type="tel" name="phone"  placeholder="9876*****" value="" 
-                            maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" >
+                            <input type="tel" name="phone" placeholder="9876*****" maxlength="10"
+                                   value="{{ old('phone', auth()->user()->phone) }}"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            @error('phone')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
+                        <!-- Email -->
                         <div class="form-group">
                             <label>Email*</label>
-                            <input type="email" name="email" placeholder="johndoe@gmail.com" value="">
+                            <input type="email" name="email" placeholder="johndoe@gmail.com" value="{{ old('email', auth()->user()->email) }}">
+                            @error('email')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
 
+                        <!-- Gender -->
                         <div class="form-group">
                             <label>Gender</label>
                             <div class="gender-group">
-                                <label class="gender-option active">
-                                    <input type="radio" name="gender" checked>
+                                @php $gender = old('gender', auth()->user()->gender); @endphp
+                                <label class="gender-option {{ $gender === 'male' ? 'active' : '' }}">
+                                    <input type="radio" name="gender" value="male" {{ $gender === 'male' ? 'checked' : '' }}>
                                     ♂ Male
                                 </label>
-                                <label class="gender-option">
-                                    <input type="radio" name="gender">
+                                <label class="gender-option {{ $gender === 'female' ? 'active' : '' }}">
+                                    <input type="radio" name="gender" value="female" {{ $gender === 'female' ? 'checked' : '' }}>
                                     ♀ Female
                                 </label>
-                                <label class="gender-option">
-                                    <input type="radio" name="gender">
+                                <label class="gender-option {{ $gender === 'other' ? 'active' : '' }}">
+                                    <input type="radio" name="gender" value="other" {{ $gender === 'other' ? 'checked' : '' }}>
                                     ⚧ Others
                                 </label>
                             </div>
+                            @error('gender')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
                         </div>
+
+                        <a href="{route('password.change')}}" class="">Change Password</a>
 
                         <button type="submit" class="continue-btn">CONTINUE</button>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 
-
-
 </main>
+
 <script>
     // Toggle gender selection
     document.querySelectorAll('.gender-option').forEach(option => {
@@ -291,38 +298,30 @@
             option.classList.add('active');
         });
     });
-</script>
-<script>
+
     const uploadInput = document.getElementById('uploadInput');
     const profilePreview = document.getElementById('profilePreview');
     const defaultIcon = document.getElementById('defaultIcon');
 
-    uploadInput.addEventListener('change', function() {
+    uploadInput.addEventListener('change', function () {
         const file = this.files[0];
         if (file) {
             const reader = new FileReader();
-
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 profilePreview.setAttribute('src', e.target.result);
                 profilePreview.style.display = 'block';
                 defaultIcon.style.display = 'none';
             };
-
             reader.readAsDataURL(file);
         }
     });
+
+    let current = 0;
+    const slides = document.querySelectorAll('.fade-gallery-img');
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 3000);
 </script>
-<script>
-  // JavaScript to rotate images every 3 seconds
-  let current = 0;
-  const slides = document.querySelectorAll('.fade-gallery-img');
-
-  setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }, 3000);
-</script>
-
-
 @endsection
