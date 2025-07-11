@@ -35,6 +35,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('doctor_details.index') }}" class="waves-effect">
+                        <i class="bx bx-user-circle"></i> {{-- You can use bx-user, bx-id-card, or bx-stethoscope if available --}}
+                        <span key="t-doctors">Doctors</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-cart"></i>
                         <span key="t-orders-section">Orders</span>
@@ -61,17 +68,17 @@
                     </ul>
                 </li>
 
-                    <li>
-                        
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-detail"></i>
-                    <span key="t-blog">Blog</span>
-                </a>
-                <ul class="sub-menu">
-                    <li><a href="{{ route('blogs.index') }}">All Blogs</a></li>
-                    <li><a href="{{ route('blogs.create') }}">Add Blog</a></li>
-                </ul>
-                    </li>
+                <li>
+
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-detail"></i>
+                        <span key="t-blog">Blog</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ route('blogs.index') }}">All Blogs</a></li>
+                        <li><a href="{{ route('blogs.create') }}">Add Blog</a></li>
+                    </ul>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect has-arrow">

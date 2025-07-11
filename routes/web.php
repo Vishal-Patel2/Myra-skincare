@@ -12,6 +12,8 @@ use App\Http\Controllers\MenController;
 use App\Http\Controllers\WomenController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AjaxCategoryController;
+use App\Http\Controllers\DoctorController;
+
 
 
 
@@ -32,15 +34,6 @@ Route::view('/about-us' , 'about')->name('about');
 
 Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
 Route::get('/women', [WomenController::class, 'showWomenCategories'])->name('women');
-<<<<<<< HEAD
-=======
-// Services list by mid category
-Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->name('services');
-
-// Single service detail
-Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
->>>>>>> 3db20a7 (blog section dyanmic)
-
 
 Route::view('/packages' , 'packages')->name('packages');
 Route::view('/career' , 'career')->name('career');
@@ -95,13 +88,23 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 }); 
 Route::post('/admin/blogs/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggleStatus');
 
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::resource('doctor_details', DoctorController::class);
+});
+
+
+// Must match fetch() URL
+Route::post('/admin/doctor_details/toggle-status/{id}', [DoctorController::class, 'toggleStatus'])->name('doctor_details.toggleStatus');
+
+Route::get('/doctors', [IndexController::class, 'frontendIndex'])->name('frontend.doctors.index');
+Route::get('/doctors/{doctor}', [DoctorController::class, 'frontendShow'])->name('frontend.doctors.show');
+
+
 
 
 //frontend
 
-
 Route::get('/blogs', [BlogController::class, 'frontendIndex'])->name('blogs');
-
 Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 
 
