@@ -25,7 +25,7 @@
                                 <span><i class="fas fa-briefcase"></i> {{ $career->experience ?? 'N/A' }} Experience</span>
                             </div>
                             <div class="career-buttons">
-                                <button class="btn-outline read-desc" data-id="{{ $career->id }}">Read
+                                <button class="btn-outline read-desc" data-id="{{ $career->id }}">Job
                                     Description</button>
                                 <button class="btn-outline apply-btn"
                                     onclick="openApplicationModal('{{ $career->job_profile }}')">Apply Now</button>
