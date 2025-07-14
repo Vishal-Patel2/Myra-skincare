@@ -3,305 +3,226 @@
 @section('title', 'Myraluxa Aesthetic Pvt Ltd')
 
 @section('content')
+    <main class="main">
 
-<main class="main">
-
-    <div class="site-breadcrumb" style="background: url(assets/img/breadcrumb/01.jpg)">
-        <div class="container">
-            <h2 class="breadcrumb-title">Our Pricing</h2>
-            <ul class="breadcrumb-menu">
-                <li><a href="index-2.html">Home</a></li>
-                <li class="active">Our Pricing</li>
-            </ul>
-        </div>
-    </div>
-
-
-    <div class="pricing-area py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    <div class="package-card">
-                        <div class="package-label">Fixed Package</div>
-                        <div class="package-title">Hair Free Care Free Skin</div>
-
-                        <div class="price-section">
-                            <span class="old-price">₹ 70,800</span>
-                            <span class="price">₹ 51,000</span>
-                        </div>
-
-                        <ul class="services">
-                            <li>Full Body Laser Hair Reduction - Female (6 sessions)</li>
-                            <li>Full Body Laser Hair Reduction - Male (6 sessions)</li>
-                        </ul>
-
-                        <div class="package-bottom">
-                            <button class="add-to-cart">ADD TO CART</button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="package-card">
-                        <div class="package-label">Fixed Package</div>
-                        <div class="package-title">Say Hello to Stronger Hair - Male</div>
-
-                        <div class="price-section">
-                            <span class="old-price">₹ 30,600</span>
-                            <span class="price">₹ 24,000</span>
-                        </div>
-
-                        <ul class="services">
-                            <li>VitHair Trichology - Male (3 sessions)</li>
-                            <li>Hair PRP - Male (3 sessions)</li>
-                        </ul>
-
-                        <div class="package-bottom">
-                            <button class="add-to-cart">ADD TO CART</button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="package-card">
-                        <div class="package-label">Fixed Package</div>
-                        <div class="package-title">Say Hello to Stronger Hair - Female</div>
-
-                        <div class="price-section">
-                            <span class="old-price">₹ 30,600</span>
-                            <span class="price">₹ 24,000</span>
-                        </div>
-
-                        <ul class="services">
-                            <li>VitHair Trichology - Female (3 sessions)</li>
-                            <li>Hair PRP - Female (3 sessions)</li>
-                        </ul>
-
-                        <div class="package-bottom">
-                            <button class="add-to-cart">ADD TO CART</button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="package-card">
-                        <div class="package-label">Fixed Package</div>
-                        <div class="package-title">Ultimate body slimming package - Male</div>
-
-                        <div class="price-section">
-                            <span class="old-price">₹ 1,02,560</span>
-                            <span class="price">₹ 70,000</span>
-                        </div>
-
-                        <ul class="services">
-                            <li>Upper Body Slimming (Arms, Love Handles, Abdomen) - Male (6 sessions)</li>
-                            <li>Lower Body Slimming (Hips and Thighs) - Male (6 sessions)</li>
-                            <li>Fat Burn Injections - Male (4 sessions)</li>
-                        </ul>
-
-                        <div class="package-bottom">
-                            <button class="add-to-cart">ADD TO CART</button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="package-card">
-                        <div class="package-label">Fixed Package</div>
-                        <div class="package-title">Ultimate body slimming package - Female</div>
-
-                        <div class="price-section">
-                            <span class="old-price">₹ 1,02,560</span>
-                            <span class="price">₹ 70,000</span>
-                        </div>
-
-                        <ul class="services">
-                            <li>Upper Body Slimming (Arms, Love Handles, Abdomen) - Female (6 sessions)</li>
-                            <li>Lower Body Slimming (Hips and Thighs) - Female (6 sessions)</li>
-                            <li>Fat Burn Injections - Female (4 sessions)</li>
-                        </ul>
-
-                        <div class="package-bottom">
-                            <button class="add-to-cart">ADD TO CART</button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="package-card">
-                        <div class="package-label">Fixed Package</div>
-                        <div class="package-title">Smooth skin & Hair rejuvenation - Male</div>
-
-                        <div class="price-section">
-                            <span class="old-price">₹ 88,525</span>
-                            <span class="price">₹ 58,000</span>
-                        </div>
-
-                        <ul class="services">
-                            <li>Full Body Laser Hair Reduction - Male (6 sessions)</li>
-                            <li>Hair PRP - Male (3 sessions)</li>
-                            <li>Face GFC Treatment - Male (4 sessions)</li>
-                        </ul>
-
-                        <div class="package-bottom">
-                            <button class="add-to-cart">ADD TO CART</button>
-
-                        </div>
-                    </div>
-
-                </div>
-
+        <!-- Breadcrumb -->
+        <div class="site-breadcrumb" style="background: url('{{ asset('assets/img/breadcrumb/01.jpg') }}');">
+            <div class="container">
+                <h2 class="breadcrumb-title">Our Pricing</h2>
+                <ul class="breadcrumb-menu">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li class="active">Our Pricing</li>
+                </ul>
             </div>
         </div>
-    </div>
 
-</main>
-<style>
-    .package-card {
-        background: #fff;
-        max-width: 600px;
-        height: 440px;
-        margin: 20px auto;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        position: relative;
-        overflow: hidden;
-    }
+        <!-- Packages Section -->
+        <div class="pricing-area py-5">
+            <div class="container">
+                <div class="row">
+                    @forelse($packages as $package)
+                        <div class="col-md-6 col-lg-6 mb-4">
+                            <div class="package-card d-flex">
+                                <!-- Left Content -->
+                                <div class="package-content flex-grow-1">
+                                    <div class="package-label">{{ $package->package_type }}</div>
+                                    <div class="package-title">{{ $package->title }}</div>
 
-    .package-label {
-        background: #e0e0e0;
-        color: #333;
-        display: inline-block;
-        padding: 6px 14px;
-        border-radius: 10px;
-        font-weight: 500;
-        font-size: 14px;
-    }
+                                    <div class="price-section">
+                                        <span class="old-price">₹ {{ number_format($package->original_price) }}</span>
+                                        <span class="price">₹ {{ number_format($package->discounted_price) }}</span>
+                                    </div>
 
-    .package-title {
-     font-size: 18px;
-    font-weight: 500;
-    margin: 10px 0 20px;
-    }
+                                    <ul class="services">
+                                        @foreach ($package->features as $feature)
+                                            <li>{{ $feature }}</li>
+                                        @endforeach
+                                    </ul>
 
-    .price {
-        font-size: 26px;
-        color: #000;
-        font-weight: 600;
-    }
+                                    <div class="package-bottom">
+                                        <button class="add-to-cart">ADD TO CART</button>
+                                    </div>
+                                </div>
 
-    .old-price {
-        text-decoration: line-through;
-        color: #c00;
-        font-size: 18px;
-        margin-right: 10px;
-    }
+                                <!-- Right Image -->
+                                <div class="package-image">
+                                    @if ($package->package_image)
+                                        <img src="{{ asset('storage/' . $package->package_image) }}" alt="Package Image"
+                                            class="person-img" />
+                                    @else
+                                        <img src="{{ asset('images/default-package.png') }}" alt="Default Image"
+                                            class="person-img" />
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-12 text-center">
+                            <p>No packages available at the moment. Please check back later.</p>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </main>
 
-    .services {
-        margin: 20px 0;
-        padding: 0;
-    }
 
-    .services li {
-        list-style: none;
-    margin: 10px 0;
-    position: relative;
-    padding-left: 30px;
-    font-size: 14px;
-    }
-
-    .services li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: #f28c28;
-        font-weight: bold;
-    }
-
-    .add-to-cart {
-        background: #000;
-        color: #fff;
-        padding: 12px 25px;
-        font-size: 16px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-
-    .add-to-cart:hover {
-        background: #333;
-    }
-
-    .package-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .person-img {
-        height: 180px;
-        max-width: 100%;
-        margin-left: 20px;
-    }
-
-    /* ✅ MOBILE RESPONSIVENESS */
-    @media (max-width: 768px) {
+    <style>
         .package-card {
-            padding: 20px;
+            background: #fff;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            height: auto;
+            flex-wrap: wrap;
+        }
+
+        .package-content {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .package-label {
+            background: #e0e0e0;
+            color: #333;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 14px;
         }
 
         .package-title {
-            font-size: 20px;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 10px 0 20px;
+            color: #2c3e50;
+        }
+
+        .price-section {
+            margin-bottom: 20px;
         }
 
         .price {
-            font-size: 22px;
+            font-size: 26px;
+            color: #000;
+            font-weight: 600;
         }
 
         .old-price {
-            font-size: 16px;
+            text-decoration: line-through;
+            color: #c00;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .services {
+            margin: 20px 0;
+            padding: 0;
         }
 
         .services li {
-            font-size: 15px;
-            padding-left: 26px;
+            list-style: none;
+            margin: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 14px;
+            color: #34495e;
+        }
+
+        .services li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #f28c28;
+            font-weight: bold;
         }
 
         .add-to-cart {
-            width: 100%;
-            padding: 12px;
+            background: #000;
+            color: #fff;
+            padding: 12px 25px;
             font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #333;
         }
 
         .package-bottom {
-            flex-direction: column-reverse;
-            align-items: flex-start;
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .person-img {
-            margin: 0 auto;
-            display: none;
-            height: auto;
-            width: 100%;
-            max-width: 250px;
+        .package-image img.person-img {
+            height: 255px;
+            width: auto;
+            max-width: 220px;
+            border-radius: 12px;
+            /* object-fit: cover; */
         }
-        .package-card {
-        
-        height: auto;
-        
-    }
-    }
-</style>
+
+        /* ✅ MOBILE RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .package-card {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .package-title {
+                font-size: 20px;
+            }
+
+            .price {
+                font-size: 22px;
+            }
+
+            .old-price {
+                font-size: 16px;
+            }
+
+            .services li {
+                font-size: 15px;
+                padding-left: 26px;
+            }
+
+            .add-to-cart {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .package-bottom {
+                justify-content: center;
+            }
+
+            .package-image img.person-img {
+                margin-top: 20px;
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+
 
 
 @endsection

@@ -123,5 +123,24 @@ class DoctorController extends Controller
         return view('doctor-details', compact('doctor'));
     }
 
+    public function uploadImage(Request $request, $id)
+{
+    $doctor = Doctor::findOrFail($id);
+
+    if ($request->hasFile('image')) {
+        $filename = $request->file('image')->hashName();
+        $request->file('image')->storeAs('doctors', $filename, 'public');
+        $doctor->image = $filename;
+        $doctor->save();
+
+        return response()->json([
+            'success' => true,
+            'image_url' => asset('storage/doctors/' . $filename)
+        ]);
+    }
+
+    return response()->json(['success' => false], 400);
+}
+
     
 }

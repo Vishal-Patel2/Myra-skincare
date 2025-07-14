@@ -36,13 +36,21 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('packages.index') }}" class="waves-effect">
+                        <i class="bx bx-package"></i>
+                        <span key="t-packages">Packages</span>
+                    </a>
+                </li>
+
+
+                <li>
                     <a href="{{ route('doctor_details.index') }}" class="waves-effect">
                         <i class="bx bx-user-circle"></i> {{-- You can use bx-user, bx-id-card, or bx-stethoscope if available --}}
                         <span key="t-doctors">Doctors</span>
                     </a>
                 </li>
 
-                 <li>
+                <li>
 
                     <a href="{{ route('blogs.index') }}" class="waves-effect">
                         <i class="bx bx-detail"></i>
@@ -57,10 +65,10 @@
                         <i class="bx bx-briefcase-alt"></i>
                         <span key="t-jobs">Careers</span>
                     </a>
-                    
+
                 </li>
 
-                 <li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-receipt"></i>
                         <span key="t-invoices">Invoices</span>
@@ -84,7 +92,7 @@
                     </ul>
                 </li>
 
-                
+
 
                 <li class="menu-title" key="t-pages">Pages</li>
 

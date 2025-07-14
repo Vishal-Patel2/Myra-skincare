@@ -15,6 +15,7 @@ use App\Http\Controllers\AjaxCategoryController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\CareerDoctorController;
 use App\Http\Controllers\CareerApplicationController;
+use App\Http\Controllers\PackageController;
 
 
 
@@ -95,10 +96,16 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('careers', CareerDoctorController::class);
 });
 
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::resource('packages', PackageController::class);
+});
+
 
 // Must match fetch() URL
 Route::post('/admin/doctor_details/toggle-status/{id}', [DoctorController::class, 'toggleStatus'])->name('doctor_details.toggleStatus');
 
+
+Route::post('/admin/doctors/{id}/upload-image', [DoctorController::class, 'uploadImage']);
 Route::get('/doctors', [IndexController::class, 'frontendIndex'])->name('frontend.doctors.index');
 Route::get('/doctors/{doctor}', [DoctorController::class, 'frontendShow'])->name('frontend.doctors.show');
 
@@ -124,6 +131,10 @@ Route::get('/change-password', function () {
     return view('profile.partials.change-password');
 })->middleware('auth')->name('password.change');
 
+  // Toggle Status Route
+Route::get('/packages', [PackageController::class, 'showPackages'])->name('packages');
+Route::post('/admin/packages/{id}/upload-image', [PackageController::class, 'uploadImage']);
+Route::post('/admin/packages/toggle-status/{id}', [PackageController::class, 'toggleStatus'])->name('packages.toggle-status');
 
 
 

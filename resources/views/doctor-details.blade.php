@@ -18,9 +18,9 @@
         <div class="container">
             <div class="team-single-wrapper">
                 <div class="row align-items-center">
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="team-single-img">
-                            <img src="{{ asset('storage/doctors/' . $doctor->image) }}" alt>
+                            <img src="{{ asset('storage/doctors/' . $doctor->image) }}" alt="doctor image" style="height: 250px;  width: 230px;">
                         </div>
                     </div>
                     <div class="col-lg-8">
