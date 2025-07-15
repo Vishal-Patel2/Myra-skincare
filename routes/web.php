@@ -13,17 +13,11 @@ use App\Http\Controllers\WomenController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AjaxCategoryController;
 use App\Http\Controllers\DoctorController;
-<<<<<<< HEAD
 use App\Http\Controllers\CareerDoctorController;
 use App\Http\Controllers\CareerApplicationController;
-<<<<<<< HEAD
 use App\Http\Controllers\PackageController;
-=======
-=======
 use App\Http\Controllers\CartController;
->>>>>>> 83d4105 (cart logic applied)
->>>>>>> 12a52dc021dba52a82d77d01360e0014ad9d8ef5
-
+ 
 
 
 
