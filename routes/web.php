@@ -13,9 +13,16 @@ use App\Http\Controllers\WomenController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AjaxCategoryController;
 use App\Http\Controllers\DoctorController;
+<<<<<<< HEAD
 use App\Http\Controllers\CareerDoctorController;
 use App\Http\Controllers\CareerApplicationController;
+<<<<<<< HEAD
 use App\Http\Controllers\PackageController;
+=======
+=======
+use App\Http\Controllers\CartController;
+>>>>>>> 83d4105 (cart logic applied)
+>>>>>>> 12a52dc021dba52a82d77d01360e0014ad9d8ef5
 
 
 
@@ -55,6 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+ 
+Route::post('/add-to-cart', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 

@@ -42,7 +42,7 @@
                              <div class="header-nav-search">
                                  <a href="#" class="search-box-outer"><i class="far fa-search"></i></a>
 
-                                 <a href="cart.php" class="cart-icon-wrapper">
+                                 <a href="{{route('cart.index')}}" class="cart-icon-wrapper">
                                      <i class="fas fa-shopping-cart"></i>
                                      <span class="count-box" id="cart-count">0</span>
                                  </a>

@@ -247,6 +247,29 @@
      });
  </script> -->
 
+ <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.add-to-cart');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const serviceId = btn.getAttribute('data-id');
+            fetch("{{ route('cart.add') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ service_id: serviceId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Added to cart');
+            });
+        });
+    });
+});
+</script>
+
 
  </body>
 
