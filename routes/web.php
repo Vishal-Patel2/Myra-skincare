@@ -16,7 +16,9 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\CareerDoctorController;
 use App\Http\Controllers\CareerApplicationController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartController;   
+use App\Http\Controllers\AdminController; 
+
  
 
 
@@ -51,12 +53,6 @@ Route::view('/treatments-type-men' , 'treatments-type-men')->name('treatments-ty
 Route::view('/treatments-type-women' , 'treatments-type-women')->name('treatments-type-women');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
  
 Route::post('/add-to-cart', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
@@ -65,9 +61,9 @@ Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remov
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
-    
- 
-    Route::view('/index' , 'admin/index')->name('dashboard');
+
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+ // Route::view('/index' , 'admin/index')->name('dashboard');
  
     Route::resource('genders', GenderController::class);
     Route::resource('top-categories', TopCategoryController::class);
@@ -75,7 +71,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('services', ServiceController::class);
    
 
+  
     Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
+
  
 });
 
@@ -147,7 +145,7 @@ Route::post('/admin/packages/toggle-status/{id}', [PackageController::class, 'to
 Route::view('/privacy-policies', 'privacy-policies')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
 Route::view('/sitemap', 'sitemap')->name('sitemap');
-Route::view('/help-support', 'help')->name('help');
+Route::view('/help-support', 'help-support')->name('help-support');
 
 
 

@@ -59,7 +59,7 @@
                                  <li><i class="far fa-map-marker-alt"></i>59A, Block A 5B, Possangipur, Janakpuri, New
                                      Delhi, Delhi 110058, India</li>
                                  <li><a href="tel:+21236547898"><i class="far fa-phone"></i>+91 935531766</a></li>
-                                 <li><a href=""><i class="far fa-envelope"></i>demomyraluxxe@gmail.com</a>
+                                 <li><a href=""><i class="far fa-envelope"></i>info@myraluxe.com</a>
                                  </li>
                              </ul>
                          </div>

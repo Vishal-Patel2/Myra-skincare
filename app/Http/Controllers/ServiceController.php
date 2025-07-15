@@ -25,8 +25,6 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'gender_id' => 'required|in:1,2',
-            'top_category_id' => 'required|exists:top_categories,id',
             'mid_category_id' => 'required|exists:mid_categories,id',
             'name' => 'required|string|max:255',
             'price' => 'nullable|numeric',
@@ -43,8 +41,6 @@ class ServiceController extends Controller
         ]);
 
         // 🛠 Ensure manually: These might be missed if only checked but not added
-        $validated['gender_id'] = $request->input('gender_id');
-        $validated['top_category_id'] = $request->input('top_category_id');
         $validated['mid_category_id'] = $request->input('mid_category_id');
 
         // ✅ Handle Image
@@ -71,7 +67,7 @@ class ServiceController extends Controller
                 $howItWorks[] = ['title' => $title, 'image' => $img];
             }
         }
-        $validated['how_it_works'] = json_encode($howItWorks);
+        $validated['how_it_works'] = $howItWorks;
 
         // ✅ FAQ Section
         $faqList = [];
@@ -83,7 +79,7 @@ class ServiceController extends Controller
                 ];
             }
         }
-        $validated['faqs'] = json_encode($faqList);
+        $validated['faqs'] = $faqList; 
 
         // ✅ Default status (optional)
         $validated['action'] = 'active';
@@ -95,18 +91,21 @@ class ServiceController extends Controller
     }
 
 
-    public function edit(Service $service)
-    {
-        // Load relationships
-        $service->load('midCategory.topCategory.gender');
+   public function edit(Service $service)
+{
+    // Load relationships
+    $service->load('midCategory.topCategory.gender');
 
-        // Decode stored JSON
-       
-        // All top categories (for dropdown)
-        $topCategories = TopCategory::all();
+    // ✅ Decode JSON columns
+   $service->load('midCategory.topCategory.gender'); // this is fine
 
-        return view('admin.services.edit', compact('service', 'topCategories'));
-    }
+
+    // All top categories (for dropdown)
+    $topCategories = TopCategory::all();
+
+    return view('admin.services.edit', compact('service', 'topCategories'));
+}
+
 
     public function update(Request $request, Service $service)
     {
@@ -152,7 +151,7 @@ class ServiceController extends Controller
             }
             $howItWorks[] = ['title' => $title, 'image' => $imgPath];
         }
-        $validated['how_it_works'] = $howItWorks;
+     $validated['how_it_works'] = $howItWorks; 
 
         // ✅ FAQ Section
         $faqs = [];
@@ -161,7 +160,7 @@ class ServiceController extends Controller
         foreach ($questions as $index => $q) {
             $faqs[] = ['question' => $q, 'answer' => $answers[$index] ?? ''];
         }
-        $validated['faqs'] = $faqs;
+  $validated['faqs'] = $faqs; 
 
         // ✅ Update only allowed fields
         $service->update($validated);
@@ -207,13 +206,14 @@ public function services($gender, $midSlug)
     if (!$midCategory) {
         abort(404, 'Mid Category not found');
     }
-
+  
     // Check gender match
     if (
         !$midCategory->topCategory ||
         !$midCategory->topCategory->gender ||
         strtolower($midCategory->topCategory->gender->name) !== strtolower($gender)
-    ) {
+    ) 
+    {  
         abort(404, 'Gender mismatch for Mid Category');
     }
 

@@ -70,22 +70,34 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Image (optional)</label>
-                            <input type="file" name="image" class="form-control" accept="image/*">
+                            <input type="file" name="image" class="form-control" accept="image/*"
+                                onchange="previewImage(event)">
+                            <div id="image-preview-wrapper" class="mt-2">
+                                <img id="image-preview" src="#" style="display: none;" width="100">
+                            </div>
                         </div>
+
                         <div class="col-md-4">
                             <label class="form-label">Video (optional)</label>
-                            <input type="file" name="video" class="form-control" accept="video/*">
+                            <input type="file" name="video" class="form-control" accept="video/*"
+                                onchange="previewVideo(event)">
+                            <div id="video-preview-wrapper" class="mt-2">
+                                <video id="video-preview" width="200" controls style="display: none;"></video>
+                            </div>
                         </div>
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Service Highlight Points</label>
-                        <textarea name="highlight_points" class="form-control" rows="2"></textarea>
+                        <textarea name="highlight_points" id="highlight_points" class="form-control" rows="2"></textarea>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Service Overview</label>
-                        <textarea name="overview" class="form-control" rows="4"></textarea>
+                        <textarea name="overview" id="overview" class="form-control" rows="4"></textarea>
                     </div>
+
 
                     <!-- How It Works -->
                     <div class="mb-3">
@@ -93,7 +105,11 @@
                         <div id="how-it-works-wrapper">
                             <div class="row how-it-works-item mb-2">
                                 <div class="col-md-5">
-                                    <input type="file" name="how_it_works_images[]" class="form-control" required>
+                                    <input type="file" name="how_it_works_images[]"
+                                        class="form-control how-it-works-image-input"
+                                        data-preview-id="how-it-works-preview-0" required>
+                                    <img id="how-it-works-preview-0" width="80" style="display: none;"
+                                        class="mt-2">
                                 </div>
                                 <div class="col-md-5">
                                     <input type="text" name="how_it_works_titles[]" class="form-control"
@@ -106,6 +122,7 @@
                         </div>
                         <button type="button" class="btn btn-info mt-2" id="add-how-it-works">+ Add More</button>
                     </div>
+
 
                     <!-- FAQ Section -->
                     <div class="mb-3">
@@ -141,6 +158,38 @@
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- CKEditor CDN -->
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
+    <script>
+        // Initialize CKEditor on both fields
+        CKEDITOR.replace('highlight_points');
+        CKEDITOR.replace('overview');
+    </script>
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('image-preview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        function previewVideo(event) {
+            const video = document.getElementById('video-preview');
+            const file = event.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                video.src = url;
+                video.style.display = 'block';
+            }
+        }
+    </script>
+
     <script>
         $(document).ready(function() {
             // Gender -> Top Category
@@ -172,24 +221,6 @@
                 });
             });
 
-            // Add/Remove How It Works
-            $('#add-how-it-works').click(function() {
-                $('#how-it-works-wrapper').append(`
-      <div class="row how-it-works-item mb-2">
-        <div class="col-md-5">
-          <input type="file" name="how_it_works_images[]" class="form-control" required>
-        </div>
-        <div class="col-md-5">
-          <input type="text" name="how_it_works_titles[]" class="form-control" placeholder="Image Title" required>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
-        </div>
-      </div>`);
-            });
-            $(document).on('click', '.remove-how-it-works', function() {
-                $(this).closest('.how-it-works-item').remove();
-            });
 
             // Add/Remove FAQ
             $('#add-faq').click(function() {
@@ -209,6 +240,48 @@
             $(document).on('click', '.remove-faq', function() {
                 $(this).closest('.faq-item').remove();
             });
+        });
+    </script>
+    <script>
+        let howItWorksIndex = 1;
+
+        // Preview uploaded image
+        $(document).on('change', '.how-it-works-image-input', function(event) {
+            const previewId = $(this).data('preview-id');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const output = document.getElementById(previewId);
+                    output.src = reader.result;
+                    output.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add new How It Works row with preview
+        $('#add-how-it-works').click(function() {
+            const newItem = `
+            <div class="row how-it-works-item mb-2">
+                <div class="col-md-5">
+                    <input type="file" name="how_it_works_images[]" class="form-control how-it-works-image-input" data-preview-id="how-it-works-preview-${howItWorksIndex}" required>
+                    <img id="how-it-works-preview-${howItWorksIndex}" width="80" style="display: none;" class="mt-2">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="how_it_works_titles[]" class="form-control" placeholder="Image Title" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
+                </div>
+            </div>`;
+            $('#how-it-works-wrapper').append(newItem);
+            howItWorksIndex++;
+        });
+
+        // Remove row
+        $(document).on('click', '.remove-how-it-works', function() {
+            $(this).closest('.how-it-works-item').remove();
         });
     </script>
 @endpush

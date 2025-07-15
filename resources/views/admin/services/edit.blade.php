@@ -90,12 +90,20 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Services Image</label>
-                            <input type="file" name="image" class="form-control" accept="image/*">
-                            @if ($service->image)
-                                <img src="{{ asset('storage/services/images/' . $service->image) }}" width="80"
-                                    class="mt-2">
-                            @endif
+                            <input type="file" name="image" class="form-control" accept="image/*"
+                                onchange="previewImage(event)">
+
+                            {{-- Old image shown by default --}}
+                            <div id="image-preview-wrapper" class="mt-2">
+                                @if ($service->image)
+                                    <img src="{{ asset('storage/services/images/' . $service->image) }}" id="image-preview"
+                                        width="80">
+                                @else
+                                    <img id="image-preview" src="#" style="display: none;" width="80">
+                                @endif
+                            </div>
                         </div>
+
                         <div class="col-md-4">
                             <label class="form-label">Services Video</label>
                             <input type="file" name="video" class="form-control" accept="video/*">
@@ -105,39 +113,55 @@
                                 </video>
                             @endif
                         </div>
+
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Service Highlight Points</label>
-                        <textarea name="highlight_points" class="form-control" rows="2">{{ $service->highlight_points }}</textarea>
+                        <textarea name="highlight_points" id="highlight_points" class="form-control" rows="2">{{ $service->highlight_points }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Service Overview</label>
-                        <textarea name="overview" class="form-control" rows="4">{{ $service->overview }}</textarea>
+                        <textarea name="overview" id="overview" class="form-control" rows="4">{{ $service->overview }}</textarea>
                     </div>
+
 
                     <!-- How It Works -->
                     <div class="mb-3">
                         <label class="form-label">How It Works</label>
                         <div id="how-it-works-wrapper">
-                            @foreach ($service->how_it_works as $item)
-                                <div class="row how-it-works-item mb-2">
+                            @foreach ($service->how_it_works as $index => $item)
+                                <div class="row how-it-works-item mb-3">
                                     <div class="col-md-5">
-                                        <input type="file" name="how_it_works_images[]" class="form-control">
+                                        <input type="file" name="how_it_works_images[]"
+                                            class="form-control how-it-works-image-input"
+                                            data-preview-id="how-it-works-preview-{{ $index }}">
                                         @if (!empty($item['image']))
-                                            <small>Current: {{ $item['image'] }}</small>
+                                            <div class="mt-2">
+                                                <p class="mb-1">Preview:</p>
+                                                <img src="{{ asset('storage/services/how_it_works/' . $item['image']) }}"
+                                                    id="how-it-works-preview-{{ $index }}" width="50">
+                                            </div>
+                                            <input type="hidden" name="how_it_works_old_images[]"
+                                                value="{{ $item['image'] }}">
+                                        @else
+                                            <img id="how-it-works-preview-{{ $index }}" width="50"
+                                                style="display: none;">
                                         @endif
                                     </div>
+
                                     <div class="col-md-5">
                                         <input type="text" name="how_it_works_titles[]" class="form-control"
                                             placeholder="Image Title" value="{{ $item['title'] ?? '' }}">
                                     </div>
+
                                     <div class="col-md-2">
                                         <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
                                     </div>
                                 </div>
                             @endforeach
+
                         </div>
                         <button type="button" class="btn btn-info mt-2" id="add-how-it-works">+ Add More</button>
                     </div>
@@ -146,7 +170,7 @@
                     <div class="mb-3">
                         <label class="form-label">FAQ Section</label>
                         <div id="faq-wrapper">
-                            @if ($service->faq)
+                            @if (!empty($service->faqs))
                                 @foreach ($service->faqs as $faq)
                                     <div class="row faq-item mb-2">
                                         <div class="col-md-5">
@@ -168,6 +192,7 @@
                     </div>
 
 
+
                     <!-- Submit -->
                     <div class="text-center mt-4 mb-4">
                         <button type="submit" class="btn btn-success btn-lg me-3">Update Service</button>
@@ -183,49 +208,98 @@
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- CKEditor CDN -->
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        // Initialize CKEditor on both textareas
+        CKEDITOR.replace('highlight_points');
+        CKEDITOR.replace('overview');
+    </script>
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById('image-preview');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            };
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+    </script>
+
+    <script>
+        // Preview for dynamically changing images
+        $(document).on('change', '.how-it-works-image-input', function(event) {
+            const previewId = $(this).data('preview-id');
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById(previewId);
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        });
+
+        // Add new item dynamically with preview ID
+        let howItWorksIndex = {{ count($service->how_it_works) }};
+
+        $('#add-how-it-works').click(function() {
+            const newItem = `
+                <div class="row how-it-works-item mb-3">
+                    <div class="col-md-5">
+                        <input type="file" name="how_it_works_images[]" class="form-control how-it-works-image-input" data-preview-id="how-it-works-preview-${howItWorksIndex}">
+                        <img id="how-it-works-preview-${howItWorksIndex}" width="80" style="display: none;" class="mt-2">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="how_it_works_titles[]" class="form-control" placeholder="Image Title">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
+                    </div>
+                </div>
+            `;
+            $('#how-it-works-wrapper').append(newItem);
+            howItWorksIndex++;
+        });
+
+        $(document).on('click', '.remove-how-it-works', function() {
+            $(this).closest('.how-it-works-item').remove();
+        });
+    </script>
     <script>
         $(document).ready(function() {
-            // Add How it Works
-            $('#add-how-it-works').click(function() {
-                $('#how-it-works-wrapper').append(`
-                    <div class="row how-it-works-item mb-2">
-                        <div class="col-md-5">
-                            <input type="file" name="how_it_works_images[]" class="form-control">
-                        </div>
-                        <div class="col-md-5">
-                            <input type="text" name="how_it_works_titles[]" class="form-control" placeholder="Image Title">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
-                        </div>
-                    </div>
-                `);
-            });
-
-            $(document).on('click', '.remove-how-it-works', function() {
-                $(this).closest('.how-it-works-item').remove();
-            });
-
             // Add FAQ
             $('#add-faq').click(function() {
                 $('#faq-wrapper').append(`
-                    <div class="row faq-item mb-2">
-                        <div class="col-md-5">
-                            <input type="text" name="faq_questions[]" class="form-control" placeholder="Enter Question">
-                        </div>
-                        <div class="col-md-5">
-                            <input type="text" name="faq_answers[]" class="form-control" placeholder="Enter Answer">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-danger remove-faq">Remove</button>
-                        </div>
-                    </div>
-                `);
+            <div class="row faq-item mb-2">
+                <div class="col-md-5">
+                    <input type="text" name="faq_questions[]" class="form-control" placeholder="Enter Question">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="faq_answers[]" class="form-control" placeholder="Enter Answer">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger remove-faq">Remove</button>
+                </div>
+            </div>
+        `);
             });
 
             $(document).on('click', '.remove-faq', function() {
                 $(this).closest('.faq-item').remove();
             });
+        });
+    </script>
+
+
+
+    <script>
+        $(document).ready(function() {
 
             // Mid Category Loading Logic
             const currentMidCategoryId = '{{ $service->mid_category_id }}';

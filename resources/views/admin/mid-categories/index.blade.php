@@ -103,7 +103,7 @@
         </div> <!-- container-fluid -->
     </div>
 </div>
-@endsection
+
 <script>
     function uploadMidCategoryImage(input, id) {
         const file = input.files[0];
@@ -132,3 +132,4 @@
         });
     }
 </script>
+@endsection
