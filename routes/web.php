@@ -137,5 +137,11 @@ Route::post('/admin/packages/{id}/upload-image', [PackageController::class, 'upl
 Route::post('/admin/packages/toggle-status/{id}', [PackageController::class, 'toggleStatus'])->name('packages.toggle-status');
 
 
+Route::view('/privacy-policies', 'privacy-policies')->name('privacy');
+Route::view('/terms', 'terms')->name('terms');
+Route::view('/sitemap', 'sitemap')->name('sitemap');
+Route::view('/help-support', 'help')->name('help');
+
+
 
 require __DIR__.'/auth.php';

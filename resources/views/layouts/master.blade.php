@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Myra Skincare')</title>
-     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+    <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
 
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/all-fontawesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/icomoon.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/all-fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     <style>
         .cart-icon-wrapper {
@@ -40,11 +41,24 @@
     </style>
 
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header, footer { background-color: #f8f8f8; padding: 20px; text-align: center; }
-        .content { padding: 30px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+
+        .content {
+            padding: 30px;
+        }
     </style>
 </head>
+
 <body>
     @include('layouts.header')
 
@@ -54,5 +68,5 @@
 
     @include('layouts.footer')
 </body>
-</html>
 
+</html>

@@ -14,13 +14,13 @@
 
                      </div>
                      <ul class="footer-social">
-                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                             <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                             <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                         </ul>
-                     
+                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                         <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                     </ul>
+
                  </div>
                  <div class="col-md-6 col-lg-2">
                      <div class="footer-widget-box list">
@@ -40,12 +40,14 @@
                      <div class="footer-widget-box list">
                          <h4 class="footer-widget-title">Company</h4>
                          <ul class="footer-list">
-                             <li><a href="privacy-policies.php"><i class="fas fa-caret-right"></i> Privacy & Policies</a></li>
-                             <li><a href="#"><i class="fas fa-caret-right"></i> Terms & Conditions</a></li>
-                             <li><a href="#"><i class="fas fa-caret-right"></i> Sitemap</a></li>
-                             <li><a href="#"><i class="fas fa-caret-right"></i> Help and Support</a></li>
-                             <!-- <li><a href="#"><i class="fas fa-caret-right"></i> Make Call</a></li>
-                             <li><a href="#"><i class="fas fa-caret-right"></i> Contact Support</a></li> -->
+                             <li><a href="{{ url('/privacy-policies') }}"><i class="fas fa-caret-right"></i> Privacy &
+                                     Policies</a></li>
+                             <li><a href="{{ url('/terms') }}"><i class="fas fa-caret-right"></i> Terms & Conditions</a>
+                             </li>
+                             <li><a href="{{ url('/sitemap') }}"><i class="fas fa-caret-right"></i> Sitemap</a></li>
+                             <li><a href="{{ url('/help-support') }}"><i class="fas fa-caret-right"></i> Help and
+                                     Support</a></li>
+
                          </ul>
                      </div>
                  </div>
@@ -54,11 +56,10 @@
                          <h4 class="footer-widget-title">Contact </h4>
                          <div class="footer-opening">
                              <ul class="footer-contact">
-                                 <li><i class="far fa-map-marker-alt"></i>59A, Block A 5B, Possangipur, Janakpuri, New Delhi, Delhi 110058, India</li>
+                                 <li><i class="far fa-map-marker-alt"></i>59A, Block A 5B, Possangipur, Janakpuri, New
+                                     Delhi, Delhi 110058, India</li>
                                  <li><a href="tel:+21236547898"><i class="far fa-phone"></i>+91 935531766</a></li>
-                                 <li><a
-                                         href=""><i
-                                             class="far fa-envelope"></i>demomyraluxxe@gmail.com</a>
+                                 <li><a href=""><i class="far fa-envelope"></i>demomyraluxxe@gmail.com</a>
                                  </li>
                              </ul>
                          </div>
@@ -73,8 +74,8 @@
                              </form>
                          </div>
                      </div>
-                     
-                    
+
+
                  </div>
              </div>
          </div>
@@ -103,12 +104,14 @@
              <div class="row">
                  <div class="col-lg-6 text-center">
                      <p class="copyright-text">
-                         &copy; Copyright <span id="date"></span> <a href="#"> MYRALUXE </a> All Rights Reserved.
+                         &copy; Copyright <span id="date"></span> <a href="#"> MYRALUXE </a> All Rights
+                         Reserved.
                      </p>
                  </div>
                  <div class="col-lg-6 text-center">
                      <p class="copyright-text">
-                         Design & Develop  <span id="date"></span> <a href="https://wedigitalindia.com/"> Wedigital India </a>
+                         Design & Develop <span id="date"></span> <a href="https://wedigitalindia.com/"> Wedigital
+                             India </a>
                      </p>
                  </div>
 
@@ -166,18 +169,18 @@
 
 
  <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/modernizr.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.appear.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('assets/js/counter-up.js') }}"></script>
-<script src="{{ asset('assets/js/wow.min.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
+ <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+ <script src="{{ asset('assets/js/modernizr.min.js') }}"></script>
+ <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+ <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
+ <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+ <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
+ <script src="{{ asset('assets/js/jquery.appear.min.js') }}"></script>
+ <script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
+ <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+ <script src="{{ asset('assets/js/counter-up.js') }}"></script>
+ <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+ <script src="{{ asset('assets/js/main.js') }}"></script>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
      const scrollContainers = document.querySelectorAll("#infiniteScroll--left");
