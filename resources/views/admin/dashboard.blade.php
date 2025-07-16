@@ -49,13 +49,13 @@
                                                 alt="" class="img-thumbnail rounded-circle">
                                         </div>
                                         <h5 class="font-size-15 text-truncate">Henry Price</h5>
-                                        <p class="text-muted mb-0 text-truncate">UI/UX Designer</p>
+                                        {{-- <p class="text-muted mb-0 text-truncate">UI/UX Designer</p> --}}
                                     </div>
 
                                     <div class="col-sm-8">
                                         <div class="pt-4">
 
-                                            <div class="row">
+                                            {{-- <div class="row">
                                                 <div class="col-6">
                                                     <h5 class="font-size-15">125</h5>
                                                     <p class="text-muted mb-0">Projects</p>
@@ -64,7 +64,7 @@
                                                     <h5 class="font-size-15">$1245</h5>
                                                     <p class="text-muted mb-0">Revenue</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="mt-4">
                                                 <a href="javascript: void(0);"
                                                     class="btn btn-primary waves-effect waves-light btn-sm">View
@@ -741,7 +741,7 @@
         <!-- end modal -->
 
         <!-- subscribeModal -->
-        <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel"
+        {{-- <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -779,6 +779,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- end modal -->
     @endsection

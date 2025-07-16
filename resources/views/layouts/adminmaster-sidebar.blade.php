@@ -68,16 +68,14 @@
 
                 </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-receipt"></i>
-                        <span key="t-invoices">Invoices</span>
+                {{-- <li>
+                    <a href="{{ route('customers.index') }}" class="waves-effect">
+                        <i class="bx bx-user"></i>
+                        <span key="t-customers">Customers</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="invoices-list.html" key="t-invoice-list">Invoice List</a></li>
-                        <li><a href="invoices-detail.html" key="t-invoice-detail">Invoice Detail</a></li>
-                    </ul>
-                </li>
+                </li> --}}
+
+
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -88,7 +86,7 @@
                         <li><a href="ecommerce-orders.html" key="t-orders">Orders</a></li>
                         <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
                         <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
-                        <li><a href="ecommerce-shops.html" key="t-shops">Shops</a></li>
+                        <li><a href="invoices-list.html" key="t-invoice-list">Invoice</a></li>
                     </ul>
                 </li>
 
