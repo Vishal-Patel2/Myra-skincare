@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2025 at 07:31 AM
+-- Generation Time: Jul 16, 2025 at 08:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,14 +58,6 @@ CREATE TABLE `cache` (
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('akash@gmail.com|127.0.0.1', 'i:1;', 1752130333),
-('akash@gmail.com|127.0.0.1:timer', 'i:1752130333;', 1752130333);
-
 -- --------------------------------------------------------
 
 --
@@ -77,6 +69,30 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
+  `service_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `session_id`, `service_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(2, 2, NULL, 1, 1, '2025-07-14 00:58:37', '2025-07-14 00:58:37'),
+(4, NULL, '6Px0rGChZuqASDf2zTfh3iV0W10r4q54YHBZgDwt', 1, 1, '2025-07-15 23:13:06', '2025-07-15 23:13:06');
 
 -- --------------------------------------------------------
 
@@ -198,8 +214,8 @@ CREATE TABLE `mid_categories` (
 --
 
 INSERT INTO `mid_categories` (`id`, `top_category_id`, `name`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Unwanted Hair', '1751955720_686cb90864918.png', '2025-07-08 07:13:17', '2025-07-08 07:13:17'),
-(2, 1, 'Hair Fall', '1751956782_686cbd2e5f521.png', '2025-07-08 07:13:17', '2025-07-08 07:13:17'),
+(1, 1, 'Unwanted Hair', '1752561012_6875f57491edf.png', '2025-07-08 07:13:17', '2025-07-15 01:00:12'),
+(2, 1, 'Hair Fall', '1752561057_6875f5a1a075a.png', '2025-07-08 07:13:17', '2025-07-15 01:00:57'),
 (3, 1, 'Stubborn Fat', '1751956825_686cbd591de90.png', '2025-07-08 07:13:17', '2025-07-08 07:13:17'),
 (4, 1, 'Dull Skin', 'dull_skin.png', '2025-07-08 07:13:17', '2025-07-08 07:13:17'),
 (5, 1, 'Acne', '1751960446_686ccb7ef144e.png', '2025-07-08 07:13:17', '2025-07-08 02:10:46'),
@@ -251,6 +267,25 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packages`
+--
+
+CREATE TABLE `packages` (
+  `id` int(11) NOT NULL,
+  `package_type` varchar(100) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `package_image` varchar(255) DEFAULT NULL,
+  `original_price` decimal(10,2) DEFAULT NULL,
+  `discounted_price` decimal(10,2) DEFAULT NULL,
+  `features` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`features`)),
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -349,16 +384,19 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_type` enum('admin','customer') DEFAULT 'customer'
+  `user_type` enum('admin','customer') DEFAULT 'customer',
+  `phone` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `user_type`) VALUES
-(1, 'test', 'test@gmail.com', NULL, '$2y$12$W1twci91jx2l9IPWaJ92POPWuCEXMvMaPoYavEgmMxKrrHnuA2x86', NULL, '2025-07-01 00:47:37', '2025-07-01 00:47:37', 'admin'),
-(2, 'Akash', 'akash@gmail.com', NULL, '$2y$12$Qt9RL7FahBIJiXVCAD1k5uaYegpEcZMlViH6g2nBM5bRzyMSecI9W', NULL, '2025-07-10 01:34:05', '2025-07-10 01:34:05', 'customer');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `user_type`, `phone`, `gender`, `profile_image`) VALUES
+(1, 'test', 'test@gmail.com', NULL, '$2y$12$Qt9RL7FahBIJiXVCAD1k5uaYegpEcZMlViH6g2nBM5bRzyMSecI9W', NULL, '2025-07-01 00:47:37', '2025-07-11 02:19:18', 'admin', '9999111186', 'female', 'profile-images/k9mvF1atiTwsj4COBOiFNRO2WtUrCZaiGqJFvtd3.png'),
+(2, 'Akash', 'akash@gmail.com', NULL, '$2y$12$Qt9RL7FahBIJiXVCAD1k5uaYegpEcZMlViH6g2nBM5bRzyMSecI9W', NULL, '2025-07-10 01:34:05', '2025-07-10 01:34:05', 'customer', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -381,6 +419,14 @@ ALTER TABLE `cache`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_carts_user_id` (`user_id`),
+  ADD KEY `fk_carts_service_id` (`service_id`);
 
 --
 -- Indexes for table `doctor_details`
@@ -429,6 +475,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -474,6 +526,12 @@ ALTER TABLE `blogs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `doctor_details`
 --
 ALTER TABLE `doctor_details`
@@ -510,6 +568,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
@@ -530,6 +594,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `carts`
+--
+ALTER TABLE `carts`
+  ADD CONSTRAINT `fk_carts_service_id` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_carts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `mid_categories`
