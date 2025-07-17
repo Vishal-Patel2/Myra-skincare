@@ -59,30 +59,33 @@ A modern, lightweight Laravel-based web application designed to explore, review,
 
 ## ⚙️ Installation
 
-```bash
+
 # Step 1: Clone the repository
 git clone https://github.com/Vishal-Patel2/Myra-skincare.git
 cd Myra-skincare
 
-# Step 2: Install dependencies
+# Step 2: Install PHP dependencies using Composer
 composer install
 
-# Step 3: Copy .env and set up database
+# Step 3: Copy the .env file and generate the application key
 cp .env.example .env
 php artisan key:generate
 
-# Step 4: Configure .env database section
-DB_DATABASE=myra_db
-DB_USERNAME=root
-DB_PASSWORD=
+# Step 4: Edit the .env file to configure your database connection
+# Open it in VS Code or any editor and update these lines:
+# DB_DATABASE=myra_db
+# DB_USERNAME=root
+# DB_PASSWORD=
 
-# Step 5: Migrate database and seed (if seeds available)
+# Step 5: Run the database migrations
 php artisan migrate
 
-# Step 6: Run local server
+# Step 6: (Optional) Seed the database if seeders are available
+# php artisan db:seed
+
+# Step 7: Start the local development server
 php artisan serve
 
-```
 ## 🚀 Usage
 
 - Visit the homepage to explore Myra Luxe skincare services.
@@ -109,8 +112,7 @@ php artisan serve
 - 🌍 Multi-language support.
 
 ---
-
 ## 👨‍💻 Contributors
 
 - [Vishal Patel](https://github.com/Vishal-Patel2)
-- Akash Jadli
+- [Akash Jadli](https://github.com/akashjadli17)
