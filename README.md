@@ -59,7 +59,7 @@ A modern, lightweight Laravel-based web application designed to explore, review,
 
 ## ⚙️ Installation
 
-
+```bash
 # Step 1: Clone the repository
 git clone https://github.com/Vishal-Patel2/Myra-skincare.git
 cd Myra-skincare
@@ -85,7 +85,7 @@ php artisan migrate
 
 # Step 7: Start the local development server
 php artisan serve
-
+```
 ## 🚀 Usage
 
 - Visit the homepage to explore Myra Luxe skincare services.
