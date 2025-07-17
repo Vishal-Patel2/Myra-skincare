@@ -197,26 +197,26 @@
             </div>
         </section>
         <!-- <section class="bg">
-                <div class="container py-4">
-                    <div class="site-heading">
-                        <h2 class="site-title">VISIBLE RESULTS</h2>
+                    <div class="container py-4">
+                        <div class="site-heading">
+                            <h2 class="site-title">VISIBLE RESULTS</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 mb-3">
+                                <img src="./assets/img/about/skin1.jpg" alt="">
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <img src="./assets/img/about/skin2.jpg" alt="">
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <img src="./assets/img/about/skin3.jpg" alt="">
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <img src="./assets/img/about/skin4.jpg" alt="">
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-3 mb-3">
-                            <img src="./assets/img/about/skin1.jpg" alt="">
-                        </div>
-                        <div class="col-lg-3 mb-3">
-                            <img src="./assets/img/about/skin2.jpg" alt="">
-                        </div>
-                        <div class="col-lg-3 mb-3">
-                            <img src="./assets/img/about/skin3.jpg" alt="">
-                        </div>
-                        <div class="col-lg-3 mb-3">
-                            <img src="./assets/img/about/skin4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </section> -->
+                </section> -->
         <!-- end VISIBLE RESULTS -->
         <!-- PREP FOR AN OCCASION -->
         <div class="service-area py-5">
@@ -617,83 +617,55 @@
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
-                            <!-- <span class="site-title-tagline">Our Blog</span> -->
                             <h2 class="site-title">News & Blog</h2>
-                            <!-- <p>It is a long established fact that a reader will be distracted</p> -->
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
-                                <img src="assets/img/blog/01.jpg" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <h4 class="blog-title">
-                                    <a href="#">There are many variates of passages alteration</a>
-                                </h4>
-                                <div class="blog-item-meta">
-
+                    @forelse ($blogs as $blog)
+                        <div class="col-md-6 col-lg-4">
+                            <div class="blog-item">
+                                <div class="blog-item-img">
+                                    <img src="{{ asset('storage/blogs/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                        class="img-fluid">
                                 </div>
-                                <p>At vero eos et accusamus et iusto odio ducimus qui blanditiis deleniti atque </p>
-                                <a class="blog-btn" href="#">Read More <i class="far fa-arrow-right"></i></a>
+                                <div class="blog-item-info">
+                                    <h4 class="blog-title">
+                                        <a href="{{ route('blogs.show', $blog->slug) }}">{{ $blog->title }}</a>
+                                    </h4>
+                                    <p>{!! Str::limit(strip_tags($blog->content), 100, '...') !!}</p>
+                                    <a class="blog-btn" href="{{ route('blogs.show', $blog->slug) }}">
+                                        Read More <i class="far fa-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
-                                <img src="assets/img/blog/02.jpg" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <h4 class="blog-title">
-                                    <a href="#">There are many variates of passages alteration</a>
-                                </h4>
-                                <div class="blog-item-meta">
-
-                                </div>
-                                <p>At vero eos et accusamus et iusto odio ducimus qui blanditiis deleniti atque </p>
-                                <a class="blog-btn" href="#">Read More <i class="far fa-arrow-right"></i></a>
-                            </div>
+                    @empty
+                        <div class="col-12">
+                            <p class="text-center">No blogs found.</p>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
-                                <img src="assets/img/blog/03.jpg" alt="Thumb">
-                            </div>
-                            <div class="blog-item-info">
-                                <h4 class="blog-title">
-                                    <a href="#">There are many variates of passages alteration</a>
-                                </h4>
-                                <div class="blog-item-meta">
-
-                                </div>
-                                <p>At vero eos et accusamus et iusto odio ducimus qui blanditiis deleniti atque </p>
-                                <a class="blog-btn" href="#">Read More <i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
         <!-- end blog -->
 
 
+
         <!-- <div class="partner-area">
-                <div class="container">
-                    <div class="partner-wrapper partner-slider owl-carousel owl-theme">
-                        <img src="assets/img/partner/01.jpg" alt="thumb">
-                        <img src="assets/img/partner/02.jpg" alt="thumb">
-                        <img src="assets/img/partner/03.jpg" alt="thumb">
-                        <img src="assets/img/partner/04.jpg" alt="thumb">
-                        <img src="assets/img/partner/01.jpg" alt="thumb">
-                        <img src="assets/img/partner/02.jpg" alt="thumb">
-                        <img src="assets/img/partner/03.jpg" alt="thumb">
+                    <div class="container">
+                        <div class="partner-wrapper partner-slider owl-carousel owl-theme">
+                            <img src="assets/img/partner/01.jpg" alt="thumb">
+                            <img src="assets/img/partner/02.jpg" alt="thumb">
+                            <img src="assets/img/partner/03.jpg" alt="thumb">
+                            <img src="assets/img/partner/04.jpg" alt="thumb">
+                            <img src="assets/img/partner/01.jpg" alt="thumb">
+                            <img src="assets/img/partner/02.jpg" alt="thumb">
+                            <img src="assets/img/partner/03.jpg" alt="thumb">
+                        </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
 
     </main>
 @endsection

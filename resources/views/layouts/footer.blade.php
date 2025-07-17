@@ -5,7 +5,7 @@
                  <div class="col-md-6 col-lg-4">
                      <div class="footer-widget-box about-us">
                          <a href="#" class="footer-logo">
-                             <img src="assets/img/logo/logo1.png" alt>
+                             <img src="assets/img/logo/logo.png" alt>
                          </a>
                          <p class="mb-20">
                              We are many variations of passages available but the majority have suffered alteration
@@ -56,8 +56,7 @@
                          <h4 class="footer-widget-title">Contact </h4>
                          <div class="footer-opening">
                              <ul class="footer-contact">
-                                 <li><i class="far fa-map-marker-alt"></i>59A, Block A 5B, Possangipur, Janakpuri, New
-                                     Delhi, Delhi 110058, India</li>
+                                 <li><i class="far fa-map-marker-alt"></i>BA-146-B Janak Puri, New Delhi 110058</li>
                                  <li><a href="tel:+21236547898"><i class="far fa-phone"></i>+91 935531766</a></li>
                                  <li><a href=""><i class="far fa-envelope"></i>info@myraluxe.com</a>
                                  </li>

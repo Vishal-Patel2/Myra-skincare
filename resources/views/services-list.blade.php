@@ -12,7 +12,7 @@
 
         .service-card {
             max-width: 700px;
-            height: 280px;
+            height: 300px;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 12px;
@@ -80,7 +80,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 35px;
         }
 
         .service-img {

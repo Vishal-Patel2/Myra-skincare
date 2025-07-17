@@ -34,6 +34,55 @@
                                     </div>
                                 </div>
 
+                                <!-- Filter Section -->
+                                <form method="GET" action="{{ route('services.index') }}">
+                                    <div class="row g-2 align-items-end mb-3">
+                                        <!-- Gender Dropdown -->
+                                        <div class="col-md-3">
+                                            <label class="form-label">Select Gender</label>
+                                            <select name="gender_id" class="form-select" id="gender-select">
+                                                <option value="">All</option>
+                                                @foreach ($genders as $gender)
+                                                    <option value="{{ $gender->id }}"
+                                                        {{ request('gender_id') == $gender->id ? 'selected' : '' }}>
+                                                        {{ $gender->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <!-- Top Category Dropdown -->
+                                        <div class="col-md-3">
+                                            <label class="form-label">Top Category</label>
+                                            <select name="top_category_id" class="form-select" id="top-category-select">
+                                                <option value="">All</option>
+                                                {{-- will be filled dynamically via JS --}}
+                                            </select>
+
+                                        </div>
+
+                                        <!-- Mid Category Dropdown -->
+                                        <div class="col-md-3">
+                                            <label class="form-label">Mid Category</label>
+                                            <select name="mid_category_id" class="form-select" id="mid-category-select">
+                                                <option value="">All</option>
+                                                @foreach ($midCategories as $mid)
+                                                    <option value="{{ $mid->id }}"
+                                                        {{ request('mid_category_id') == $mid->id ? 'selected' : '' }}>
+                                                        {{ $mid->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-primary w-100">Filter</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+
                                 <!-- Table -->
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover align-middle">
@@ -164,4 +213,77 @@
             });
         });
     </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const genderSelect = document.getElementById('gender-select');
+        const topCategorySelect = document.getElementById('top-category-select');
+        const midCategorySelect = document.getElementById('mid-category-select');
+
+        const selectedGenderId = "{{ request('gender_id') }}";
+        const selectedTopCategoryId = "{{ request('top_category_id') }}";
+        const selectedMidCategoryId = "{{ request('mid_category_id') }}";
+
+        function loadTopCategories(genderId, callback = null) {
+            topCategorySelect.innerHTML = '<option value="">All</option>';
+            midCategorySelect.innerHTML = '<option value="">All</option>'; // reset mids
+
+            if (!genderId) return;
+
+            fetch(`/admin/get-top-categories/${genderId}`)
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(top => {
+                        const selected = (top.id == selectedTopCategoryId) ? 'selected' : '';
+                        topCategorySelect.innerHTML += `<option value="${top.id}" ${selected}>${top.name}</option>`;
+                    });
+
+                    if (callback && typeof callback === 'function') {
+                        callback();
+                    }
+                });
+        }
+
+        function loadMidCategories(topCategoryId) {
+            midCategorySelect.innerHTML = '<option value="">All</option>';
+
+            if (!topCategoryId) return;
+
+            fetch(`/admin/get-mid-categories/${topCategoryId}`)
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(mid => {
+                        const selected = (mid.id == selectedMidCategoryId) ? 'selected' : '';
+                        midCategorySelect.innerHTML += `<option value="${mid.id}" ${selected}>${mid.name}</option>`;
+                    });
+                });
+        }
+
+        // Event: Gender Changed
+        genderSelect.addEventListener('change', function () {
+            const genderId = this.value;
+            loadTopCategories(genderId);
+        });
+
+        // Event: Top Category Changed
+        topCategorySelect.addEventListener('change', function () {
+            const topCategoryId = this.value;
+            loadMidCategories(topCategoryId);
+        });
+
+        // 🔄 Auto load on page load if gender is pre-selected
+        if (selectedGenderId) {
+            loadTopCategories(selectedGenderId, function () {
+                if (selectedTopCategoryId) {
+                    loadMidCategories(selectedTopCategoryId);
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+
 @endsection

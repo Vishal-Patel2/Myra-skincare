@@ -10,11 +10,41 @@ use Illuminate\Support\Facades\Storage;
  
 class ServiceController extends Controller
 {
-    public function index()
-    {
-        $services = Service::with('midCategory.topCategory.gender')->get();
-        return view('admin.services.index', compact('services'));
+public function index(Request $request)
+{
+    // Start query with relationships
+    $query = Service::with('midCategory.topCategory.gender');
+
+    // Apply filters based on request input
+    if ($request->filled('gender_id')) {
+        $query->whereHas('midCategory.topCategory.gender', function ($q) use ($request) {
+            $q->where('id', $request->gender_id);
+        });
     }
+
+    if ($request->filled('top_category_id')) {
+        $query->whereHas('midCategory.topCategory', function ($q) use ($request) {
+            $q->where('id', $request->top_category_id);
+        });
+    }
+
+    if ($request->filled('mid_category_id')) {
+        $query->whereHas('midCategory', function ($q) use ($request) {
+            $q->where('id', $request->mid_category_id);
+        });
+    }
+
+    // Get filtered services
+    $services = $query->get();
+
+    // Fetch dropdown data
+    $topCategories = TopCategory::with('gender')->get();
+    $midCategories = MidCategory::all();
+    $genders = \App\Models\Gender::all();
+
+    return view('admin.services.index', compact('services', 'topCategories', 'midCategories', 'genders'));
+}
+
 
     public function create()
     {
@@ -237,6 +267,9 @@ public function services($gender, $midSlug)
 
         return view('service-detail', compact('service'));
     }
+
+
+    
  
     
 }
