@@ -14,23 +14,28 @@ A modern, lightweight Laravel-based web application designed to explore, review,
 - [Admin Functionalities](#-admin-functionalities)
 - [Future Improvements](#-future-improvements)
 - [Contributors](#-contributors)
-- [License](#-license)
+
 
 ---
 
 ## ✨ Features
 
-- 💄 Browse and filter **Myra Skincare** services by gender, category, and sub-category.
+- 💄 Browse and filter **Myra Skincare** services by gender, top category, and mid category.
 - 🧴 View detailed product/service pages with highlights, videos, how-it-works sections, and FAQs.
-- 🧑‍💼 Admin dashboard to manage:
+- 🛒 Add services to a **Cart** for grouped booking or future reference.
+- 📅 Book **Appointments** directly from the service page.
+- 💳 Secure **Payment Integration** (optional for online bookings).
+- 📍 Live **Google Maps Integration** to display clinic location(s).
+- 🧑‍💼 **Admin Dashboard** to manage:
   - Services
   - Categories (Gender → Top Category → Mid Category)
+  - Blog posts
   - Image/video uploads
-- 📝 Blog/News section to engage visitors with skincare updates.
-- ⚙️ AJAX-powered category filtering without page reload.
-- 📊 Dynamic dropdowns based on user selections.
-- 📁 Upload & manage images/videos directly from the panel.
-- 🌐 Mobile-responsive modern UI.
+- 📝 **Blog/News section** to engage visitors with skincare updates.
+- ⚙️ **AJAX-powered category filtering** without page reload.
+- 📊 **Dynamic dropdowns** based on user selections.
+- 📁 Upload & manage **images/videos** directly from the panel.
+- 🌐 **Mobile-responsive**, modern UI for all devices.
 
 ---
 
