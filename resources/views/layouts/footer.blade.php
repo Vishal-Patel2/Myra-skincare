@@ -5,7 +5,7 @@
                  <div class="col-md-6 col-lg-4">
                      <div class="footer-widget-box about-us">
                          <a href="#" class="footer-logo">
-                             <img src="assets/img/logo/logo.png" alt>
+                             <img src="assets/img/logo/logo1.png" alt>
                          </a>
                          <p class="mb-20">
                              We are many variations of passages available but the majority have suffered alteration

@@ -229,9 +229,14 @@ public function index(Request $request)
 public function services($gender, $midSlug)
 {
     // Find MidCategory by Slug
-    $midCategory = MidCategory::with('topCategory.gender')
-        ->get()
-        ->first(fn($item) => Str::slug($item->name) === $midSlug);
+   $midCategory = MidCategory::whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [$midSlug])
+    ->whereHas('topCategory.gender', function ($query) use ($gender) {
+        $query->whereRaw('LOWER(name) = ?', [strtolower($gender)]);
+    })
+    ->with('topCategory.gender')
+    ->first();
+
+
 
     if (!$midCategory) {
         abort(404, 'Mid Category not found');
