@@ -58,7 +58,7 @@
         }
 
         .benefits li {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
         }

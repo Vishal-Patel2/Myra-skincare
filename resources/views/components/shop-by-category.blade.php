@@ -48,8 +48,7 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
 
 
                     <div class="col-6 col-md-6 col-lg-2 mb-4">
-                        <a
-                            href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
+                        <a  href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
 
                             <div class="card h-100 text-center">
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
@@ -72,8 +71,7 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
                     @foreach($maleMid as $mid)
 
                     <div class="col-6 col-md-6 col-lg-2 mb-4">
-                        <a
-                            href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
+                        <a  href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
 
                             <div class="card h-100 text-center">
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
