@@ -120,48 +120,48 @@
      </div>
  </footer>
  <style>
-     .subscribe-section {
-         background-color: #0f1a1f;
-         /* dark background */
-         padding: 30px 0;
-         text-align: center;
-     }
+.subscribe-section {
+    background-color: #0f1a1f;
+    /* dark background */
+    padding: 30px 0;
+    text-align: center;
+}
 
-     .subscribe-container {
-         display: inline-flex;
-         border: 1px solid #2e2e2e;
-         border-radius: 4px;
-         overflow: hidden;
-     }
+.subscribe-container {
+    display: inline-flex;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    overflow: hidden;
+}
 
-     .subscribe-input {
-         padding: 12px 16px;
-         font-size: 16px;
-         border: none;
-         outline: none;
-         background-color: #0f1a1f;
-         color: #ddd;
-         width: 250px;
-     }
+.subscribe-input {
+    padding: 12px 16px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: #0f1a1f;
+    color: #ddd;
+    width: 250px;
+}
 
-     .subscribe-input::placeholder {
-         color: #aaa;
-     }
+.subscribe-input::placeholder {
+    color: #aaa;
+}
 
-     .subscribe-button {
-         background-color: #a1532c;
-         color: #fff;
-         padding: 12px 20px;
-         border: none;
-         cursor: pointer;
-         font-weight: bold;
-         letter-spacing: 1px;
-         transition: background-color 0.3s ease;
-     }
+.subscribe-button {
+    background-color: #a1532c;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
 
-     .subscribe-button:hover {
-         background-color: #8c4523;
-     }
+.subscribe-button:hover {
+    background-color: #8c4523;
+}
  </style>
 
  <a href="#" id="scroll-top"><i class="far fa-long-arrow-up"></i></a>
@@ -182,44 +182,44 @@
  <script src="{{ asset('assets/js/main.js') }}"></script>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
-     const scrollContainers = document.querySelectorAll("#infiniteScroll--left");
+const scrollContainers = document.querySelectorAll("#infiniteScroll--left");
 
-     scrollContainers.forEach((container) => {
-         const scrollWidth = container.scrollWidth;
-         let isScrollingPaused = false;
+scrollContainers.forEach((container) => {
+    const scrollWidth = container.scrollWidth;
+    let isScrollingPaused = false;
 
-         window.addEventListener("load", () => {
-             setInterval(() => {
-                 if (isScrollingPaused) return;
+    window.addEventListener("load", () => {
+        setInterval(() => {
+            if (isScrollingPaused) return;
 
-                 const first = container.querySelector("article");
-                 if (!isElementInViewport(first)) {
-                     container.appendChild(first);
-                     container.scrollTo(container.scrollLeft - first.offsetWidth, 0);
-                 }
-                 container.scrollTo(container.scrollLeft + 1, 0);
-             }, 15);
-         });
+            const first = container.querySelector("article");
+            if (!isElementInViewport(first)) {
+                container.appendChild(first);
+                container.scrollTo(container.scrollLeft - first.offsetWidth, 0);
+            }
+            container.scrollTo(container.scrollLeft + 1, 0);
+        }, 15);
+    });
 
-         function isElementInViewport(el) {
-             const rect = el.getBoundingClientRect();
-             return rect.right > 0;
-         }
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.right > 0;
+    }
 
-         function pauseScrolling() {
-             isScrollingPaused = true;
-         }
+    function pauseScrolling() {
+        isScrollingPaused = true;
+    }
 
-         function resumeScrolling() {
-             isScrollingPaused = false;
-         }
+    function resumeScrolling() {
+        isScrollingPaused = false;
+    }
 
-         const allArticles = container.querySelectorAll("article");
-         for (let article of allArticles) {
-             article.addEventListener("mouseenter", pauseScrolling);
-             article.addEventListener("mouseleave", resumeScrolling);
-         }
-     });
+    const allArticles = container.querySelectorAll("article");
+    for (let article of allArticles) {
+        article.addEventListener("mouseenter", pauseScrolling);
+        article.addEventListener("mouseleave", resumeScrolling);
+    }
+});
  </script>
 
 
@@ -247,30 +247,31 @@
  </script> -->
 
  <script>
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.add-to-cart');
     buttons.forEach(btn => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function() {
             const serviceId = btn.getAttribute('data-id');
             fetch("{{ route('cart.add') }}", {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ service_id: serviceId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message || 'Added to cart');
-            });
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        service_id: serviceId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message || 'Added to cart');
+                });
         });
     });
 });
-</script>
+ </script>
 
 
- </body>
 
 
- </html>
+
