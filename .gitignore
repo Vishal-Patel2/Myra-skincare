@@ -1,0 +1,3 @@
+# Ignore database dumps or custom folders
+db.sql
+*.sql

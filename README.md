@@ -54,9 +54,10 @@ A modern, lightweight Laravel-based web application designed to explore, review,
 
 ## 🖼 Screenshots
 
-| Home Page            | Admin Panel Services             |
-|----------------------|----------------------------------|
-| ![home](public/screenshots/home.png) | ![admin](public/screenshots/admin.png) |
+| Home Page | Admin Panel | Services Section |
+|-----------|-------------|------------------|
+| ![Home](public/screenshots/home.png) | ![Admin](public/screenshots/admin.png) | ![Services](public/screenshots/services.png) |
+
 
 
 
