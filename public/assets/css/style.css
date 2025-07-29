@@ -249,7 +249,7 @@ label {
 .site-title {
     font-weight: 500;
     text-transform: uppercase;
-    font-size: 25px;
+    font-size: 22px;
     color: #000000;
     margin-top: 5px;
     margin-bottom: 0;
@@ -3696,9 +3696,9 @@ body.rtl-mode .price-wrapper {
     color: #20c7ba
 }
 
-.footer-newsletter .subscribe-form .theme-btn::before {
+/* .footer-newsletter .subscribe-form .theme-btn::before {
     background: #fff
-}
+} */
 
 .footer-newsletter .subscribe-form .theme-btn i {
     margin-right: 5px

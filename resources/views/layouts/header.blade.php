@@ -47,7 +47,7 @@
                                      <span class="count-box" id="cart-count">0</span>
                                  </a>
 
-                                 <a href="wallet.php" class=""><i class="fas fa-wallet"></i></a>
+                                 <a href="{{route('wallet')}}" class=""><i class="fas fa-wallet"></i></a>
                                  <div class="user-dropdown">
                                 <a href="#" class="user-icon" id="userIcon"><i class="fa fa-user"></i></a>
 
