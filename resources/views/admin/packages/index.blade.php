@@ -56,9 +56,10 @@
 
                                                     <td>
                                                         <label style="cursor: pointer">
-                                                            <img src="{{ $package->package_image ? asset('storage/' . $package->package_image) : asset('images/default-package.png') }}"
+                                                            <img src="{{ $package->package_image ? asset('storage/packages/' . $package->package_image) : asset('images/default-package.png') }}"
                                                                 width="70" class="img-thumbnail"
                                                                 id="img-preview-{{ $package->id }}">
+
                                                             <input type="file" accept="image/*" style="display: none"
                                                                 onchange="uploadPackageImage(this, {{ $package->id }})">
                                                         </label>

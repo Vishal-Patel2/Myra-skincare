@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PackageController extends Controller
 {
@@ -26,17 +28,17 @@ class PackageController extends Controller
             'package_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'original_price' => 'required|numeric',
             'discounted_price' => 'required|numeric',
-            'features' => 'required|string', // JSON string from frontend
+            'features' => 'required|string', // JSON string expected
         ]);
 
         // Handle Image Upload
         if ($request->hasFile('package_image')) {
-            $image = $request->file('package_image')->store('packages', 'public');
-            $data['package_image'] = $image;
+            $filename = Str::random(40) . '.' . $request->file('package_image')->getClientOriginalExtension();
+            $request->file('package_image')->storeAs('packages', $filename, 'public');
+            $data['package_image'] = $filename;
         }
 
-        // Decode features JSON string into PHP array
-        $data['features'] = json_decode($data['features'], true);
+        $data['features'] = json_decode($data['features'], true); // JSON -> array
 
         Package::create($data);
 
@@ -56,17 +58,22 @@ class PackageController extends Controller
             'package_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'original_price' => 'required|numeric',
             'discounted_price' => 'required|numeric',
-            'features' => 'required|string', // JSON string again from frontend
+            'features' => 'required|string', // JSON string
         ]);
 
-        // Handle Image Upload
+        // Handle image upload
         if ($request->hasFile('package_image')) {
-            $image = $request->file('package_image')->store('packages', 'public');
-            $data['package_image'] = $image;
+            // Optional: delete old image
+            if ($package->package_image) {
+                Storage::disk('public')->delete('packages/' . $package->package_image);
+            }
+
+            $filename = Str::random(40) . '.' . $request->file('package_image')->getClientOriginalExtension();
+            $request->file('package_image')->storeAs('packages', $filename, 'public');
+            $data['package_image'] = $filename;
         }
 
-        // Decode features JSON string into PHP array
-        $data['features'] = json_decode($data['features'], true);
+        $data['features'] = json_decode($data['features'], true); // Decode JSON string
 
         $package->update($data);
 
@@ -75,7 +82,13 @@ class PackageController extends Controller
 
     public function destroy(Package $package)
     {
+        // Delete image from storage
+        if ($package->package_image) {
+            Storage::disk('public')->delete('packages/' . $package->package_image);
+        }
+
         $package->delete();
+
         return redirect()->route('packages.index')->with('success', 'Package deleted successfully.');
     }
 
@@ -90,33 +103,35 @@ class PackageController extends Controller
             'new_status' => $package->status
         ]);
     }
-   public function showPackages()
-{
-    $packages = Package::where('status', 'active')->get(); // Fetch only active packages
-    return view('packages', compact('packages')); // Match the Blade view name
-}
-public function uploadImage(Request $request, $id)
-{
-    $request->validate([
-        'package_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-    ]);
 
-    $package = Package::findOrFail($id);
+    public function showPackages()
+    {
+        $packages = Package::where('status', 'active')->get();
+        return view('packages', compact('packages'));
+    }
 
-    // Store new image
-    $imagePath = $request->file('package_image')->store('packages', 'public');
+    public function uploadImage(Request $request, $id)
+    {
+        $request->validate([
+            'package_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
 
-    // Optionally delete old image here (if needed)
-    // Storage::disk('public')->delete($package->package_image);
+        $package = Package::findOrFail($id);
 
-    $package->package_image = $imagePath;
-    $package->save();
+        // Optional: delete old image
+        if ($package->package_image) {
+            Storage::disk('public')->delete('packages/' . $package->package_image);
+        }
 
-    return response()->json([
-        'success' => true,
-        'image_url' => asset('storage/' . $imagePath)
-    ]);
-}
+        $filename = Str::random(40) . '.' . $request->file('package_image')->getClientOriginalExtension();
+        $request->file('package_image')->storeAs('packages', $filename, 'public');
 
+        $package->package_image = $filename;
+        $package->save();
 
+        return response()->json([
+            'success' => true,
+            'image_url' => asset('storage/packages/' . $filename)
+        ]);
+    }
 }

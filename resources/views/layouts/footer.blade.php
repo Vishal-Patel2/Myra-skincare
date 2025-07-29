@@ -26,14 +26,15 @@
                      <div class="footer-widget-box list">
                          <h4 class="footer-widget-title">Quick Links</h4>
                          <ul class="footer-list">
-                             <li><a href="about.php"><i class="fas fa-caret-right"></i> About Us</a></li>
-                             <li><a href="men.php"><i class="fas fa-caret-right"></i> Men</a></li>
-                             <li><a href="women.php"><i class="fas fa-caret-right"></i> Women</a></li>
-                             <li><a href="pricing.php"><i class="fas fa-caret-right"></i> Packages</a></li>
-                             <li><a href="blog.php"><i class="fas fa-caret-right"></i> Blog</a></li>
-                             <li><a href="carrer.php"><i class="fas fa-caret-right"></i> Carrer</a></li>
-                             <li><a href="contact.php"><i class="fas fa-caret-right"></i> Contact Us</a></li>
+                             <li><a href="{{ route('about') }}"><i class="fas fa-caret-right"></i> About Us</a></li>
+                             <li><a href="{{ route('men') }}"><i class="fas fa-caret-right"></i> Men</a></li>
+                             <li><a href="{{ route('women') }}"><i class="fas fa-caret-right"></i> Women</a></li>
+                             <li><a href="{{ route('packages') }}"><i class="fas fa-caret-right"></i> Packages</a></li>
+                             <li><a href="{{ route('blogs') }}"><i class="fas fa-caret-right"></i> Blog</a></li>
+                             <li><a href="{{ route('careers') }}"><i class="fas fa-caret-right"></i> Career</a></li>
+                             <li><a href="{{ route('contact') }}"><i class="fas fa-caret-right"></i> Contact Us</a></li>
                          </ul>
+
                      </div>
                  </div>
                  <div class="col-md-6 col-lg-2">
@@ -44,6 +45,10 @@
                                      Policies</a></li>
                              <li><a href="{{ url('/terms') }}"><i class="fas fa-caret-right"></i> Terms & Conditions</a>
                              </li>
+                             <li><a href="{{ url('/refunds') }}"><i class="fas fa-caret-right"></i> Refunds &
+                                     Cancellations</a>
+                             </li>
+
                              <li><a href="{{ url('/sitemap') }}"><i class="fas fa-caret-right"></i> Sitemap</a></li>
                              <li><a href="{{ url('/help-support') }}"><i class="fas fa-caret-right"></i> Help and
                                      Support</a></li>
@@ -53,16 +58,18 @@
                  </div>
                  <div class="col-md-6 col-lg-4">
                      <div class="footer-widget-box list">
-                         <h4 class="footer-widget-title">Contact </h4>
+                         <h4 class="footer-widget-title">Contact</h4>
                          <div class="footer-opening">
                              <ul class="footer-contact">
+                                 <li><i class="far fa-building"></i>MyraLuxe Aesthetic Private Ltd.</li>
                                  <li><i class="far fa-map-marker-alt"></i>BA-146-B Janak Puri, New Delhi 110058</li>
-                                 <li><a href="tel:+21236547898"><i class="far fa-phone"></i>+91 935531766</a></li>
-                                 <li><a href=""><i class="far fa-envelope"></i>info@myraluxe.com</a>
-                                 </li>
+                                 <li><a href="tel:+91935531766"><i class="far fa-phone"></i>+91 935531766</a></li>
+                                 <li><a href="mailto:info@myraluxe.com"><i
+                                             class="far fa-envelope"></i>info@myraluxe.com</a></li>
                              </ul>
                          </div>
                      </div>
+
                      <div class="footer-newsletter">
                          <div class="subscribe-form">
                              <form action="#">
@@ -98,70 +105,78 @@
              </div>
          </div> -->
      </div>
-     <div class="copyright">
+     <div class="copyright bg-dark text-light py-3">
          <div class="container">
-             <div class="row">
-                 <div class="col-lg-6 text-center">
-                     <p class="copyright-text">
-                         &copy; Copyright <span id="date"></span> <a href="#"> MYRALUXE </a> All Rights
-                         Reserved.
-                     </p>
-                 </div>
-                 <div class="col-lg-6 text-center">
-                     <p class="copyright-text">
-                         Design & Develop <span id="date"></span> <a href="https://wedigitalindia.com/"> Wedigital
-                             India </a>
+             <div class="row align-items-center">
+                 <!-- Left Side -->
+                 <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                     <p class="mb-0 small">
+                         &copy; <span id="date"></span> <strong>MyraLuxe Aesthetic Private Ltd.</strong> &mdash;
+                         All rights reserved.
                      </p>
                  </div>
 
-
+                 <!-- Right Side -->
+                 <div class="col-md-6 text-center text-md-end">
+                     <p class="mb-0 small">
+                         Designed & Developed by <a href="https://wedigitalindia.com/"
+                             class="text-light text-decoration-underline" target="_blank" rel="noopener">WeDigital
+                             India</a>
+                     </p>
+                 </div>
              </div>
          </div>
      </div>
+
+     <script>
+         // Dynamically set the year
+         document.getElementById('date').textContent = new Date().getFullYear();
+     </script>
+
  </footer>
  <style>
-.subscribe-section {
-    background-color: #0f1a1f;
-    /* dark background */
-    padding: 30px 0;
-    text-align: center;
-}
+     .subscribe-section {
+         background-color: #0f1a1f;
+         /* dark background */
+         padding: 30px 0;
+         text-align: center;
+     }
 
-.subscribe-container {
-    display: inline-flex;
-    border: 1px solid #2e2e2e;
-    border-radius: 4px;
-    overflow: hidden;
-}
+     .subscribe-container {
+         display: inline-flex;
+         border: 1px solid #2e2e2e;
+         border-radius: 4px;
+         overflow: hidden;
+     }
 
-.subscribe-input {
-    padding: 12px 16px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background-color: #0f1a1f;
-    color: #ddd;
-    width: 250px;
-}
+     .subscribe-input {
+         padding: 12px 16px;
+         font-size: 16px;
+         border: none;
+         outline: none;
+         background-color: #0f1a1f;
+         color: #ddd;
+         width: 250px;
+     }
 
-.subscribe-input::placeholder {
-    color: #aaa;
-}
+     .subscribe-input::placeholder {
+         color: #aaa;
+     }
 
-.subscribe-button {
-    background-color: #a1532c;
-    color: #fff;
-    padding: 12px 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease;
-}
+     .subscribe-button {
+         background-color: #a1532c;
+         color: #fff;
+         padding: 12px 20px;
+         border: none;
+         cursor: pointer;
+         font-weight: bold;
+         letter-spacing: 1px;
+         transition: background-color 0.3s ease;
+     }
 
-.subscribe-button:hover {
-    background-color: #8c4523;
-}
+     .subscribe-button:hover {
+         background-color: #8c4523;
+     }
  </style>
 
  <a href="#" id="scroll-top"><i class="far fa-long-arrow-up"></i></a>
@@ -182,44 +197,44 @@
  <script src="{{ asset('assets/js/main.js') }}"></script>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
-const scrollContainers = document.querySelectorAll("#infiniteScroll--left");
+     const scrollContainers = document.querySelectorAll("#infiniteScroll--left");
 
-scrollContainers.forEach((container) => {
-    const scrollWidth = container.scrollWidth;
-    let isScrollingPaused = false;
+     scrollContainers.forEach((container) => {
+         const scrollWidth = container.scrollWidth;
+         let isScrollingPaused = false;
 
-    window.addEventListener("load", () => {
-        setInterval(() => {
-            if (isScrollingPaused) return;
+         window.addEventListener("load", () => {
+             setInterval(() => {
+                 if (isScrollingPaused) return;
 
-            const first = container.querySelector("article");
-            if (!isElementInViewport(first)) {
-                container.appendChild(first);
-                container.scrollTo(container.scrollLeft - first.offsetWidth, 0);
-            }
-            container.scrollTo(container.scrollLeft + 1, 0);
-        }, 15);
-    });
+                 const first = container.querySelector("article");
+                 if (!isElementInViewport(first)) {
+                     container.appendChild(first);
+                     container.scrollTo(container.scrollLeft - first.offsetWidth, 0);
+                 }
+                 container.scrollTo(container.scrollLeft + 1, 0);
+             }, 15);
+         });
 
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.right > 0;
-    }
+         function isElementInViewport(el) {
+             const rect = el.getBoundingClientRect();
+             return rect.right > 0;
+         }
 
-    function pauseScrolling() {
-        isScrollingPaused = true;
-    }
+         function pauseScrolling() {
+             isScrollingPaused = true;
+         }
 
-    function resumeScrolling() {
-        isScrollingPaused = false;
-    }
+         function resumeScrolling() {
+             isScrollingPaused = false;
+         }
 
-    const allArticles = container.querySelectorAll("article");
-    for (let article of allArticles) {
-        article.addEventListener("mouseenter", pauseScrolling);
-        article.addEventListener("mouseleave", resumeScrolling);
-    }
-});
+         const allArticles = container.querySelectorAll("article");
+         for (let article of allArticles) {
+             article.addEventListener("mouseenter", pauseScrolling);
+             article.addEventListener("mouseleave", resumeScrolling);
+         }
+     });
  </script>
 
 
@@ -247,31 +262,26 @@ scrollContainers.forEach((container) => {
  </script> -->
 
  <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.add-to-cart');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const serviceId = btn.getAttribute('data-id');
-            fetch("{{ route('cart.add') }}", {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        service_id: serviceId
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message || 'Added to cart');
-                });
-        });
-    });
-});
+     document.addEventListener('DOMContentLoaded', function() {
+         const buttons = document.querySelectorAll('.add-to-cart');
+         buttons.forEach(btn => {
+             btn.addEventListener('click', function() {
+                 const serviceId = btn.getAttribute('data-id');
+                 fetch("{{ route('cart.add') }}", {
+                         method: 'POST',
+                         headers: {
+                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                             'Content-Type': 'application/json'
+                         },
+                         body: JSON.stringify({
+                             service_id: serviceId
+                         })
+                     })
+                     .then(response => response.json())
+                     .then(data => {
+                         alert(data.message || 'Added to cart');
+                     });
+             });
+         });
+     });
  </script>
-
-
-
-
-

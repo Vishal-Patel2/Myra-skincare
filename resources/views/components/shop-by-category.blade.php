@@ -14,7 +14,7 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
 @endphp
 
 @if($femaleMid->count() || $maleMid->count())
-<section class="bg py-5">
+<section class="bg mt-5">
     <div class="container">
         <div class="text-center mb-4">
             <h2 class="site-title pt-3">SHOP BY {{ strtoupper($top_category) }}</h2>
@@ -43,7 +43,8 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
             <!-- Female Tab -->
             <div class="tab-pane fade show active" id="{{ $categorySlug }}-female" role="tabpanel"
                 aria-labelledby="{{ $categorySlug }}-female-tab">
-                <div class="row">
+
+                <div class="scroll-wrapper d-lg-none d-flex overflow-auto gap-3 pb-3">
                     @foreach($femaleMid as $mid)
 
 
@@ -54,12 +55,26 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
                                     class="card-img-top" alt="">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $mid->name }}</h5>
+                                    <h5 class="card-title" style="font-size: 14px;">{{ $mid->name }}</h5>
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    @endforeach
+                </div>
 
+                <div class="row d-none d-lg-flex">
+                    @foreach($femaleMid as $mid)
+                        <div class="col-6 col-md-6 col-lg-2 mb-4">
+                            <a href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
+                                <div class="card h-100 text-center">
+                                    <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
+                                        class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $mid->name }}</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -67,7 +82,8 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
             <!-- Male Tab -->
             <div class="tab-pane fade" id="{{ $categorySlug }}-male" role="tabpanel"
                 aria-labelledby="{{ $categorySlug }}-male-tab">
-                <div class="row">
+
+                <div class="scroll-wrapper d-lg-none d-flex overflow-auto gap-3 pb-3">
                     @foreach($maleMid as $mid)
 
                     <div class="col-6 col-md-6 col-lg-2 mb-4">
@@ -77,16 +93,31 @@ $query->where('name', $top_category)->whereHas('gender', fn($q) => $q->where('na
                                 <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
                                     class="card-img-top" alt="">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $mid->name }}</h5>
+                                    <h5 class="card-title" style="font-size: 14px;">{{ $mid->name }}</h5>
                                 </div>
                             </div>
                         </a>
+                    @endforeach
+                </div>
 
-                    </div>
+                <div class="row d-none d-lg-flex">
+                    @foreach($maleMid as $mid)
+                        <div class="col-6 col-md-6 col-lg-2 mb-4">
+                            <a href="{{ route('services', ['gender' => strtolower($mid->topCategory->gender->name), 'mid' => Str::slug($mid->name)]) }}">
+                                <div class="card h-100 text-center">
+                                    <img src="{{ asset('storage/uploads/mid_categories/' . $mid->image) }}"
+                                        class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $mid->name }}</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @endif

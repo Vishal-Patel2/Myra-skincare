@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
  Route::get('/', [IndexController::class, 'index'])->name('index');
 
-Route::view('/about-us' , 'about')->name('about');
+Route::view('/about' , 'about')->name('about');
 
 
 Route::get('/men', [MenController::class, 'showMenCategories'])->name('men');
@@ -153,6 +153,7 @@ Route::post('/admin/packages/toggle-status/{id}', [PackageController::class, 'to
 
 Route::view('/privacy-policies', 'privacy-policies')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
+Route::view('/refunds', 'refunds')->name('refunds');
 Route::view('/sitemap', 'sitemap')->name('sitemap');
 Route::view('/help-support', 'help-support')->name('help-support');
 

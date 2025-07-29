@@ -47,8 +47,7 @@
                                 <!-- Right Image -->
                                 <div class="package-image">
                                     @if ($package->package_image)
-                                        <img src="{{ asset('storage/' . $package->package_image) }}" alt="Package Image"
-                                            class="person-img" />
+                                        <img src="{{ asset('storage/packages/' . $package->package_image) }}" alt="Package Image" class="person-img"/>
                                     @else
                                         <img src="{{ asset('images/default-package.png') }}" alt="Default Image"
                                             class="person-img" />

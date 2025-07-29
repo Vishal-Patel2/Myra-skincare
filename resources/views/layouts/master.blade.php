@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>@yield('title', 'Myra Skincare')</title>
     <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
 
