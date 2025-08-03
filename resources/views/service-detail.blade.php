@@ -245,7 +245,9 @@
     <main class="main">
         <div class="site-breadcrumb">
             <div class="container">
-                <h2 class="breadcrumb-title">{{ $service->name }}</h2>
+                <h2 class="breadcrumb-title">
+                    {{ $service->midCategory->topCategory->name ?? 'Top Category' }}
+                </h2>
                 <ul class="breadcrumb-menu">
                     <li><a href="/">Home</a></li>
                     <li class="active">{{ $service->name }}</li>
@@ -274,12 +276,16 @@
                                 <div class="service-summary">
                                     <div class="info-left">
                                         <div class="service-title">{{ $service->name }}</div>
-                                        <div class="price-time">Rs. {{ $service->price }} &nbsp; | &nbsp; <i
-                                                class="far fa-clock"></i> {{ $service->duration }} mins</div>
                                         <div class="rating">
                                             <span class="star">&#9733;</span>
                                             <span>{{ $service->rating ?? '4.85' }}</span>
                                         </div>
+                                        <div class="price-time">
+                                            <strong>Price: </strong> ₹{{ number_format($service->price) }}/- per session
+                                            &nbsp; | &nbsp;
+                                            <i class="far fa-clock"></i> {{ $service->duration }} mins
+                                        </div>
+
                                     </div>
                                     <button class="add-to-cart">ADD TO CART</button>
                                 </div>
@@ -291,7 +297,7 @@
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="how-tab" data-bs-toggle="tab" data-bs-target="#how"
-                                            type="button" role="tab">HOW IT WORKS</button>
+                                            type="button" role="tab">Expected Results</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq"
@@ -299,8 +305,8 @@
                                     </li>
                                 </ul>
 
-                                <div class="tab-content py-5">
-                                    @php
+                                <div class="tab-content py-3">
+                                    {{-- @php
                                         $paragraphs = preg_split(
                                             '/<p[^>]*>(.*?)<\/p>/i',
                                             $service->overview,
@@ -311,46 +317,15 @@
                                             'Aftercare Tips',
                                             array_map('strip_tags', $paragraphs),
                                         );
-                                    @endphp
+                                    @endphp --}}
 
                                     <div class="tab-pane fade show active" id="services" role="tabpanel">
-                                        {{-- ✅ First section: List with bullets --}}
                                         <div style="padding-left: 20px;">
-                                            <ul
-                                                style="list-style-type: disc; list-style-position: outside; padding-left: 20px; margin-bottom: 30px;">
-                                                @foreach ($paragraphs as $index => $text)
-                                                    @if ($index < $aftercareIndex)
-                                                        @if (!empty(trim(strip_tags($text))))
-                                                            <li style="margin-bottom: 10px;">{{ strip_tags($text) }}</li>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            </ul>
+                                            {!! $service->overview !!}
                                         </div>
-
-
-                                        {{-- ✅ Aftercare Tips Section --}}
-                                        @if ($aftercareIndex !== false)
-                                            <div style="background-color: #fef1ee; padding: 30px; border-radius: 4px;">
-                                                <h4 style="font-weight: 600; margin-bottom: 20px;">Aftercare Tips</h4>
-                                                <ul style="list-style: none; padding-left: 0;">
-                                                    @foreach ($paragraphs as $index => $text)
-                                                        @if ($index > $aftercareIndex)
-                                                            @if (!empty(trim(strip_tags($text))))
-                                                                <li
-                                                                    style="display: flex; align-items: flex-start; margin-bottom: 15px;">
-                                                                    <span
-                                                                        style="margin-right: 10px; margin-top: 2px;">✅</span>
-                                                                    <span>{{ strip_tags($text) }}</span>
-                                                                </li>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
                                     </div>
 
+                                    
                                     {{-- 💡 How It Works Tab --}}
                                     <div class="tab-pane fade" id="how" role="tabpanel">
                                         <div class="row">
@@ -362,7 +337,7 @@
                                                             style="border-radius: 10px;">
 
                                                         {{-- Number Badge --}}
-                                                        <div 
+                                                        <div
                                                             style="
                                                                     position: absolute;
                                                                     bottom: 10px;
@@ -417,12 +392,26 @@
                             </div>
                         </div>
 
+                        @php
+                            // Get current top category
+                            $currentTopCategoryId = $service->midCategory->topCategory->id ?? null;
+
+                            // Fetch all services under the same top category
+                            $relatedServices = \App\Models\Service::whereHas('midCategory', function ($query) use (
+                                $currentTopCategoryId,
+                            ) {
+                                $query->where('top_category_id', $currentTopCategoryId);
+                            })
+                                ->take(8)
+                                ->get();
+                        @endphp
+
                         <div class="col-xl-4 col-lg-4">
                             <div class="service-sidebar">
                                 <div class="widget category">
                                     <h4 class="widget-title">All Services</h4>
                                     <div class="category-list">
-                                        @foreach (App\Models\Service::take(8)->get() as $s)
+                                        @foreach ($relatedServices as $s)
                                             <a href="{{ route('service.detail', Str::slug($s->name)) }}">
                                                 <i class="far fa-angle-double-right"></i> {{ $s->name }}
                                             </a>

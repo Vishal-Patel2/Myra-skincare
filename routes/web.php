@@ -137,6 +137,7 @@ Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show')
 Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->name('services');
  
 Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
+Route::get('/services/{slug}', [ServiceController::class, 'serviceDetail'])->name('service-hiuf-details');
 
 Route::get('/change-password', function () {
     return view('profile.partials.change-password');

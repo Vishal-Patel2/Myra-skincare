@@ -14,7 +14,7 @@ class AdminController extends Controller
         $totalServices = Service::count();
 
         // Use actual model if these tables exist, else keep it as 0
-        $totalCustomers = 0; // or Customer::count();
+        $totalCustomers = 0;
         $totalEnquiries = 0; // or Enquiry::count();
 
         return view('admin.dashboard', compact('totalServices', 'totalCustomers', 'totalEnquiries'));

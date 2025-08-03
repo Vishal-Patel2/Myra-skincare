@@ -5,6 +5,8 @@
 @section('content')
 
     <style>
+
+
         .site-breadcrumb {
             padding-top: 35px;
             padding-bottom: 35px;
@@ -12,13 +14,13 @@
 
         .service-card {
             max-width: 700px;
-            height: 300px;
+            height: 320px;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             gap: 20px;
         }
@@ -159,18 +161,23 @@
                                         </div>
 
                                         <div class="price-time">
-                                            Rs. {{ number_format($service->price) }} &nbsp; | &nbsp;
+                                            <strong>Price:</strong> ₹{{ number_format($service->price) }}/- per session
+                                            &nbsp; | &nbsp;
                                             <i class="far fa-clock"></i> {{ $service->duration }} mins
                                         </div>
 
-                                        {!! nl2br(
-                                            '<ul class="benefits"><li>' .
-                                                implode('</li><li>', array_filter(array_map('trim', explode("\n", $service->highlight_points)))) .
-                                                '</li></ul>',
-                                        ) !!}
+                                        @if (!empty($service->highlight_points))
+                                            <h5 class="mt-2">Why Choose {{ $service->name }}?</h5>
+                                            {!! nl2br(
+                                                '<ul class="benefits"><li>' .
+                                                    implode('</li><li>', array_filter(array_map('trim', explode("\n", $service->highlight_points)))) .
+                                                    '</li></ul>',
+                                            ) !!}
+                                        @endif
 
 
-                                        <div class="view-details">
+
+                                        <div class="view-details mt-2">
                                             <a href="{{ route('service.detail', Str::slug($service->name)) }}">VIEW
                                                 DETAILS</a>
                                         </div>

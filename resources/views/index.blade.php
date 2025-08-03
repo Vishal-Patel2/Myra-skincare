@@ -11,8 +11,10 @@
             </video>
         </div>
 
+        @include('components.service-cards', ['services' => $services])
+
         @include('components.shop-by-category', ['top_category' => 'SKIN CONCERN'])
-        @include('components.shop-by-category', ['top_category' => 'TREATMENTS'])
+
 
         <!--end  SHOP BY TREATMENTS -->
         <!-- Best Selling Deals -->
@@ -197,26 +199,26 @@
             </div>
         </section>
         <!-- <section class="bg">
-                    <div class="container py-4">
-                        <div class="site-heading">
-                            <h2 class="site-title">VISIBLE RESULTS</h2>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 mb-3">
-                                <img src="./assets/img/about/skin1.jpg" alt="">
-                            </div>
-                            <div class="col-lg-3 mb-3">
-                                <img src="./assets/img/about/skin2.jpg" alt="">
-                            </div>
-                            <div class="col-lg-3 mb-3">
-                                <img src="./assets/img/about/skin3.jpg" alt="">
-                            </div>
-                            <div class="col-lg-3 mb-3">
-                                <img src="./assets/img/about/skin4.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </section> -->
+                                            <div class="container py-4">
+                                                <div class="site-heading">
+                                                    <h2 class="site-title">VISIBLE RESULTS</h2>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 mb-3">
+                                                        <img src="./assets/img/about/skin1.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3">
+                                                        <img src="./assets/img/about/skin2.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3">
+                                                        <img src="./assets/img/about/skin3.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3">
+                                                        <img src="./assets/img/about/skin4.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section> -->
         <!-- end VISIBLE RESULTS -->
         <!-- PREP FOR AN OCCASION -->
         <div class="service-area py-5">
@@ -654,18 +656,18 @@
 
 
         <!-- <div class="partner-area">
-                    <div class="container">
-                        <div class="partner-wrapper partner-slider owl-carousel owl-theme">
-                            <img src="assets/img/partner/01.jpg" alt="thumb">
-                            <img src="assets/img/partner/02.jpg" alt="thumb">
-                            <img src="assets/img/partner/03.jpg" alt="thumb">
-                            <img src="assets/img/partner/04.jpg" alt="thumb">
-                            <img src="assets/img/partner/01.jpg" alt="thumb">
-                            <img src="assets/img/partner/02.jpg" alt="thumb">
-                            <img src="assets/img/partner/03.jpg" alt="thumb">
-                        </div>
-                    </div>
-                </div> -->
+                                            <div class="container">
+                                                <div class="partner-wrapper partner-slider owl-carousel owl-theme">
+                                                    <img src="assets/img/partner/01.jpg" alt="thumb">
+                                                    <img src="assets/img/partner/02.jpg" alt="thumb">
+                                                    <img src="assets/img/partner/03.jpg" alt="thumb">
+                                                    <img src="assets/img/partner/04.jpg" alt="thumb">
+                                                    <img src="assets/img/partner/01.jpg" alt="thumb">
+                                                    <img src="assets/img/partner/02.jpg" alt="thumb">
+                                                    <img src="assets/img/partner/03.jpg" alt="thumb">
+                                                </div>
+                                            </div>
+                                        </div> -->
 
     </main>
 @endsection

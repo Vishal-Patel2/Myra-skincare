@@ -29,16 +29,7 @@
                         </div>
                     </div>
 
-                    <!-- Top Category Selection -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Select Top Category</label>
-                            <select name="top_category_id" id="top_category_select" class="form-control" required>
-                                <option value="">-- Select Top Category --</option>
-                            </select>
-                        </div>
-                    </div>
-
+                
 
                     <!-- Mid Category Name -->
                     <div class="row mb-3">

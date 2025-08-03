@@ -2,30 +2,24 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Service;
-use App\Models\MidCategory;
-use App\Models\TopCategory;
 use App\Models\Doctor;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
-     
-    public function index()
+   public function index()
 {
     $doctors = Doctor::where('status', 'active')->latest()->get();
-    $blogs = Blog::latest()->take(3)->get(); // show latest 3 blogs
+    $blogs = Blog::latest()->take(3)->get();
 
-    return view('index', compact('doctors', 'blogs'));
+    // Get services where the TopCategory name is 'HIUF'
+    $services = Service::whereHas('midCategory.topCategory', function ($query) {
+        $query->where('name', 'HIUF');
+    })->get();
+
+    return view('index', compact('doctors', 'blogs', 'services'));
 }
 
-
-    
-
 }
-    

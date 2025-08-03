@@ -36,6 +36,7 @@
                                 <option value="">-- Select Top Category --</option>
                             </select>
                         </div>
+
                         <div class="col-md-6">
                             <label class="form-label">Mid Level Category</label>
                             <select name="mid_category_id" id="mid_category" class="form-control" required>
@@ -107,7 +108,8 @@
                                 <div class="col-md-5">
                                     <input type="file" name="how_it_works_images[]"
                                         class="form-control how-it-works-image-input"
-                                        data-preview-id="how-it-works-preview-0" required>
+                                        data-preview-id="how-it-works-preview-0">
+
                                     <img id="how-it-works-preview-0" width="80" style="display: none;"
                                         class="mt-2">
                                 </div>
@@ -265,7 +267,7 @@
             const newItem = `
             <div class="row how-it-works-item mb-2">
                 <div class="col-md-5">
-                    <input type="file" name="how_it_works_images[]" class="form-control how-it-works-image-input" data-preview-id="how-it-works-preview-${howItWorksIndex}" required>
+                    <input type="file" name="how_it_works_images[]" class="form-control how-it-works-image-input" data-preview-id="how-it-works-preview-${howItWorksIndex}">
                     <img id="how-it-works-preview-${howItWorksIndex}" width="80" style="display: none;" class="mt-2">
                 </div>
                 <div class="col-md-5">
@@ -278,6 +280,7 @@
             $('#how-it-works-wrapper').append(newItem);
             howItWorksIndex++;
         });
+
 
         // Remove row
         $(document).on('click', '.remove-how-it-works', function() {

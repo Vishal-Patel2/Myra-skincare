@@ -90,10 +90,11 @@ public function index(Request $request)
         if ($request->has('how_it_works_titles')) {
             foreach ($request->how_it_works_titles as $index => $title) {
                 $img = null;
-                if ($request->hasFile("how_it_works_images.$index")) {
-                    $imgPath = $request->file("how_it_works_images.$index")->store('services/how_it_works', 'public');
+                if ($request->hasFile("how_it_works_images") && $request->file("how_it_works_images")[$index] ?? false) {
+                    $imgPath = $request->file("how_it_works_images")[$index]->store('services/how_it_works', 'public');
                     $img = basename($imgPath);
                 }
+
                 $howItWorks[] = ['title' => $title, 'image' => $img];
             }
         }
@@ -175,10 +176,11 @@ public function index(Request $request)
         $images = $request->file('how_it_works_images', []);
         foreach ($titles as $index => $title) {
             $imgPath = null;
-            if (!empty($images[$index])) {
+           if (isset($images[$index]) && $images[$index] !== null) {
                 $imgPath = $images[$index]->store('services/how_it_works', 'public');
                 $imgPath = basename($imgPath);
             }
+
             $howItWorks[] = ['title' => $title, 'image' => $imgPath];
         }
      $validated['how_it_works'] = $howItWorks; 
@@ -260,18 +262,26 @@ public function services($gender, $midSlug)
 
 
 
-   public function serviceDetail($slug)
-    {
-        $service = Service::get()->first(function ($item) use ($slug) {
-            return Str::slug($item->name) === $slug;
-        });
+ public function serviceDetail($slug)
+{
+    $service = Service::with('midCategory.topCategory')->get()->first(function ($item) use ($slug) {
+        return Str::slug($item->name) === $slug;
+    });
 
-        if (!$service) {
-            abort(404, 'Service not found');
-        }
-
-        return view('service-detail', compact('service'));
+    if (!$service) {
+        abort(404, 'Service not found');
     }
+
+    // Check if the top category is HIUF (case-insensitive)
+    $topCategoryName = optional($service->midCategory->topCategory)->name;
+
+    if (strtolower($topCategoryName) === 'hiuf') {
+        return view('service-hiuf-details', compact('service'));
+    }
+
+    return view('service-detail', compact('service'));
+}
+
 
 
     

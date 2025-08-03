@@ -33,25 +33,32 @@ class MidCategoryController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'top_category_id' => 'required|exists:top_categories,id',
-        'name' => 'required|string|max:100|unique:mid_categories,name,NULL,id,top_category_id,' . $request->top_category_id,
+        'gender_id' => 'required|in:1,2',
+        'name' => 'required|string|max:100|unique:mid_categories,name,NULL,id',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
     ]);
 
-    $data = $request->only(['top_category_id', 'name']);
+    // Set top_category_id based on gender_id
+    $topCategoryId = $request->gender_id == 1 ? 1 : 3;
+
+    $data = [
+        'top_category_id' => $topCategoryId,
+        'name' => $request->name,
+    ];
 
     if ($request->hasFile('image')) {
         $file = $request->file('image');
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
         $file->storeAs('uploads/mid_categories', $filename, 'public');
 
-        $data['image'] = $filename; // ✅ only filename saved
+        $data['image'] = $filename;
     }
 
     MidCategory::create($data);
 
     return redirect()->route('mid-categories.index')->with('success', 'Mid Category created successfully.');
 }
+
 
 
     /**

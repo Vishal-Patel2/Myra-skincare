@@ -56,7 +56,7 @@
         }
 
         .content {
-            padding: 30px;
+            padding: 10px;
         }
     </style>
 </head>
