@@ -10,36 +10,51 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function add(Request $request)
-    {
-        $request->validate([
-            'service_id' => 'required|exists:services,id',
+{
+    $request->validate([
+        'service_id' => 'required|exists:services,id',
+    ]);
+
+    $userId = Auth::id();
+    $sessionId = $request->session()->getId();
+
+    $cart = Cart::where('service_id', $request->service_id)
+        ->where(function ($q) use ($userId, $sessionId) {
+            if ($userId) {
+                $q->where('user_id', $userId);
+            } else {
+                $q->where('session_id', $sessionId);
+            }
+        })->first();
+
+    if ($cart) {
+        $cart->increment('quantity');
+    } else {
+        Cart::create([
+            'user_id' => $userId,
+            'session_id' => $userId ? null : $sessionId,
+            'service_id' => $request->service_id,
+            'quantity' => 1
         ]);
-
-        $userId = Auth::id();
-        $sessionId = $request->session()->getId();
-
-        $cart = Cart::where('service_id', $request->service_id)
-                    ->where(function($q) use ($userId, $sessionId) {
-                        if ($userId) {
-                            $q->where('user_id', $userId);
-                        } else {
-                            $q->where('session_id', $sessionId);
-                        }
-                    })->first();
-
-        if ($cart) {
-            $cart->increment('quantity');
-        } else {
-            Cart::create([
-                'user_id' => $userId,
-                'session_id' => $userId ? null : $sessionId,
-                'service_id' => $request->service_id,
-                'quantity' => 1
-            ]);
-        }
-
-        return response()->json(['status' => 'success', 'message' => 'Added to cart']);
     }
+
+    // ✅ Get total quantity
+    $cartCount = Cart::where(function ($q) use ($userId, $sessionId) {
+        if ($userId) {
+            $q->where('user_id', $userId);
+        } else {
+            $q->where('session_id', $sessionId);
+        }
+    })->sum('quantity');
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Added to cart',
+        'cart_count' => $cartCount
+    ]);
+}
+
+
 
     public function index(Request $request)
     {

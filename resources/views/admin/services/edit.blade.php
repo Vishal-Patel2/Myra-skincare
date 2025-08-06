@@ -46,23 +46,26 @@
                         </div>
                     </div>
 
-                    <!-- Service Info -->
+                                       <!-- Service Info -->
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label class="form-label">Service Name</label>
                             <input type="text" name="name" value="{{ $service->name }}" class="form-control" required>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Price</label>
-                            <input type="number" name="price" value="{{ $service->price }}" step="0.01"
-                                class="form-control">
+                            <input type="number" name="price" value="{{ $service->price }}" step="0.01" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Packages</label>
+                            <input type="number" name="packages" value="{{ $service->packages }}" step="0.01" class="form-control">
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Rating</label>
-                            <input type="number" name="rating" value="{{ $service->rating }}" step="0.1"
-                                max="5" min="0" class="form-control">
+                            <input type="number" name="rating" value="{{ $service->rating }}" step="0.1" max="5" min="0" class="form-control">
                         </div>
                     </div>
+
 
                     <div class="row mb-3">
                         <div class="col-md-4">

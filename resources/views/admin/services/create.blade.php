@@ -45,9 +45,9 @@
                         </div>
                     </div>
 
-                    <!-- Service Details -->
+                   <!-- Service Details -->
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label class="form-label">Service Name</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
@@ -56,11 +56,15 @@
                             <input type="number" name="price" step="0.01" class="form-control">
                         </div>
                         <div class="col-md-3">
+                            <label class="form-label">Packages</label>
+                            <input type="number" name="packages" step="0.01" class="form-control">
+                        </div>
+                        <div class="col-md-3">
                             <label class="form-label">Rating</label>
-                            <input type="number" name="rating" step="0.1" max="5" min="0"
-                                class="form-control">
+                            <input type="number" name="rating" step="0.1" max="5" min="0" class="form-control">
                         </div>
                     </div>
+
 
                     <div class="row mb-3">
                         <div class="col-md-4">

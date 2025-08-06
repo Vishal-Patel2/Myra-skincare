@@ -142,7 +142,8 @@
     <main class="main">
         <div class="site-breadcrumb">
             <div class="container">
-                <h2 class="breadcrumb-title">{{ $service->midCategory->topCategory->name ?? 'Top Category' }}</h2>
+                <h2 class="breadcrumb-title">{{ $service->midCategory->name ?? 'Mid Category' }}</h2>
+
                 <ul class="breadcrumb-menu">
                     <li><a href="/">Home</a></li>
                     <li class="active">{{ $service->name }}</li>
@@ -167,17 +168,28 @@
                             <div class="service-summary">
                                 <div class="info-left">
                                     <div class="service-title">{{ $service->name }}</div>
+                                    
                                     <div class="rating">
                                         <span class="star">&#9733;</span>
                                         <span>{{ $service->rating ?? '4.85' }}</span>
                                     </div>
+                                    
                                     <div class="price-time">
                                         ₹{{ number_format($service->price) }}/- per session &nbsp; | &nbsp;
                                         <i class="far fa-clock"></i> {{ $service->duration }} mins
                                     </div>
+                            
+                                    @if($service->packages)
+                                        <div class="package-price" style="margin-top: 6px; color: #6B7280; font-size: 0.95rem;">
+                                            <!--<i class="fas fa-star" style="color: #FFD700; margin-right: 6px;"></i>-->
+                                            <strong>Package (6 sessions):</strong> ₹{{ number_format($service->packages) }}/-
+                                        </div>
+                                    @endif
                                 </div>
-                                <button class="add-to-cart">ADD TO CART</button>
+                            
+                                <button class="add-to-cart" data-id="{{ $service->id }}">ADD TO CART</button>
                             </div>
+
 
                             <ul class="nav nav-tabs" id="serviceTabs" role="tablist">
                                 <li class="nav-item">
@@ -201,7 +213,7 @@
                                         @if (Str::contains($service->expected_results, '<table>'))
                                             {!! $service->expected_results !!}
                                         @else
-                                            <p>{!! nl2br(e($service->expected_results)) !!}</p>
+                                            {!! $service->expected_results !!}
                                         @endif
                                     </div>
                                 </div>
@@ -246,6 +258,11 @@
             </div>
         </div>
     </main>
+    <style>
+        h2 {
+    font-size: 25px;
+      }
+    </style>
 
     <script>
         const slides = document.querySelectorAll('.fade-gallery-img');

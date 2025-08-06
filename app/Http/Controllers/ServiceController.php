@@ -52,37 +52,39 @@ class ServiceController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'mid_category_id' => 'required|exists:mid_categories,id',
-            'name' => 'required|string|max:255',
-            'price' => 'nullable|numeric',
-            'rating' => 'nullable|numeric|max:5',
-            'duration' => 'nullable|string',
-            'image' => 'nullable|image',
-            'video' => 'nullable|file|mimes:mp4,mov,avi,wmv',
-            'highlight_points' => 'nullable|string',
-            'overview' => 'nullable|string',
-            'expected_results' => 'nullable|string',
-            'why_choose' => 'nullable|string',
-        ]);
+{
+    $validated = $request->validate([
+        'mid_category_id' => 'required|exists:mid_categories,id',
+        'name' => 'required|string|max:255',
+        'price' => 'nullable|numeric',
+        'packages' => 'nullable|numeric',
+        'rating' => 'nullable|numeric|max:5',
+        'duration' => 'nullable|string',
+        'image' => 'nullable|image',
+        'video' => 'nullable|file|mimes:mp4,mov,avi,wmv',
+        'highlight_points' => 'nullable|string',
+        'overview' => 'nullable|string',
+        'expected_results' => 'nullable|string',
+        'why_choose' => 'nullable|string',
+    ]);
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('services/images', 'public');
-            $validated['image'] = basename($path);
-        }
-
-        if ($request->hasFile('video')) {
-            $path = $request->file('video')->store('services/videos', 'public');
-            $validated['video'] = basename($path);
-        }
-
-        $validated['action'] = 'active';
-
-        Service::create($validated);
-
-        return redirect()->route('services.index')->with('success', 'Service created successfully.');
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('services/images', 'public');
+        $validated['image'] = basename($path);
     }
+
+    if ($request->hasFile('video')) {
+        $path = $request->file('video')->store('services/videos', 'public');
+        $validated['video'] = basename($path);
+    }
+
+    $validated['action'] = 'active';
+
+    Service::create($validated);
+
+    return redirect()->route('services.index')->with('success', 'Service created successfully.');
+}
+
 
    public function edit(Service $service)
 {
@@ -96,41 +98,43 @@ class ServiceController extends Controller
 
 
     public function update(Request $request, Service $service)
-    {
-        $validated = $request->validate([
-            'mid_category_id' => 'required|exists:mid_categories,id',
-            'name' => 'required|string|max:255',
-            'price' => 'nullable|numeric',
-            'rating' => 'nullable|numeric|max:5',
-            'duration' => 'nullable|string',
-            'image' => 'nullable|image',
-            'video' => 'nullable|file|mimes:mp4,mov,avi,wmv',
-            'highlight_points' => 'nullable|string',
-            'overview' => 'nullable|string',
-            'expected_results' => 'nullable|string',
-            'why_choose' => 'nullable|string',
-        ]);
+{
+    $validated = $request->validate([
+        'mid_category_id' => 'required|exists:mid_categories,id',
+        'name' => 'required|string|max:255',
+        'price' => 'nullable|numeric',
+        'packages' => 'nullable|numeric',
+        'rating' => 'nullable|numeric|max:5',
+        'duration' => 'nullable|string',
+        'image' => 'nullable|image',
+        'video' => 'nullable|file|mimes:mp4,mov,avi,wmv',
+        'highlight_points' => 'nullable|string',
+        'overview' => 'nullable|string',
+        'expected_results' => 'nullable|string',
+        'why_choose' => 'nullable|string',
+    ]);
 
-        if ($request->hasFile('image')) {
-            if ($service->image) {
-                Storage::disk('public')->delete('services/images/' . $service->image);
-            }
-            $path = $request->file('image')->store('services/images', 'public');
-            $validated['image'] = basename($path);
+    if ($request->hasFile('image')) {
+        if ($service->image) {
+            Storage::disk('public')->delete('services/images/' . $service->image);
         }
-
-        if ($request->hasFile('video')) {
-            if ($service->video) {
-                Storage::disk('public')->delete('services/videos/' . $service->video);
-            }
-            $path = $request->file('video')->store('services/videos', 'public');
-            $validated['video'] = basename($path);
-        }
-
-        $service->update($validated);
-
-        return redirect()->route('services.index')->with('success', 'Service updated successfully.');
+        $path = $request->file('image')->store('services/images', 'public');
+        $validated['image'] = basename($path);
     }
+
+    if ($request->hasFile('video')) {
+        if ($service->video) {
+            Storage::disk('public')->delete('services/videos/' . $service->video);
+        }
+        $path = $request->file('video')->store('services/videos', 'public');
+        $validated['video'] = basename($path);
+    }
+
+    $service->update($validated);
+
+    return redirect()->route('services.index')->with('success', 'Service updated successfully.');
+}
+
 
     public function destroy(Service $service)
     {
@@ -173,7 +177,11 @@ class ServiceController extends Controller
             abort(404, 'Gender mismatch for Mid Category');
         }
 
-        $services = Service::where('mid_category_id', $midCategory->id)->get();
+        $services = Service::where('mid_category_id', $midCategory->id)
+    ->orderBy('created_at') // Ensures oldest services come first
+    ->get();
+    
+
 
         return view('services-list', compact('services', 'midCategory'));
     }

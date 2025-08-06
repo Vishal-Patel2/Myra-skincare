@@ -82,6 +82,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 });
 
 
+Route::get('/services/{gender}/{midSlug}', [ServiceController::class, 'services'])->name('services.list');
 
 Route::prefix('admin')->group(function () {
     // Use AjaxCategoryController for all dynamic AJAX-based category fetching

@@ -13,6 +13,7 @@ class Service extends Model
         'video',
         'rating',
         'price',
+        'packages',
         'duration',
         'highlight_points',
         'overview',
@@ -21,10 +22,11 @@ class Service extends Model
         'action',
     ];
 
-    // No casting needed anymore since 'how_it_works' and 'faqs' are removed
+
     protected $casts = [
-        'rating' => 'decimal:1',
+        'rating' => 'decimal:2',
         'price' => 'decimal:2',
+         'packages' => 'decimal:2',
     ];
 
     public function midCategory()

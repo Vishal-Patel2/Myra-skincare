@@ -273,23 +273,86 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="service-summary">
+                                <div class="service-summary d-flex justify-content-between align-items-start flex-wrap">
                                     <div class="info-left">
-                                        <div class="service-title">{{ $service->name }}</div>
-                                        <div class="rating">
-                                            <span class="star">&#9733;</span>
+                                        <!-- Service Name -->
+                                        <div class="service-title mb-2" style="font-size: 1.3rem; font-weight: 600; color: #2d2d2d;">
+                                            {{ $service->name }}
+                                        </div>
+                                
+                                        <!-- Rating -->
+                                        <div class="rating d-flex align-items-center mb-2" style="color: #6B7280; font-size: 0.95rem;">
+                                            <span class="star" style="color: #FFD700; font-size: 1.1rem; margin-right: 6px;">&#9733;</span>
                                             <span>{{ $service->rating ?? '4.85' }}</span>
                                         </div>
-                                        <div class="price-time">
-                                            <strong>Price: </strong> ₹{{ number_format($service->price) }}/- per session
-                                            &nbsp; | &nbsp;
-                                            <i class="far fa-clock"></i> {{ $service->duration }} mins
+                                
+                                        <!-- Price & Duration -->
+                                        <div class="price-time d-flex align-items-center mb-2" style="color: #6B7280; font-size: 0.95rem;">
+                                            <strong style="margin-right: 4px;">Price:</strong> ₹{{ number_format($service->price) }}/- per session
+                                            <span class="mx-2">|</span>
+                                            <i class="far fa-clock me-1"></i> {{ $service->duration }} mins
                                         </div>
-
+                                
+                                        <!-- Package Price -->
+                                        @if($service->packages)
+                                            <div class="package-price d-flex align-items-center" style="color: #6B7280; font-size: 0.95rem;">
+                                                <!--<i class="fas fa-star" style="color: #FFD700; margin-right: 6px;"></i>-->
+                                                <strong>Package (6 sessions):</strong>&nbsp;₹{{ number_format($service->packages) }}/-
+                                            </div>
+                                        @endif
                                     </div>
-                                    <button class="add-to-cart">ADD TO CART</button>
+                                
+                                    <!-- Add to Cart Button -->
+                                    <button class="add-to-cart btn btn-dark rounded-pill px-4 py-2 text-uppercase mt-2 mt-md-0"
+                                        data-id="{{ $service->id }}"
+                                        style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">
+                                        ADD TO CART
+                                    </button>
                                 </div>
 
+                               <style>
+                                   .service-summary {
+                                        padding: 15px 0;
+                                        /*border-bottom: 1px solid #eee;*/
+                                    }
+                                    
+                                    .service-title {
+                                        font-size: 1.3rem;
+                                        font-weight: 600;
+                                        color: #2d2d2d;
+                                    }
+                                    
+                                    .rating,
+                                    .price-time,
+                                    .package-price {
+                                        font-size: 0.95rem;
+                                        color: #6B7280;
+                                    }
+                                    
+                                    .star {
+                                        color: #FFD700;
+                                        font-size: 1.1rem;
+                                        margin-right: 6px;
+                                    }
+                                    
+                                    .add-to-cart {
+                                        background-color: #000;
+                                        color: #fff;
+                                        border: none;
+                                        border-radius: 50px;
+                                        padding: 8px 20px;
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        text-transform: uppercase;
+                                        cursor: pointer;
+                                        transition: background-color 0.3s ease;
+                                    }
+                                    
+                                    .add-to-cart:hover {
+                                        background-color: #333;
+                                    }
+
+                               </style>
                                 <ul class="nav nav-tabs justify-content-center" id="bookingTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"

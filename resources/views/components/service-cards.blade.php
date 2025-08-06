@@ -1,67 +1,53 @@
-<h2 class="section-heading">
-    Our Latest Skincare Treatments with HIFU Technology
-</h2>
-<style>
-    .section-heading {
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        color: #1d293f;
-        margin: 40px 0 20px;
-        letter-spacing: 0.5px;
-        line-height: 1;
-        background: linear-gradient(to right, #e3e3e3, #c0c0c0);
-        padding: 20px 10px;
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-</style>
+@php
+    // Keep only one service per Mid Category
+    $uniqueServices = $services->unique(function ($service) {
+        return $service->midCategory->id;
+    });
+@endphp
 
-<div class="card1s-container">
-    @forelse ($services as $service)
-        <div class="card1">
-            <div class="card1-image">
-                <img src="{{ asset('storage/services/images/' . $service->image) }}" alt="{{ $service->name }}">
-            </div>
+<div class="card1s-container"> 
+    @forelse ($uniqueServices as $service)
+        @php
+            $midSlug = Str::slug($service->midCategory->name);
+            $gender = strtolower(optional($service->midCategory->topCategory->gender)->name);
+        @endphp
 
-            <div class="card1-content">
-                <h3>{{ $service->name }}</h3>
-                <p>{!! Str::limit(strip_tags(html_entity_decode($service->highlight_points ?? 'No description available.')), 150) !!}</p>
+        @if ($gender && $midSlug)
+            <a href="{{ route('services.list', ['gender' => $gender, 'midSlug' => $midSlug]) }}"
+                class="card1-link-wrapper">
+                <div class="card1">
+                    <div class="card1-image">
+                        <img src="{{ asset('storage/uploads/mid_categories/' . $service->midCategory->image) }}" 
+                             alt="{{ $service->midCategory->name }}">
+                    </div>
 
-
-                <div class="cta-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    {{-- <a href="{{ route('service-hiuf-details', Str::slug($service->name)) }}" class="cta-button">
-                        View Details
-                    </a> --}}
-
-
-                    @php
-                        $gender = strtolower(optional($service->midCategory->topCategory->gender)->name);
-                        $slug = Str::slug($service->name);
-                    @endphp
-
-                    @if ($gender && $slug)
-                        <a href="{{ route('service.detail', ['gender' => $gender, 'slug' => $slug]) }}"
-                            class="cta-button">
-                            View Details
-                        </a>
-                    @else
-                        <span class="text-danger">Missing gender or name</span>
-                    @endif
-
-
-
-                    <button class="add-to-cart" data-id="{{ $service->id }}">Add to Cart</button>
+                    <div class="card1-content">
+                        <h3>{{ $service->midCategory->name ?? 'Mid Category' }}</h3>
+                        <p>{!! Str::limit(strip_tags(html_entity_decode($service->highlight_points ?? 'No description available.')), 150) !!}</p>
+                    </div>
                 </div>
-
-            </div>
-        </div>
+            </a>
+        @endif
     @empty
         <p>No HIUF services available at the moment.</p>
     @endforelse
 </div>
 
+
+
+
 <style>
+    .card1-link-wrapper {
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+        max-width: 550px;
+    }
+
+    .card1-link-wrapper:hover {
+        text-decoration: none;
+    }
+
     .card1s-container {
         display: flex;
         flex-wrap: wrap;
@@ -187,3 +173,31 @@
         }
     }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.add-to-cart');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const serviceId = this.getAttribute('data-id');
+
+                fetch("{{ route('cart.add') }}", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            service_id: serviceId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            document.getElementById('cart-count').textContent = data
+                                .cart_count;
+                        }
+                    });
+            });
+        });
+    });
+</script>
