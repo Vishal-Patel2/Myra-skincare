@@ -22,36 +22,38 @@
                 <div class="row">
                     @forelse($packages as $package)
                         <div class="col-md-6 col-lg-6 mb-4">
-                            <div class="package-card d-flex">
-                                <!-- Left Content -->
-                                <div class="package-content flex-grow-1">
-                                    <div class="package-label">{{ $package->package_type }}</div>
-                                    <div class="package-title">{{ $package->title }}</div>
-
-                                    <div class="price-section">
-                                        <span class="old-price">₹ {{ number_format($package->original_price) }}</span>
-                                        <span class="price">₹ {{ number_format($package->discounted_price) }}</span>
+                            <div class="package-card">
+                                <!-- Top Row -->
+                                <div class="package-top">
+                                    <div class="package-info">
+                                        <div class="package-label">{{ $package->package_type }}</div>
+                                        <div class="package-title">{{ $package->title }}</div>
+                                        <div class="price-section">
+                                            <span class="old-price">₹ {{ number_format($package->original_price) }}</span>
+                                            <span class="price">₹ {{ number_format($package->discounted_price) }}</span>
+                                        </div>
                                     </div>
+                                    <div class="package-image">
+                                        @if ($package->package_image)
+                                            <img src="{{ asset('storage/packages/' . $package->package_image) }}"
+                                                alt="Package Image" class="person-img" />
+                                        @else
+                                            <img src="{{ asset('images/default-package.png') }}" alt="Default Image"
+                                                class="person-img" />
+                                        @endif
+                                    </div>
+                                </div>
 
+                                <!-- Bottom Row -->
+                                <div class="package-bottom-content">
                                     <ul class="services">
                                         @foreach ($package->features as $feature)
                                             <li>{{ $feature }}</li>
                                         @endforeach
                                     </ul>
-
                                     <div class="package-bottom">
                                         <button class="add-to-cart">ADD TO CART</button>
                                     </div>
-                                </div>
-
-                                <!-- Right Image -->
-                                <div class="package-image">
-                                    @if ($package->package_image)
-                                        <img src="{{ asset('storage/packages/' . $package->package_image) }}" alt="Package Image" class="person-img"/>
-                                    @else
-                                        <img src="{{ asset('images/default-package.png') }}" alt="Default Image"
-                                            class="person-img" />
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -65,7 +67,6 @@
         </div>
     </main>
 
-
     <style>
         .package-card {
             background: #fff;
@@ -74,27 +75,29 @@
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .package-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 20px;
-            height: auto;
-            flex-wrap: wrap;
         }
 
-        .package-content {
+        .package-info {
             flex: 1;
-            min-width: 250px;
+            min-width: 170px;
         }
 
         .package-label {
             background: #e0e0e0;
             color: #333;
             display: inline-block;
-            padding: 6px 14px;
-            border-radius: 10px;
+            padding: 1px 6px;
+            border-radius: 2px;
             font-weight: 500;
             font-size: 14px;
         }
@@ -102,12 +105,12 @@
         .package-title {
             font-size: 18px;
             font-weight: 500;
-            margin: 10px 0 20px;
             color: #2c3e50;
+            margin: 10px 0;
         }
 
         .price-section {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .price {
@@ -123,8 +126,20 @@
             margin-right: 10px;
         }
 
+        .package-image img.person-img {
+            height: 150px;
+            width: 125px;
+            max-width: 220px;
+            border-radius: 12px;
+        }
+
+        .package-bottom-content {
+            display: flex;
+            flex-direction: column;
+        }
+
         .services {
-            margin: 20px 0;
+            margin: 0;
             padding: 0;
         }
 
@@ -166,62 +181,52 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
         }
 
-        .package-image img.person-img {
-            height: 255px;
-            width: auto;
-            max-width: 220px;
-            border-radius: 12px;
-            /* object-fit: cover; */
-        }
-
-        /* ✅ MOBILE RESPONSIVENESS */
+        /* ✅ Mobile responsiveness */
         @media (max-width: 768px) {
+
             .package-card {
-                flex-direction: column;
-                align-items: center;
-                padding: 20px;
-                text-align: center;
+                gap: 0px;
+            }
+
+            .package-top {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .package-info {
+                flex: 1;
             }
 
             .package-title {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .price {
-                font-size: 22px;
+                font-size: 20px;
             }
 
             .old-price {
                 font-size: 16px;
             }
 
-            .services li {
-                font-size: 15px;
-                padding-left: 26px;
+            .package-image img.person-img {
+                max-width: 90px;
+                height: auto;
+                border-radius: 10px;
             }
 
             .add-to-cart {
                 width: 100%;
-                padding: 12px;
-                font-size: 16px;
+                padding: 8px;
+                font-size: 15px;
             }
 
             .package-bottom {
                 justify-content: center;
             }
-
-            .package-image img.person-img {
-                margin-top: 20px;
-                max-width: 100%;
-                height: auto;
-            }
         }
     </style>
-
-
-
 @endsection

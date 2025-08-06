@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $fillable = [
-        'gender_id',
-        'top_category_id',
         'mid_category_id',
         'name',
         'image',
@@ -18,23 +16,22 @@ class Service extends Model
         'duration',
         'highlight_points',
         'overview',
-        'how_it_works',
-        'faqs',
+        'expected_results',
+        'why_choose',
         'action',
     ];
 
+    // No casting needed anymore since 'how_it_works' and 'faqs' are removed
     protected $casts = [
-        'how_it_works' => 'array',
-        'faqs' => 'array',
+        'rating' => 'decimal:1',
+        'price' => 'decimal:2',
     ];
 
-public function midCategory()
-{
-    return $this->belongsTo(MidCategory::class);
-}
+    public function midCategory()
+    {
+        return $this->belongsTo(MidCategory::class);
+    }
 
-
-    // ✅ TopCategory via MidCategory
     public function topCategory()
     {
         return $this->hasOneThrough(
@@ -47,18 +44,15 @@ public function midCategory()
         );
     }
 
-    // ✅ Gender (via TopCategory or directly, depending on your schema)
-public function gender()
-{
-    return $this->hasOneThrough(
-        Gender::class,
-        TopCategory::class,
-        'id', // top_categories.id
-        'id', // genders.id
-        'mid_category_id', // services.mid_category_id
-        'gender_id' // top_categories.gender_id
-    );
-}
-
-
+    public function gender()
+    {
+        return $this->hasOneThrough(
+            Gender::class,
+            TopCategory::class,
+            'id', // top_categories.id
+            'id', // genders.id
+            'mid_category_id', // services.mid_category_id
+            'gender_id' // top_categories.gender_id
+        );
+    }
 }

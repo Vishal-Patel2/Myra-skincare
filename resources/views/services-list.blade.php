@@ -5,8 +5,6 @@
 @section('content')
 
     <style>
-
-
         .site-breadcrumb {
             padding-top: 35px;
             padding-bottom: 35px;
@@ -178,9 +176,27 @@
 
 
                                         <div class="view-details mt-2">
-                                            <a href="{{ route('service.detail', Str::slug($service->name)) }}">VIEW
-                                                DETAILS</a>
+
+
+                                            @php
+                                                $gender = strtolower(
+                                                    optional($service->midCategory->topCategory->gender)->name,
+                                                );
+                                                $slug = Str::slug($service->name);
+                                            @endphp
+
+                                            @if ($gender && $slug)
+                                                <a href="{{ route('service.detail', ['gender' => $gender, 'slug' => $slug]) }}"
+                                                    class="cta-button">
+                                                    View Details
+                                                </a>
+                                            @else
+                                                <span class="text-danger">Missing gender or name</span>
+                                            @endif
+
+
                                         </div>
+
                                     </div>
 
                                     <div class="service-right">

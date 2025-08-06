@@ -76,10 +76,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('mid-categories', MidCategoryController::class);
     Route::resource('services', ServiceController::class);
    
-
-  
     Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
-
+    Route::post('/services/update-image/{id}', [ServiceController::class, 'updateImage']);
  
 });
 
@@ -136,8 +134,8 @@ Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show')
 // Services list by mid category
 Route::get('{gender}/services/{mid}', [ServiceController::class, 'services'])->name('services');
  
-Route::get('service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
-Route::get('/services/{slug}', [ServiceController::class, 'serviceDetail'])->name('service-hiuf-details');
+Route::get('{gender}/service/{slug}', [ServiceController::class, 'serviceDetail'])->name('service.detail');
+
 
 Route::get('/change-password', function () {
     return view('profile.partials.change-password');

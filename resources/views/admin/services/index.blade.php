@@ -88,7 +88,7 @@
                                     <table class="table table-bordered table-hover align-middle">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>ID</th>
+                                                <th>#</th>
                                                 <th>Service For</th>
                                                 <th>Top Category</th>
                                                 <th>Mid Category</th>
@@ -103,7 +103,7 @@
                                         <tbody>
                                             @forelse ($services as $service)
                                                 <tr id="service-row-{{ $service->id }}">
-                                                    <td>{{ $service->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
 
                                                     <!-- Gender -->
                                                     <td>
@@ -122,8 +122,14 @@
                                                     <!-- Media -->
                                                     <td>
                                                         @if ($service->image)
-                                                            <img src="{{ asset('storage/services/images/' . $service->image) }}"
-                                                                alt="Image" width="60">
+                                                            <label style="cursor:pointer">
+                                                                <img src="{{ asset('storage/services/images/' . $service->image) }}"
+                                                                    alt="Service Image" height="50"
+                                                                    id="img-preview-{{ $service->id }}">
+                                                                <input type="file" name="image" accept="image/*"
+                                                                    style="display: none"
+                                                                    onchange="uploadServiceImage(this, {{ $service->id }})">
+                                                            </label>
                                                         @elseif ($service->video)
                                                             <video width="80" controls>
                                                                 <source
@@ -169,6 +175,18 @@
                                             @endforelse
                                         </tbody>
                                     </table>
+                                    <!-- Pagination -->
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div>
+                                            Showing {{ $services->firstItem() }} to {{ $services->lastItem() }} of
+                                            {{ $services->total() }} entries
+                                        </div>
+                                        <div>
+                                            {{ $services->withQueryString()->links('pagination::bootstrap-5') }}
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
                             </div> <!-- card-body -->
@@ -179,6 +197,39 @@
             </div> <!-- container-fluid -->
         </div>
     </div>
+
+
+    @push('scripts')
+        <script>
+            function uploadServiceImage(input, serviceId) {
+                const file = input.files[0];
+                if (!file) return;
+
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('_token', '{{ csrf_token() }}');
+
+                fetch(`/admin/services/update-image/${serviceId}`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            const imgPreview = document.getElementById(`img-preview-${serviceId}`);
+                            imgPreview.src = data.new_image_url + '?t=' + new Date().getTime();
+                        } else {
+                            alert('Image update failed.');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('An error occurred while uploading the image.');
+                    });
+            }
+        </script>
+    @endpush
+
 
     <!-- Toggle Status Script -->
     <script>
@@ -214,73 +265,75 @@
         });
     </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const genderSelect = document.getElementById('gender-select');
-        const topCategorySelect = document.getElementById('top-category-select');
-        const midCategorySelect = document.getElementById('mid-category-select');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const genderSelect = document.getElementById('gender-select');
+            const topCategorySelect = document.getElementById('top-category-select');
+            const midCategorySelect = document.getElementById('mid-category-select');
 
-        const selectedGenderId = "{{ request('gender_id') }}";
-        const selectedTopCategoryId = "{{ request('top_category_id') }}";
-        const selectedMidCategoryId = "{{ request('mid_category_id') }}";
+            const selectedGenderId = "{{ request('gender_id') }}";
+            const selectedTopCategoryId = "{{ request('top_category_id') }}";
+            const selectedMidCategoryId = "{{ request('mid_category_id') }}";
 
-        function loadTopCategories(genderId, callback = null) {
-            topCategorySelect.innerHTML = '<option value="">All</option>';
-            midCategorySelect.innerHTML = '<option value="">All</option>'; // reset mids
+            function loadTopCategories(genderId, callback = null) {
+                topCategorySelect.innerHTML = '<option value="">All</option>';
+                midCategorySelect.innerHTML = '<option value="">All</option>'; // reset mids
 
-            if (!genderId) return;
+                if (!genderId) return;
 
-            fetch(`/admin/get-top-categories/${genderId}`)
-                .then(res => res.json())
-                .then(data => {
-                    data.forEach(top => {
-                        const selected = (top.id == selectedTopCategoryId) ? 'selected' : '';
-                        topCategorySelect.innerHTML += `<option value="${top.id}" ${selected}>${top.name}</option>`;
+                fetch(`/admin/get-top-categories/${genderId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(top => {
+                            const selected = (top.id == selectedTopCategoryId) ? 'selected' : '';
+                            topCategorySelect.innerHTML +=
+                                `<option value="${top.id}" ${selected}>${top.name}</option>`;
+                        });
+
+                        if (callback && typeof callback === 'function') {
+                            callback();
+                        }
                     });
+            }
 
-                    if (callback && typeof callback === 'function') {
-                        callback();
+            function loadMidCategories(topCategoryId) {
+                midCategorySelect.innerHTML = '<option value="">All</option>';
+
+                if (!topCategoryId) return;
+
+                fetch(`/admin/get-mid-categories/${topCategoryId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(mid => {
+                            const selected = (mid.id == selectedMidCategoryId) ? 'selected' : '';
+                            midCategorySelect.innerHTML +=
+                                `<option value="${mid.id}" ${selected}>${mid.name}</option>`;
+                        });
+                    });
+            }
+
+            // Event: Gender Changed
+            genderSelect.addEventListener('change', function() {
+                const genderId = this.value;
+                loadTopCategories(genderId);
+            });
+
+            // Event: Top Category Changed
+            topCategorySelect.addEventListener('change', function() {
+                const topCategoryId = this.value;
+                loadMidCategories(topCategoryId);
+            });
+
+            // 🔄 Auto load on page load if gender is pre-selected
+            if (selectedGenderId) {
+                loadTopCategories(selectedGenderId, function() {
+                    if (selectedTopCategoryId) {
+                        loadMidCategories(selectedTopCategoryId);
                     }
                 });
-        }
-
-        function loadMidCategories(topCategoryId) {
-            midCategorySelect.innerHTML = '<option value="">All</option>';
-
-            if (!topCategoryId) return;
-
-            fetch(`/admin/get-mid-categories/${topCategoryId}`)
-                .then(res => res.json())
-                .then(data => {
-                    data.forEach(mid => {
-                        const selected = (mid.id == selectedMidCategoryId) ? 'selected' : '';
-                        midCategorySelect.innerHTML += `<option value="${mid.id}" ${selected}>${mid.name}</option>`;
-                    });
-                });
-        }
-
-        // Event: Gender Changed
-        genderSelect.addEventListener('change', function () {
-            const genderId = this.value;
-            loadTopCategories(genderId);
+            }
         });
-
-        // Event: Top Category Changed
-        topCategorySelect.addEventListener('change', function () {
-            const topCategoryId = this.value;
-            loadMidCategories(topCategoryId);
-        });
-
-        // 🔄 Auto load on page load if gender is pre-selected
-        if (selectedGenderId) {
-            loadTopCategories(selectedGenderId, function () {
-                if (selectedTopCategoryId) {
-                    loadMidCategories(selectedTopCategoryId);
-                }
-            });
-        }
-    });
-</script>
+    </script>
 
 
 

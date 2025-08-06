@@ -41,9 +41,7 @@
                             <label class="form-label">Mid Level Category</label>
                             <select name="mid_category_id" id="mid_category" class="form-control" required>
                                 <option value="">-- Select Mid Category --</option>
-                                <!-- Options dynamically populated -->
                             </select>
-
                         </div>
                     </div>
 
@@ -86,7 +84,6 @@
                                 <video id="video-preview" width="200" controls style="display: none;"></video>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="mb-3">
@@ -99,52 +96,16 @@
                         <textarea name="overview" id="overview" class="form-control" rows="4"></textarea>
                     </div>
 
-
-                    <!-- How It Works -->
+                    <!-- Expected Results -->
                     <div class="mb-3">
-                        <label class="form-label">How It Works</label>
-                        <div id="how-it-works-wrapper">
-                            <div class="row how-it-works-item mb-2">
-                                <div class="col-md-5">
-                                    <input type="file" name="how_it_works_images[]"
-                                        class="form-control how-it-works-image-input"
-                                        data-preview-id="how-it-works-preview-0">
-
-                                    <img id="how-it-works-preview-0" width="80" style="display: none;"
-                                        class="mt-2">
-                                </div>
-                                <div class="col-md-5">
-                                    <input type="text" name="how_it_works_titles[]" class="form-control"
-                                        placeholder="Image Title" required>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-info mt-2" id="add-how-it-works">+ Add More</button>
+                        <label class="form-label">Expected Results</label>
+                        <textarea name="expected_results" id="expected_results" class="form-control" rows="4"></textarea>
                     </div>
 
-
-                    <!-- FAQ Section -->
+                    <!-- Why Choose -->
                     <div class="mb-3">
-                        <label class="form-label">FAQ Section</label>
-                        <div id="faq-wrapper">
-                            <div class="row faq-item mb-2">
-                                <div class="col-md-5">
-                                    <input type="text" name="faq_questions[]" class="form-control"
-                                        placeholder="Enter Question" required>
-                                </div>
-                                <div class="col-md-5">
-                                    <input type="text" name="faq_answers[]" class="form-control"
-                                        placeholder="Enter Answer" required>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger remove-faq">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-warning mt-2" id="add-faq">+ Add FAQ</button>
+                        <label class="form-label">Why Choose Myraluxe</label>
+                        <textarea name="why_choose" id="why_choose" class="form-control" rows="4"></textarea>
                     </div>
 
                     <div class="text-center mt-4 mb-4">
@@ -160,14 +121,15 @@
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- CKEditor CDN -->
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 
     <script>
-        // Initialize CKEditor on both fields
         CKEDITOR.replace('highlight_points');
         CKEDITOR.replace('overview');
+        CKEDITOR.replace('expected_results');
+        CKEDITOR.replace('why_choose');
     </script>
+
     <script>
         function previewImage(event) {
             const reader = new FileReader();
@@ -194,7 +156,6 @@
 
     <script>
         $(document).ready(function() {
-            // Gender -> Top Category
             $('input[name="gender_id"]').change(function() {
                 let genderId = $(this).val();
                 $('#top_category').html('<option>Loading...</option>');
@@ -209,7 +170,6 @@
                 });
             });
 
-            // Top -> Mid Category
             $('#top_category').change(function() {
                 let id = $(this).val();
                 $('#mid_category').html('<option>Loading...</option>');
@@ -222,69 +182,6 @@
                     $('#mid_category').html('<option value="">-- Error --</option>');
                 });
             });
-
-
-            // Add/Remove FAQ
-            $('#add-faq').click(function() {
-                $('#faq-wrapper').append(`
-      <div class="row faq-item mb-2">
-        <div class="col-md-5">
-          <input type="text" name="faq_questions[]" class="form-control" placeholder="Enter Question" required>
-        </div>
-        <div class="col-md-5">
-          <input type="text" name="faq_answers[]" class="form-control" placeholder="Enter Answer" required>
-        </div>
-        <div class="col-md-2">
-          <button type="button" class="btn btn-danger remove-faq">Remove</button>
-        </div>
-      </div>`);
-            });
-            $(document).on('click', '.remove-faq', function() {
-                $(this).closest('.faq-item').remove();
-            });
-        });
-    </script>
-    <script>
-        let howItWorksIndex = 1;
-
-        // Preview uploaded image
-        $(document).on('change', '.how-it-works-image-input', function(event) {
-            const previewId = $(this).data('preview-id');
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function() {
-                    const output = document.getElementById(previewId);
-                    output.src = reader.result;
-                    output.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Add new How It Works row with preview
-        $('#add-how-it-works').click(function() {
-            const newItem = `
-            <div class="row how-it-works-item mb-2">
-                <div class="col-md-5">
-                    <input type="file" name="how_it_works_images[]" class="form-control how-it-works-image-input" data-preview-id="how-it-works-preview-${howItWorksIndex}">
-                    <img id="how-it-works-preview-${howItWorksIndex}" width="80" style="display: none;" class="mt-2">
-                </div>
-                <div class="col-md-5">
-                    <input type="text" name="how_it_works_titles[]" class="form-control" placeholder="Image Title" required>
-                </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-danger remove-how-it-works">Remove</button>
-                </div>
-            </div>`;
-            $('#how-it-works-wrapper').append(newItem);
-            howItWorksIndex++;
-        });
-
-
-        // Remove row
-        $(document).on('click', '.remove-how-it-works', function() {
-            $(this).closest('.how-it-works-item').remove();
         });
     </script>
 @endpush

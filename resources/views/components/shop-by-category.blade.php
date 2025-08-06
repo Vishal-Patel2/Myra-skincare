@@ -61,6 +61,7 @@
                     <!-- Mobile Horizontal Scroll -->
                     <div class="scroll-wrapper d-lg-none d-flex overflow-auto gap-3 pb-3">
                         @foreach ($femaleMid as $mid)
+                            {{ $mid->name }}
                             <div class="col-6 col-md-6 col-lg-2 mb-4">
                                 <a
                                     href="{{ route('services', ['gender' => strtolower(optional($mid->topCategory->gender)->name), 'mid' => Str::slug($mid->name)]) }}">

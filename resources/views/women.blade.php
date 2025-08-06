@@ -63,5 +63,12 @@
         </div>
 
     </main>
+    <style>
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 2;
+        }
+    </style>
 
 @endsection

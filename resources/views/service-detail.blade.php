@@ -56,7 +56,7 @@
         .info-left {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            /* gap: 10px; */
             flex: 1;
         }
 
@@ -128,7 +128,7 @@
         .nav-tabs .nav-link {
             color: #888;
             font-weight: 500;
-            padding: 14px 20px;
+            padding: 10px 20px;
             border: none;
             border-bottom: 2px solid transparent;
             transition: 0.3s ease;
@@ -161,7 +161,7 @@
 
         .tab-pane p {
             font-size: 15px;
-            margin-bottom: 20px;
+            /* margin-bottom: 10px; */
             color: black;
         }
 
@@ -211,7 +211,7 @@
 
         @media (max-width: 768px) {
             .nav-tabs {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: center;
             }
 
@@ -292,106 +292,73 @@
 
                                 <ul class="nav nav-tabs justify-content-center" id="bookingTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="services-tab" data-bs-toggle="tab"
-                                            data-bs-target="#services" type="button" role="tab">OVERVIEW</button>
+                                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                                            data-bs-target="#overview" type="button" role="tab">Overview</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="how-tab" data-bs-toggle="tab" data-bs-target="#how"
-                                            type="button" role="tab">Expected Results</button>
+                                        <button class="nav-link" id="results-tab" data-bs-toggle="tab"
+                                            data-bs-target="#expected-results" type="button" role="tab">Expected
+                                            Results</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq"
-                                            type="button" role="tab">FAQ'S</button>
+                                        <button class="nav-link" id="why-choose-tab" data-bs-toggle="tab"
+                                            data-bs-target="#why-choose" type="button" role="tab">Why Choose Myra Luxe
+                                            Aesthetics?</button>
                                     </li>
                                 </ul>
 
-                                <div class="tab-content py-3">
-                                    {{-- @php
-                                        $paragraphs = preg_split(
-                                            '/<p[^>]*>(.*?)<\/p>/i',
-                                            $service->overview,
-                                            -1,
-                                            PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY,
-                                        );
-                                        $aftercareIndex = array_search(
-                                            'Aftercare Tips',
-                                            array_map('strip_tags', $paragraphs),
-                                        );
-                                    @endphp --}}
+                                <div class="tab-content py-4">
 
-                                    <div class="tab-pane fade show active" id="services" role="tabpanel">
+                                    {{-- OVERVIEW --}}
+                                    <div class="tab-pane fade show active" id="overview" role="tabpanel">
                                         <div style="padding-left: 20px;">
                                             {!! $service->overview !!}
                                         </div>
                                     </div>
 
-                                    
-                                    {{-- 💡 How It Works Tab --}}
-                                    <div class="tab-pane fade" id="how" role="tabpanel">
-                                        <div class="row">
-                                            @foreach ($service->how_it_works ?? [] as $index => $step)
-                                                <div class="col-md-6 mb-4">
-                                                    <div style="position: relative; border-radius: 10px; overflow: hidden;">
-                                                        <img src="{{ asset('storage/services/how_it_works/' . $step['image']) }}"
-                                                            alt="Step {{ $index + 1 }}" class="img-fluid"
-                                                            style="border-radius: 10px;">
-
-                                                        {{-- Number Badge --}}
-                                                        <div
-                                                            style="
-                                                                    position: absolute;
-                                                                    bottom: 10px;
-                                                                    left: 10px;
-                                                                    background-color: #0d1b5c;
-                                                                    color: #fff;
-                                                                    width: 30px;
-                                                                    height: 30px;
-                                                                    border-radius: 50%;
-                                                                    display: flex;
-                                                                    align-items: center;
-                                                                    justify-content: center;
-                                                                    font-weight: bold;
-                                                                    font-size: 14px;
-                                                                ">
-                                                            {{ $index + 1 }}
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Step Title --}}
-                                                    <p style="font-weight: 600; margin-top: 10px;">{{ $step['title'] }}</p>
-                                                </div>
-                                            @endforeach
+                                    {{-- EXPECTED RESULTS --}}
+                                    <div class="tab-pane fade" id="expected-results" role="tabpanel">
+                                        <div style="padding-left: 20px;">
+                                            @if (Str::contains($service->expected_results, '<table>'))
+                                                {!! $service->expected_results !!}
+                                            @else
+                                                <p>{!! nl2br(e($service->expected_results)) !!}</p>
+                                            @endif
                                         </div>
                                     </div>
 
-
-                                    {{-- 💬 FAQ Tab --}}
-                                    <div class="tab-pane fade" id="faq" role="tabpanel">
-                                        <div class="accordion" id="accordionFaq">
-                                            @foreach ($service->faqs ?? [] as $index => $faq)
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="heading{{ $index }}">
-                                                        <button class="accordion-button collapsed" type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#collapse{{ $index }}">
-                                                            {{ $faq['question'] }}
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapse{{ $index }}"
-                                                        class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
-                                                        <div class="accordion-body">
-                                                            {{ $faq['answer'] }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                    {{-- WHY CHOOSE --}}
+                                    <div class="tab-pane fade" id="why-choose" role="tabpanel">
+                                        <div style="padding-left: 20px;">
+                                            {!! $service->why_choose !!}
                                         </div>
                                     </div>
+
                                 </div>
+
 
                             </div>
                         </div>
 
+                        <style>
+                            .tab-content table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-top: 1rem;
+                            }
+
+                            .tab-content th,
+                            .tab-content td {
+                                border: 1px solid #ddd;
+                                padding: 8px 10px;
+                                vertical-align: top;
+                            }
+
+                            .tab-content thead {
+                                background-color: #f8f9fa;
+                                font-weight: bold;
+                            }
+                        </style>
                         @php
                             // Get current top category
                             $currentTopCategoryId = $service->midCategory->topCategory->id ?? null;
@@ -411,15 +378,28 @@
                                 <div class="widget category">
                                     <h4 class="widget-title">All Services</h4>
                                     <div class="category-list">
-                                        @foreach ($relatedServices as $s)
-                                            <a href="{{ route('service.detail', Str::slug($s->name)) }}">
-                                                <i class="far fa-angle-double-right"></i> {{ $s->name }}
-                                            </a>
+                                        @foreach ($relatedServices as $relatedService)
+                                            @php
+                                                $gender = strtolower(
+                                                    optional($relatedService->midCategory->topCategory->gender)->name,
+                                                );
+                                                $slug = \Illuminate\Support\Str::slug($relatedService->name);
+                                            @endphp
+
+                                            @if ($gender && $slug)
+                                                <a href="{{ route('service.detail', ['gender' => $gender, 'slug' => $slug]) }}"
+                                                    class="cta-button d-block mb-2">
+                                                    {{ $relatedService->name }}
+                                                </a>
+                                            @else
+                                                <span class="text-danger d-block mb-2">Missing gender or service name</span>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                     </div>
                 </div>

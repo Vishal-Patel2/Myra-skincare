@@ -1,3 +1,22 @@
+<h2 class="section-heading">
+    Our Latest Skincare Treatments with HIFU Technology
+</h2>
+<style>
+    .section-heading {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #1d293f;
+        margin: 40px 0 20px;
+        letter-spacing: 0.5px;
+        line-height: 1;
+        background: linear-gradient(to right, #e3e3e3, #c0c0c0);
+        padding: 20px 10px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+</style>
+
 <div class="card1s-container">
     @forelse ($services as $service)
         <div class="card1">
@@ -11,9 +30,27 @@
 
 
                 <div class="cta-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="{{ route('service-hiuf-details', Str::slug($service->name)) }}" class="cta-button">
+                    {{-- <a href="{{ route('service-hiuf-details', Str::slug($service->name)) }}" class="cta-button">
                         View Details
-                    </a>
+                    </a> --}}
+
+
+                    @php
+                        $gender = strtolower(optional($service->midCategory->topCategory->gender)->name);
+                        $slug = Str::slug($service->name);
+                    @endphp
+
+                    @if ($gender && $slug)
+                        <a href="{{ route('service.detail', ['gender' => $gender, 'slug' => $slug]) }}"
+                            class="cta-button">
+                            View Details
+                        </a>
+                    @else
+                        <span class="text-danger">Missing gender or name</span>
+                    @endif
+
+
+
                     <button class="add-to-cart" data-id="{{ $service->id }}">Add to Cart</button>
                 </div>
 
