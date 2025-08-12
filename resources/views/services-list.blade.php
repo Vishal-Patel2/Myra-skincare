@@ -12,7 +12,7 @@
 
         .service-card {
             max-width: 700px;
-            height: 320px;
+            height: auto;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 12px;
@@ -48,7 +48,7 @@
         .price-time {
             color: gray;
             font-size: 15px;
-            margin-bottom: 12px;
+            /*margin-bottom: 12px;*/
         }
 
         .benefits {
@@ -86,7 +86,7 @@
         .service-img {
             width: 150px;
             height: 175px;
-            object-fit: cover;
+            object-fit: fill;
             border-radius: 12px;
         }
 
@@ -132,15 +132,20 @@
 
     <main class="main">
 
-        <div class="site-breadcrumb">
-            <div class="container">
-                <h2 class="breadcrumb-title">{{ $midCategory->name }}</h2>
-                <ul class="breadcrumb-menu">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="active">{{ $midCategory->name }}</li>
-                </ul>
-            </div>
+       <div class="site-breadcrumb">
+        <div class="container">
+            <h2 class="breadcrumb-title">
+               {{ $midCategory->name }}
+            </h2>
+            <ul class="breadcrumb-menu">
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li>{{ ucfirst(optional($midCategory->topCategory->gender)->name) ?? 'Gender' }}</li>
+                <li class="active">{{ $midCategory->name }}</li>
+            </ul>
         </div>
+    </div>
+
+        
 
         <div class="contact-area py-5">
             <div class="container">
@@ -160,9 +165,17 @@
 
                                         <div class="price-time">
                                             <strong>Price:</strong> ₹{{ number_format($service->price) }}/- per session
-                                            &nbsp; | &nbsp;
-                                            <i class="far fa-clock"></i> {{ $service->duration }} mins
+                                            <!--&nbsp; | &nbsp;-->
+                                            <!--<i class="far fa-clock"></i> {{ $service->duration }} mins-->
                                         </div>
+                                        
+                                       @if($service->packages)
+                                            <div class="package-price d-flex align-items-center">
+                                                <strong>{{ $service->packages }}</strong>
+                                            </div>
+                                        @endif
+
+
 
                                         @if (!empty($service->highlight_points))
                                             <h5 class="mt-2">Why Choose {{ $service->name }}?</h5>

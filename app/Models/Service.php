@@ -20,13 +20,13 @@ class Service extends Model
         'expected_results',
         'why_choose',
         'action',
+        'is_best_seller',
     ];
 
 
     protected $casts = [
         'rating' => 'decimal:2',
         'price' => 'decimal:2',
-         'packages' => 'decimal:2',
     ];
 
     public function midCategory()

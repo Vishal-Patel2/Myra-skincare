@@ -18,6 +18,14 @@ use App\Http\Controllers\CareerApplicationController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CartController;   
 use App\Http\Controllers\AdminController; 
+use Illuminate\Support\Facades\Artisan;
+ 
+
+Route::get('/create-storage-link', function () {
+    Artisan::call('storage:link');
+
+    return 'Storage link created successfully.';
+});
 
  
 
@@ -78,9 +86,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
    
     Route::post('/mid-categories/{midCategory}/upload-image', [MidCategoryController::class, 'uploadImage']);
     Route::post('/services/update-image/{id}', [ServiceController::class, 'updateImage']);
+    Route::post('/services/{id}/toggle-best-seller', [ServiceController::class, 'toggleBestSeller']);
+
  
 });
 
+Route::get('/best-selling-services', [ServiceController::class, 'bestSellingServices']);
+Route::get('/services/{gender}/{slug}', [ServiceController::class, 'serviceDetail'])->name('service-detail');
 
 Route::get('/services/{gender}/{midSlug}', [ServiceController::class, 'services'])->name('services.list');
 

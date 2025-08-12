@@ -96,6 +96,7 @@
                                                 <th>Image / Video</th>
                                                 <th>Price</th>
                                                 <th>Duration</th>
+                                                <th>IS_best Deals</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -143,6 +144,13 @@
 
                                                     <td>₹{{ number_format($service->price ?? 0, 2) }}</td>
                                                     <td>{{ $service->duration ?? 'N/A' }} mins</td>
+
+                                                    <!-- Status toggle-best-seller -->
+                                                    <td>
+                                                        <input type="checkbox" class="toggle-best-seller"
+                                                            data-id="{{ $service->id }}"
+                                                            {{ $service->is_best_seller ? 'checked' : '' }}>
+                                                    </td>
 
                                                     <!-- Status Toggle -->
                                                     <td>
@@ -334,6 +342,27 @@
             }
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('.toggle-best-seller').on('change', function () {
+        var isChecked = $(this).is(':checked') ? 1 : 0;
+        var serviceId = $(this).data('id');
+        
+        $.ajax({
+            url: '/admin/services/' + serviceId + '/toggle-best-seller',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                is_best_seller: isChecked
+            },
+            success: function (response) {
+                alert(response.message);
+            }
+        });
+    });
+</script>
+
 
 
 

@@ -57,7 +57,7 @@ class ServiceController extends Controller
         'mid_category_id' => 'required|exists:mid_categories,id',
         'name' => 'required|string|max:255',
         'price' => 'nullable|numeric',
-        'packages' => 'nullable|numeric',
+        'packages' => 'nullable|string',
         'rating' => 'nullable|numeric|max:5',
         'duration' => 'nullable|string',
         'image' => 'nullable|image',
@@ -103,7 +103,7 @@ class ServiceController extends Controller
         'mid_category_id' => 'required|exists:mid_categories,id',
         'name' => 'required|string|max:255',
         'price' => 'nullable|numeric',
-        'packages' => 'nullable|numeric',
+        'packages' => 'nullable|string',
         'rating' => 'nullable|numeric|max:5',
         'duration' => 'nullable|string',
         'image' => 'nullable|image',
@@ -234,6 +234,29 @@ public function serviceDetail($gender, $slug)
 
     return response()->json(['status' => 'error'], 400);
 }
+
+public function toggleBestSeller(Request $request, $id)
+{
+    $service = Service::findOrFail($id);
+    $service->is_best_seller = $request->is_best_seller;
+    $service->save();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Best seller status updated!'
+    ]);
+}
+public function bestSellingServices()
+{
+    $bestSellers = Service::with('midCategory.topCategory.gender')
+        ->where('is_best_seller', 1)
+        ->where('action', 'active')
+        ->get();
+
+    return view('components.best_services', compact('bestSellers'));
+}
+
+
 
 
 }

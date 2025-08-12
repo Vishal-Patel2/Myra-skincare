@@ -40,7 +40,7 @@
                             </div>
                             <div class="contact-info-content">
                                 <h5>Call Us</h5>
-                                <p>+91 935531766</p>
+                                <p>+91 9667916791</p>
                             </div>
                         </div>
                     </div>

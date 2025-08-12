@@ -30,7 +30,7 @@
     <section class="bg mt-5">
         <div class="container">
             <div class="text-center mb-4">
-                <h2 class="site-title pt-3">SHOP BY {{ strtoupper($top_category) }}</h2>
+                <h2 class="site-title pt-3 mt-2">Holistic Aesthetic Therapies</h2>
             </div>
 
             <!-- Nav Pills -->

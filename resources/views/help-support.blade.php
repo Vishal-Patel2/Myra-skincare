@@ -26,7 +26,7 @@
         <div class="border p-4 rounded mb-4">
             <h5><i class="fas fa-headset me-2"></i>Customer Support</h5>
             <ul class="list-unstyled mb-0">
-                <li><i class="fas fa-phone-alt me-2"></i>+91-935531766</li>
+                <li><i class="fas fa-phone-alt me-2"></i>+91-9667916791</li>
                 <li><i class="fas fa-envelope me-2"></i>info@myraluxe.com</li>
             </ul>
         </div>

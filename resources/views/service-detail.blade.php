@@ -243,17 +243,20 @@
         }
     </style>
     <main class="main">
-        <div class="site-breadcrumb">
-            <div class="container">
-                <h2 class="breadcrumb-title">
-                    {{ $service->midCategory->topCategory->name ?? 'Top Category' }}
-                </h2>
-                <ul class="breadcrumb-menu">
-                    <li><a href="/">Home</a></li>
-                    <li class="active">{{ $service->name }}</li>
-                </ul>
-            </div>
+     <div class="site-breadcrumb">
+        <div class="container">
+           
+            <ul class="breadcrumb-menu mb-2">
+                <li><a href="/">{{ ucfirst(optional($service->midCategory->topCategory->gender)->name) ?? 'Gender' }}</a>
+                </li>
+                <li class="active">{{ $service->midCategory->name ?? 'Mid Category' }}</li>
+            </ul>
+             <h4 class="breadcrumb-title">
+                {{ $service->name }}
+            </h4>
         </div>
+    </div>
+
 
         <div class="service-single-area py-5">
             <div class="container">
@@ -289,17 +292,17 @@
                                         <!-- Price & Duration -->
                                         <div class="price-time d-flex align-items-center mb-2" style="color: #6B7280; font-size: 0.95rem;">
                                             <strong style="margin-right: 4px;">Price:</strong> ₹{{ number_format($service->price) }}/- per session
-                                            <span class="mx-2">|</span>
-                                            <i class="far fa-clock me-1"></i> {{ $service->duration }} mins
+                                            <!--<span class="mx-2">|</span>-->
+                                            <!--<i class="far fa-clock me-1"></i> {{ $service->duration }} mins-->
                                         </div>
                                 
-                                        <!-- Package Price -->
+                                       <!-- Package Price -->
                                         @if($service->packages)
                                             <div class="package-price d-flex align-items-center" style="color: #6B7280; font-size: 0.95rem;">
-                                                <!--<i class="fas fa-star" style="color: #FFD700; margin-right: 6px;"></i>-->
-                                                <strong>Package (6 sessions):</strong>&nbsp;₹{{ number_format($service->packages) }}/-
+                                                <strong>{{ $service->packages }}</strong>
                                             </div>
                                         @endif
+
                                     </div>
                                 
                                     <!-- Add to Cart Button -->
@@ -423,19 +426,15 @@
                             }
                         </style>
                         @php
-                            // Get current top category
-                            $currentTopCategoryId = $service->midCategory->topCategory->id ?? null;
-
-                            // Fetch all services under the same top category
-                            $relatedServices = \App\Models\Service::whereHas('midCategory', function ($query) use (
-                                $currentTopCategoryId,
-                            ) {
-                                $query->where('top_category_id', $currentTopCategoryId);
-                            })
-                                ->take(8)
+                            // Get current mid category
+                            $currentMidCategoryId = $service->mid_category_id ?? null;
+                        
+                            // Fetch all services under the same mid category, ordered by created_at ASC
+                            $relatedServices = \App\Models\Service::where('mid_category_id', $currentMidCategoryId)
+                                ->orderBy('created_at', 'asc')
                                 ->get();
                         @endphp
-
+                        
                         <div class="col-xl-4 col-lg-4">
                             <div class="service-sidebar">
                                 <div class="widget category">
@@ -443,12 +442,10 @@
                                     <div class="category-list">
                                         @foreach ($relatedServices as $relatedService)
                                             @php
-                                                $gender = strtolower(
-                                                    optional($relatedService->midCategory->topCategory->gender)->name,
-                                                );
+                                                $gender = strtolower(optional($relatedService->midCategory->topCategory->gender)->name);
                                                 $slug = \Illuminate\Support\Str::slug($relatedService->name);
                                             @endphp
-
+                        
                                             @if ($gender && $slug)
                                                 <a href="{{ route('service.detail', ['gender' => $gender, 'slug' => $slug]) }}"
                                                     class="cta-button d-block mb-2">
@@ -462,6 +459,7 @@
                                 </div>
                             </div>
                         </div>
+
 
 
                     </div>

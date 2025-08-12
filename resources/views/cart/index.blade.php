@@ -32,7 +32,7 @@
                         <div class="product-title fw-bold">
                             {{ $loop->iteration }}. {{ $cart->service->name }} -
                             <span
-                                class="gender-badge badge bg-primary">{{ $cart->service->gender->name ?? 'Unisex' }}</span>
+                                class="gender-badge badge bg-dark">{{ $cart->service->gender->name ?? 'Unisex' }}</span>
                         </div>
                         <div class="session-count">Number of Sessions: {{ $cart->quantity }}</div>
 
@@ -104,6 +104,11 @@
         </div>
 
     </section>
+    <style>
+        .modal-title{
+            color: #ffffff;
+        }
+    </style>
 
 
     <!-- Schedule Modal Styled -->
@@ -112,7 +117,7 @@
             <form method="POST" action="{{ route('booking.confirm') }}" class="modal-content border-0">
                 @csrf
 
-                <div class="modal-header bg-primary text-white">
+                <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="scheduleModalLabel">
                         <i class="fas fa-calendar-check me-2"></i> Appointment Booking
                     </h5>
@@ -241,7 +246,7 @@
                         <button class="btn btn-outline-secondary" id="prev-step" disabled>
                             <i class="bi bi-arrow-left"></i> Previous
                         </button>
-                        <button class="btn btn-primary" id="next-step">
+                        <button class="btn btn-dark" id="next-step">
                             Next <i class="bi bi-arrow-right"></i>
                         </button>
                     </div>
@@ -449,7 +454,7 @@ $(document).ready(function() {
     function updateTimeSlots(selectedDate) {
         $("#time-slots-container").html(`
             <div class="text-center w-100 py-4">
-                <div class="spinner-border text-primary" role="status"></div>
+                <div class="spinner-border text-dark" role="status"></div>
                 <div class="mt-2">Checking availability...</div>
             </div>
         `);
@@ -502,7 +507,7 @@ $(document).ready(function() {
             const $slotsGrid = $("<div class='slots-grid d-flex flex-wrap gap-2'></div>");
             mockedResponse.available_slots.forEach(slot => {
                 const slotBtn = $(`
-                    <div class="time-slot btn btn-outline-primary"
+                    <div class="time-slot btn btn-outline-dark"
                         data-start="${slot.start}"
                         data-end="${slot.end}"
                         data-time="${slot.display}">

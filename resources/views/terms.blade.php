@@ -135,7 +135,7 @@
                                 <p>If you have questions or concerns about these Terms & Conditions, please contact us:</p>
                                 <ul>
                                     <li><strong>Email:</strong> info@myraluxe.com</li>
-                                    <li><strong>Phone:</strong> +91-935531766</li>
+                                    <li><strong>Phone:</strong> +91-9667916791</li>
                                     <li><strong>Office Address:</strong> MyraLuxe Clinic, 59A, Block A 5B, Possangipur,
                                         Janakpuri, New Delhi, Delhi 110058, India</li>
                                 </ul>

@@ -175,16 +175,18 @@
                                     </div>
                                     
                                     <div class="price-time">
-                                        ₹{{ number_format($service->price) }}/- per session &nbsp; | &nbsp;
-                                        <i class="far fa-clock"></i> {{ $service->duration }} mins
+                                        ₹{{ number_format($service->price) }}/- per session 
+                                        <!--&nbsp; | &nbsp;-->
+                                        <!--<i class="far fa-clock"></i> {{ $service->duration }} mins-->
                                     </div>
                             
-                                    @if($service->packages)
+                                   @if($service->packages)
                                         <div class="package-price" style="margin-top: 6px; color: #6B7280; font-size: 0.95rem;">
                                             <!--<i class="fas fa-star" style="color: #FFD700; margin-right: 6px;"></i>-->
-                                            <strong>Package (6 sessions):</strong> ₹{{ number_format($service->packages) }}/-
+                                            <strong>{{ $service->packages }}</strong>
                                         </div>
                                     @endif
+
                                 </div>
                             
                                 <button class="add-to-cart" data-id="{{ $service->id }}">ADD TO CART</button>

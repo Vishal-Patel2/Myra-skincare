@@ -15,16 +15,16 @@
 
         @include('components.shop-by-category', ['top_category' => 'SKIN CONCERN'])
 
-
-        <!--end  SHOP BY TREATMENTS -->
         <!-- Best Selling Deals -->
-        <section class="py-5">
+
+        {{-- <section class="py-5">
             <div class="site-heading text-center">
                 <h2 class="site-title">Best Selling Deals</h2>
             </div>
 
             <div id="infiniteScroll--left" class="container1">
                 <!-- START ITEM -->
+                
                 <article>
                     <div class="pricing-item">
                         <div class="img">
@@ -131,7 +131,12 @@
 
 
             </div>
-        </section>
+        </section> --}}
+
+     @include('components.best_services', ['bestSellers' => $bestSellers])
+
+
+
 
         <!-- end Best Selling Deals -->
         <!-- VISIBLE RESULTS before/after -->
@@ -199,26 +204,26 @@
             </div>
         </section>
         <!-- <section class="bg">
-                                            <div class="container py-4">
-                                                <div class="site-heading">
-                                                    <h2 class="site-title">VISIBLE RESULTS</h2>
+                                                <div class="container py-4">
+                                                    <div class="site-heading">
+                                                        <h2 class="site-title">VISIBLE RESULTS</h2>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 mb-3">
+                                                            <img src="./assets/img/about/skin1.jpg" alt="">
+                                                        </div>
+                                                        <div class="col-lg-3 mb-3">
+                                                            <img src="./assets/img/about/skin2.jpg" alt="">
+                                                        </div>
+                                                        <div class="col-lg-3 mb-3">
+                                                            <img src="./assets/img/about/skin3.jpg" alt="">
+                                                        </div>
+                                                        <div class="col-lg-3 mb-3">
+                                                            <img src="./assets/img/about/skin4.jpg" alt="">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 mb-3">
-                                                        <img src="./assets/img/about/skin1.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-3 mb-3">
-                                                        <img src="./assets/img/about/skin2.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-3 mb-3">
-                                                        <img src="./assets/img/about/skin3.jpg" alt="">
-                                                    </div>
-                                                    <div class="col-lg-3 mb-3">
-                                                        <img src="./assets/img/about/skin4.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section> -->
+                                            </section> -->
         <!-- end VISIBLE RESULTS -->
         <!-- PREP FOR AN OCCASION -->
         <div class="service-area py-5">
@@ -325,7 +330,7 @@
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
 
-                            <h2 class="site-title">Why MYRALUXA</h2>
+                            <h2 class="site-title">Why Myra Luxe Aesthetics</h2>
 
                         </div>
                     </div>
@@ -460,7 +465,7 @@
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center mb-4">
 
-                            <h2 class="site-title">CLIENT DIARIES</h2>
+                            <h2 class="site-title">What Our Customers Say!</h2>
 
                         </div>
                     </div>
@@ -502,7 +507,7 @@
                     <div class="col-lg-6 mx-auto">
                         <div class="site-heading text-center">
                             <!-- <span class="site-title-tagline">Testimonials</span> -->
-                            <h2 class="site-title">Client Feedback</h2>
+                            <h2 class="site-title">GOOGLE REVIEWS</h2>
                             <!-- <p>It is a long established fact that a reader will be distracted</p> -->
                         </div>
                     </div>
@@ -655,19 +660,6 @@
 
 
 
-        <!-- <div class="partner-area">
-                                            <div class="container">
-                                                <div class="partner-wrapper partner-slider owl-carousel owl-theme">
-                                                    <img src="assets/img/partner/01.jpg" alt="thumb">
-                                                    <img src="assets/img/partner/02.jpg" alt="thumb">
-                                                    <img src="assets/img/partner/03.jpg" alt="thumb">
-                                                    <img src="assets/img/partner/04.jpg" alt="thumb">
-                                                    <img src="assets/img/partner/01.jpg" alt="thumb">
-                                                    <img src="assets/img/partner/02.jpg" alt="thumb">
-                                                    <img src="assets/img/partner/03.jpg" alt="thumb">
-                                                </div>
-                                            </div>
-                                        </div> -->
 
     </main>
 @endsection
